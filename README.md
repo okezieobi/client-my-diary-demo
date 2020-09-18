@@ -1,4 +1,23 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e54b2167-63be-4b0e-8773-b72d72660f00/deploy-status)](https://app.netlify.com/sites/diary-app-demo/deploys)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecd44881e1ea4364afe36a9f963ad44f)](https://www.codacy.com/manual/okezieobi/client-my-diary-demo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=okezieobi/client-my-diary-demo&amp;utm_campaign=Badge_Grade)
+
 # client-my-diary-demo-v1
+Web client for MyDiary, an online journal where users can pen down their thoughts and feelings
+
+## Live app
+https://diary-app-demo.netlify.app/
+
+## Required Features
+- Users can send requests create an account and log in.
+- Users send requests view all entries to their diary.
+- Users send requests view the contents of a diary entry.
+- Users send requests add or modify an entry.
+## Optional Features
+- Users send requests set and get daily notifications that prompt them to add an entry to their diary.
+
+## Stack
+ReactJS, Material-UI
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
