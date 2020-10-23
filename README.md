@@ -2,6 +2,9 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecd44881e1ea4364afe36a9f963ad44f)](https://www.codacy.com/manual/okezieobi/client-my-diary-demo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=okezieobi/client-my-diary-demo&amp;utm_campaign=Badge_Grade)
 
+## Server
+https://github.com/okezieobi/server-my-diary-demo
+
 # client-my-diary-demo-v1
 Web client for MyDiary, an online journal where users can pen down their thoughts and feelings
 
