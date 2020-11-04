@@ -23,7 +23,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:no-watch": "npm test -- --watchAll=false",
-    "coverage": "npm run test:no-watch -- --coverage"
+    "coverage": "npm run test -- --coverage",
+    "coverage:coveralls": "npm run coverage && coveralls < coverage/lcov.info",
+    "coverage:codacy": "npm run coverage && cp -R coverage .github/workflows/coverage/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "coveralls": "^3.1.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
