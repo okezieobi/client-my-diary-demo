@@ -9,13 +9,19 @@ on:
 jobs:
   codacy-coverage-reporter:
     runs-on: ubuntu-latest
-    name: codacy-coverage-reporter
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
     steps:
-      - uses: actions/checkout@master
-      - name: Run codacy-coverage-reporter
-        uses: codacy/codacy-coverage-reporter-action@master
-        with:
-       - run: npm ci
-       - run: npm run coverage:codacy
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: coverage/lcov.info
+    - uses: actions/checkout@master
+    - name: Run codacy-coverage-reporter ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run coverage:codacy
+    - uses: codacy/codacy-coverage-reporter-action@master
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        coverage-reports: coverage/lcov.info
