@@ -12,7 +12,7 @@ describe('Home dashboard page should render', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByText(/Number of entries/)).toBeInTheDocument();
-    expect(screen.getByText(/Set reminder/)).toBeInTheDocument();
+    expect(screen.queryByText(/Number of entries/)).toBeInTheDocument();
+    expect(screen.queryByText(/Set reminder/)).toBeInTheDocument();
   });
 });

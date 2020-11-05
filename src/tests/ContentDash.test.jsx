@@ -12,6 +12,6 @@ describe('Home dashboard page should render', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByText(/Edit/)).toBeInTheDocument();
+    expect(screen.queryByText(/Edit/)).toBeInTheDocument();
   });
 });
