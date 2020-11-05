@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Home from './components/layouts/Home';
 import Signup from './components/containers/Signup';
@@ -10,7 +10,7 @@ import ComposeForm from './components/containers/Compose';
 import EditForm from './components/containers/Edit';
 import Profile from './components/containers/Profile';
 
-function AppTest() {
+export default function App() {
   return (
     <Switch>
       <Route path="/profile">
@@ -40,13 +40,3 @@ function AppTest() {
     </Switch>
   );
 }
-
-function App() {
-  return (
-    <BrowserRouter>
-      <AppTest />
-    </BrowserRouter>
-  );
-}
-
-export { App, AppTest };

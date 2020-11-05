@@ -1,17 +1,17 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import { AppTest } from '../App';
+import App from '../App';
 
 describe('Signin page should render', () => {
   test('Renders signin page of app for large screens', () => {
-    const { getByText } = render(
+    render(
       <MemoryRouter initialEntries={['/signin']}>
-        <AppTest />
+        <App />
       </MemoryRouter>,
     );
 
-    expect(getByText(/Sign in/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Sign in/i })).toBeInTheDocument();
   });
 });

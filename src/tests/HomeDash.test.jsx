@@ -1,17 +1,17 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import { AppTest } from '../App';
+import App from '../App';
 
 describe('Home dashboard page should render', () => {
   test('Renders home dashboard page of app for large screens', () => {
-    const { getAllByText } = render(
+    render(
       <MemoryRouter initialEntries={['/home']}>
-        <AppTest />
+        <App />
       </MemoryRouter>,
     );
 
-    expect(getAllByText(/Entries/)[0]).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Search/i })).toBeInTheDocument();
   });
 });
