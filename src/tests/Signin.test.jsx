@@ -12,6 +12,6 @@ describe('Signin page should render', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.queryByText(/Sign in/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Sign in/i })).toBeInTheDocument();
   });
 });

@@ -7,6 +7,8 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'plugin:testing-library/react',
+    'plugin:jest-dom/recommended'
   ],
   globals: {
     Atomics: 'readonly',

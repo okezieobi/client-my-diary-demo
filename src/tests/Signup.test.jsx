@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 // import userEvent from '@testing-library/user-event';
 
 import App from '../App';
-/// import utils from './utils';
+// import utils from './utils';
 
 describe('Signup page should render', () => {
   test('Renders signup page of app for large screens', () => {
@@ -14,7 +14,7 @@ describe('Signup page should render', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.queryByText(/Sign up/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument();
   });
 
   /*
@@ -28,7 +28,7 @@ describe('Signup page should render', () => {
     await userEvent.type(screen.queryAllByRole(/textbox/)[0], utils.inputs.fullName);
     await userEvent.type(screen.queryAllByRole(/textbox/)[1], utils.inputs.username);
     await userEvent.type(screen.queryAllByRole(/textbox/)[2], utils.inputs.email);
-    // await userEvent.type(screen.queryAllByRole('textbox')[3], utils.inputs.password);
+    await userEvent.type(screen.queryAllByRole('textbox')[3], utils.inputs.password);
     await userEvent.click(screen.queryByText(/Submit/));
 
     jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({

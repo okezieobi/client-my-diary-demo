@@ -12,7 +12,7 @@ describe('Home page should render', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.queryByText(/MyDiary/)).toBeInTheDocument();
-    expect(screen.queryByText(/Get Started/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /MyDiary/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Get Started/i })).toBeInTheDocument();
   });
 });
