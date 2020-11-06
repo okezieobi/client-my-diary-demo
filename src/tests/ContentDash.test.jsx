@@ -14,5 +14,6 @@ describe('Home dashboard page should render', () => {
 
     expect(screen.getByRole('button', { name: /Edit/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Back/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
   });
 });

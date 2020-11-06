@@ -12,7 +12,9 @@ describe('Home dashboard page should render', () => {
       </MemoryRouter>,
     );
 
+    expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Number of entries/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Set reminder/i })).toBeInTheDocument();
+    expect(screen.getByText('Off' || 'On')).toBeInTheDocument();
   });
 });
