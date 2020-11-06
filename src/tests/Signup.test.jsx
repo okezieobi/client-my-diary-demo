@@ -15,10 +15,6 @@ describe('Signup page should render', () => {
     );
 
     expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument();
-    expect(screen.getByLabelText(/Full Name/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
   });
 
   test('navigates to dashboard when signup is successful', async () => {
@@ -29,7 +25,7 @@ describe('Signup page should render', () => {
     );
 
     jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
-      json: () => Promise.resolve(utils.response.success),
+      json: () => Promise.resolve(utils.successResponse),
     }));
 
     await userEvent.type(screen.getByLabelText(/Full Name/i), utils.inputs.fullName);
@@ -39,6 +35,46 @@ describe('Signup page should render', () => {
     await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     await wait(() => expect(screen.getByRole('button', { name: /Search/i })).toBeInTheDocument());
+
+    global.fetch.mockRestore();
+  });
+
+  test('does not navigate to dashboard when signup is not successful if input is not valid', async () => {
+    render(
+      <MemoryRouter initialEntries={['/signup']}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(utils.ErrRes400),
+    }));
+
+    await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+    await wait(() => expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument());
+
+    global.fetch.mockRestore();
+  });
+
+  test('does not navigate to dashboard when signup is not successful', async () => {
+    render(
+      <MemoryRouter initialEntries={['/signup']}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(utils.errRes),
+    }));
+
+    await userEvent.type(screen.getByLabelText(/Full Name/i), utils.inputs.fullName);
+    await userEvent.type(screen.getByLabelText(/Username/i), utils.inputs.username);
+    await userEvent.type(screen.getByLabelText(/Email Address/i), 'test-404@email.com');
+    await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.password);
+    await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+    await wait(() => expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument());
 
     global.fetch.mockRestore();
   });

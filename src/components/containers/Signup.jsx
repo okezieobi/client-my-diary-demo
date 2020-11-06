@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import SignupLayout from '../layouts/Signup';
 
@@ -11,8 +11,7 @@ export default function () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [btnState, setBtnState] = useState(false);
-
-  const history = useHistory();
+  const [isAuth, setAuth] = useState(false);
 
   const handleSubmit = () => {
     if (!btnState) {
@@ -39,7 +38,7 @@ export default function () {
           setBtnState(false);
         } else {
           localStorage.setItem('token', token);
-          history.push('/home');
+          setAuth(true);
         }
       }).catch((err) => {
         console.log(err);
@@ -47,6 +46,7 @@ export default function () {
       });
   };
 
+  if (isAuth) return <Redirect to="/home" push />;
   return (
     <>
       <SignupLayout
