@@ -10,7 +10,7 @@ export default {
       message: 'fakeErr',
     },
   },
-  ErrRes400: {
+  errRes400: {
     error: {
       messages: [{ msg: 'fakeErr' }],
     },

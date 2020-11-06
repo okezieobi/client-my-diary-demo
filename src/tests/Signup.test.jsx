@@ -39,24 +39,6 @@ describe('Signup page should render', () => {
     global.fetch.mockRestore();
   });
 
-  test('does not navigate to dashboard when signup is not successful if input is not valid', async () => {
-    render(
-      <MemoryRouter initialEntries={['/signup']}>
-        <App />
-      </MemoryRouter>,
-    );
-
-    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
-      json: () => Promise.resolve(utils.ErrRes400),
-    }));
-
-    await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
-
-    await wait(() => expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument());
-
-    global.fetch.mockRestore();
-  });
-
   test('does not navigate to dashboard when signup is not successful', async () => {
     render(
       <MemoryRouter initialEntries={['/signup']}>
@@ -74,7 +56,25 @@ describe('Signup page should render', () => {
     await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.password);
     await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    await wait(() => expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument());
+    await wait(() => expect(screen.getByText(utils.errRes.error.message)).toBeInTheDocument());
+
+    global.fetch.mockRestore();
+  });
+
+  test('does not navigate to dashboard when signup is not successful if input is not valid', async () => {
+    render(
+      <MemoryRouter initialEntries={['/signup']}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(utils.errRes400),
+    }));
+
+    await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+    await wait(() => expect(screen.getByText(utils.errRes400.error.messages[0].msg)).toBeInTheDocument());
 
     global.fetch.mockRestore();
   });
