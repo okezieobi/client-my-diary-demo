@@ -74,7 +74,8 @@ describe('Signup page should render', () => {
 
     await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    await wait(() => expect(screen.getByText(utils.errRes400.error.messages[0].msg)).toBeInTheDocument());
+    await wait(() => expect(screen.getByText(utils.errRes400.error.messages[0].msg))
+      .toBeInTheDocument());
 
     global.fetch.mockRestore();
   });
