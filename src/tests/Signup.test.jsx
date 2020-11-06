@@ -15,6 +15,10 @@ describe('Signup page should render', () => {
     );
 
     expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument();
+    expect(screen.getByLabelText(/Full Name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
   });
 
   test('navigates to dashboard when signup is successful', async () => {
