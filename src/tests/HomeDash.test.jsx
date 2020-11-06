@@ -12,6 +12,7 @@ describe('Home dashboard page should render', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole('button', { name: /Search/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
+    expect(screen.getByRole('table')).toBeInTheDocument();
   });
 });

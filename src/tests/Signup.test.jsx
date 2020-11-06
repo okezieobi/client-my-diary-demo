@@ -25,7 +25,7 @@ describe('Signup page should render', () => {
     );
 
     jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
-      json: () => Promise.resolve(utils.response.success),
+      json: () => Promise.resolve(utils.successResponse),
     }));
 
     await userEvent.type(screen.getByLabelText(/Full Name/i), utils.inputs.fullName);
@@ -35,6 +35,47 @@ describe('Signup page should render', () => {
     await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     await wait(() => expect(screen.getByRole('button', { name: /Search/i })).toBeInTheDocument());
+
+    global.fetch.mockRestore();
+  });
+
+  test('does not navigate to dashboard when signup is not successful', async () => {
+    render(
+      <MemoryRouter initialEntries={['/signup']}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(utils.errRes),
+    }));
+
+    await userEvent.type(screen.getByLabelText(/Full Name/i), utils.inputs.fullName);
+    await userEvent.type(screen.getByLabelText(/Username/i), utils.inputs.username);
+    await userEvent.type(screen.getByLabelText(/Email Address/i), 'test-404@email.com');
+    await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.password);
+    await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+    await wait(() => expect(screen.getByText(utils.errRes.error.message)).toBeInTheDocument());
+
+    global.fetch.mockRestore();
+  });
+
+  test('does not navigate to dashboard when signup is not successful if input is not valid', async () => {
+    render(
+      <MemoryRouter initialEntries={['/signup']}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(utils.errRes400),
+    }));
+
+    await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+    await wait(() => expect(screen.getByText(utils.errRes400.error.messages[0].msg))
+      .toBeInTheDocument());
 
     global.fetch.mockRestore();
   });

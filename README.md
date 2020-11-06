@@ -6,6 +6,10 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/okezieobi/client-my-diary-demo/badge.svg?branch=main)](https://coveralls.io/github/okezieobi/client-my-diary-demo?branch=main)
 
+![Node.js CI](https://github.com/okezieobi/client-my-diary-demo/workflows/Node.js%20CI/badge.svg)
+
+![codacy-coverage-reporter](https://github.com/okezieobi/client-my-diary-demo/workflows/codacy-coverage-reporter/badge.svg)
+
 ## Server
 https://github.com/okezieobi/server-my-diary-demo
 

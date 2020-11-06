@@ -5,8 +5,19 @@ export default {
     email: 'foobar@mail.com',
     password: '456789Lovely',
   },
-  response: {
-    error: 'fakeErr',
-    success: 'fakeSuccess',
+  errRes: {
+    error: {
+      message: 'fakeErr',
+    },
+  },
+  errRes400: {
+    error: {
+      messages: [{ msg: 'fakeErr' }],
+    },
+  },
+  successResponse: {
+    data: {
+      token: 'fakeToken',
+    },
   },
 };
