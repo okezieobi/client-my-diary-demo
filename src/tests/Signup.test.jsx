@@ -1,28 +1,17 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen, wait } from '@testing-library/react';
+import { screen, wait } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import App from '../App';
 import utils from './utils';
 
 describe('Signup page should render', () => {
   test('Renders signup page of app for large screens', () => {
-    render(
-      <MemoryRouter initialEntries={['/signup']}>
-        <App />
-      </MemoryRouter>,
-    );
+    utils.renderWithRouter('/signup');
 
     expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument();
   });
 
   test('navigates to dashboard when signup is successful', async () => {
-    render(
-      <MemoryRouter initialEntries={['/signup']}>
-        <App />
-      </MemoryRouter>,
-    );
+    utils.renderWithRouter('/signup');
 
     jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
       json: () => Promise.resolve(utils.successResponse),
@@ -40,11 +29,7 @@ describe('Signup page should render', () => {
   });
 
   test('does not navigate to dashboard when signup is not successful', async () => {
-    render(
-      <MemoryRouter initialEntries={['/signup']}>
-        <App />
-      </MemoryRouter>,
-    );
+    utils.renderWithRouter('/signup');
 
     jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
       json: () => Promise.resolve(utils.errRes),
@@ -62,11 +47,7 @@ describe('Signup page should render', () => {
   });
 
   test('does not navigate to dashboard when signup is not successful if input is not valid', async () => {
-    render(
-      <MemoryRouter initialEntries={['/signup']}>
-        <App />
-      </MemoryRouter>,
-    );
+    utils.renderWithRouter('/signup');
 
     jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
       json: () => Promise.resolve(utils.errRes400),

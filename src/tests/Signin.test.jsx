@@ -1,16 +1,10 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
-import App from '../App';
+import utils from './utils';
 
 describe('Signin page should render', () => {
   test('Renders signin page of app for large screens', () => {
-    render(
-      <MemoryRouter initialEntries={['/signin']}>
-        <App />
-      </MemoryRouter>,
-    );
+    utils.renderWithRouter('/signin');
 
     expect(screen.getByRole('heading', { name: /Sign in/i })).toBeInTheDocument();
   });
