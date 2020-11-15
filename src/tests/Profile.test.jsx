@@ -1,16 +1,10 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
-import App from '../App';
+import utils from './utils';
 
 describe('Home dashboard page should render', () => {
   test('Renders diary content for large screens', () => {
-    render(
-      <MemoryRouter initialEntries={['/profile']}>
-        <App />
-      </MemoryRouter>,
-    );
+    utils.renderWithRouter('/profile');
 
     expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Number of entries/i })).toBeInTheDocument();
