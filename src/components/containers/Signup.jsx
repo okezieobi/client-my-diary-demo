@@ -31,13 +31,12 @@ export default function () {
       method: 'POST',
       body: JSON.stringify(inputData),
     }).then((response) => response.json())
-      .then(({ error, token }) => {
+      .then(({ error }) => {
         if (error) {
           if (error.messages) setSignupErr(error.messages[error.messages.length - 1].msg);
           else if (error.message) setSignupErr(error.message);
           setBtnState(false);
         } else {
-          localStorage.setItem('token', token);
           setAuth(true);
         }
       }).catch((err) => {

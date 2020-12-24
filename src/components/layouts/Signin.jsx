@@ -7,27 +7,22 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
-import AuthHeader from './Auth';
-import Copyright from './Copyright';
+import Root from './Root';
 import SigninBG from '../../images/Signin.svg';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(3),
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    width: '100%',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -41,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     width: '100vw',
-    height: '100vh',
+    height: '100%',
     backgroundSize: 'cover',
   },
 }));
@@ -53,8 +48,8 @@ export default function Signin({
 
   return (
     <div className={classes.backdrop}>
-      <AuthHeader>
-        <Container component="main" maxWidth="sm">
+      <Root>
+        <main>
           <CssBaseline />
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5">
@@ -107,17 +102,14 @@ export default function Signin({
                 </Grid>
                 <Grid item>
                   <Link href="/signup" variant="body2">
-                    Do not have an account? Sign Up
+                    Do not have an account yet ? Sign up
                   </Link>
                 </Grid>
               </Grid>
             </form>
           </Paper>
-          <Box mt={8}>
-            <Copyright yourWebsite="My Diary App Demo" />
-          </Box>
-        </Container>
-      </AuthHeader>
+        </main>
+      </Root>
     </div>
   );
 }

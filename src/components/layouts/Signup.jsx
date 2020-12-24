@@ -5,19 +5,18 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
-import AuthHeader from './Auth';
-import Copyright from './Copyright';
+import { makeStyles } from '@material-ui/core/styles';
+
+import Root from './Root';
 import SignupBG from '../../images/Signup.svg';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -34,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${SignupBG})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
     backgroundSize: 'cover',
   },
 }));
@@ -49,8 +48,8 @@ export default function Signup({
 
   return (
     <div className={classes.backdrop}>
-      <AuthHeader>
-        <Container component="main" maxWidth="sm">
+      <Root>
+        <main>
           <CssBaseline />
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5">
@@ -124,7 +123,7 @@ export default function Signup({
               <Grid container justify="flex-end">
                 <Grid item>
                   <Link href="/signin" variant="body2">
-                    Already have an account? Sign in
+                    Already have an account ? Sign in
                   </Link>
                 </Grid>
               </Grid>
@@ -135,11 +134,8 @@ export default function Signup({
               </Grid>
             </form>
           </Paper>
-          <Box mt={5}>
-            <Copyright yourWebsite="My Diary App Demo" />
-          </Box>
-        </Container>
-      </AuthHeader>
+        </main>
+      </Root>
     </div>
   );
 }

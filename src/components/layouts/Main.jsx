@@ -66,9 +66,7 @@ export default function Home({
               <Hidden className={classes.title} implementation="css" xsDown>
                 <Typography variant="h6">MyDiary</Typography>
               </Hidden>
-              <Link underline="none" href={href} color="inherit">
-                <Typography variant="h6">{headerLink}</Typography>
-              </Link>
+              <Link underline="none" href={href} color="inherit">{headerLink}</Link>
             </Toolbar>
           </AppBar>
         </Slide>
