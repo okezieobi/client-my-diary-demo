@@ -7,6 +7,6 @@ describe('Home page should render', () => {
     utils.renderWithRouter();
 
     expect(screen.getByRole('heading', { name: /MyDiary/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Get Started/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Get Started/i })).toBeInTheDocument();
   });
 });
