@@ -15,8 +15,8 @@ import SignupBG from '../../images/Signup.svg';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(6),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
