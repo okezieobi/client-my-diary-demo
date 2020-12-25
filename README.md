@@ -2,6 +2,8 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecd44881e1ea4364afe36a9f963ad44f)](https://www.codacy.com/manual/okezieobi/client-my-diary-demo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=okezieobi/client-my-diary-demo&amp;utm_campaign=Badge_Grade)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/ecd44881e1ea4364afe36a9f963ad44f)](https://www.codacy.com/gh/okezieobi/client-my-diary-demo/dashboard?utm_source=github.com&utm_medium=referral&utm_content=okezieobi/client-my-diary-demo&utm_campaign=Badge_Coverage)
+
 [![Build Status](https://travis-ci.org/okezieobi/client-my-diary-demo.svg?branch=main)](https://travis-ci.org/okezieobi/client-my-diary-demo)
 
 [![Coverage Status](https://coveralls.io/repos/github/okezieobi/client-my-diary-demo/badge.svg?branch=main)](https://coveralls.io/github/okezieobi/client-my-diary-demo?branch=main)
