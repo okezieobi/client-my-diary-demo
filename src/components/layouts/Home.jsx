@@ -1,18 +1,4 @@
 import React from 'react';
-/*
-import Paper from '@material-ui/core/Paper';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import LockIcon from '@material-ui/icons/Lock';
-import HomeIcon from '@material-ui/icons/Home';
-import LocalConvenienceStoreIcon from '@material-ui/icons/LocalConvenienceStore';
-import TimerIcon from '@material-ui/icons/Timer';
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
-*/
-
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,7 +24,7 @@ const useStyles = makeStyles(() => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     width: '100%',
-    height: '100%',
+    height: '98%',
     backgroundSize: 'contain',
   },
 }));

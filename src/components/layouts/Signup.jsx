@@ -129,7 +129,7 @@ export default function Signup({
               </Grid>
               <Grid container justify="center">
                 <Grid item>
-                  <Typography color="secondary">{signupErr}</Typography>
+                  <Typography color="error">{signupErr}</Typography>
                 </Grid>
               </Grid>
             </form>

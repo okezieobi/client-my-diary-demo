@@ -40,8 +40,8 @@ export default function () {
           setAuth(true);
         }
       }).catch((err) => {
-        console.log(err);
         setBtnState(false);
+        throw err;
       });
   };
 
