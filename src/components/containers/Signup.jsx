@@ -29,6 +29,7 @@ export default function () {
         'Content-Type': 'application/json;charset=utf-8',
       },
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(inputData),
     }).then((response) => response.json())
       .then(({ error }) => {
@@ -45,7 +46,7 @@ export default function () {
       });
   };
 
-  if (isAuth) return <Redirect to="/home" push />;
+  if (isAuth) return <Redirect to="/home" />;
   return (
     <>
       <SignupLayout

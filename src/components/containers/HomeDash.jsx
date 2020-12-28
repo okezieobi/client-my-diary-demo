@@ -1,6 +1,7 @@
-import React from 'react';
+/* eslint-disable no-console */
+import React, { useEffect, useState } from 'react';
 import Hidden from '@material-ui/core/Hidden';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,6 +22,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function () {
+  const [tableData, setData] = useState([]);
+  const [fetchErr, setFetchErr] = useState('');
+  const [isAuth, setAuth] = useState(true);
   const history = useHistory();
   const classes = useStyles();
 
@@ -35,32 +39,59 @@ export default function () {
   };
 
   const columns = ['title', 'body', 'created on', 'updated on'];
-  const data = [
-    ['test title 1', 'test body 1', 'created on 1', 'updated on 1'],
-    ['test title 2', 'test body 2', 'created on 2', 'updated on 2'],
-    ['test title 3', 'test body 3', 'created on 3', 'updated on 3'],
-    ['test title 4', 'test body 4', 'created on 4', 'updated on 4'],
-  ];
   const options = {
     filterType: 'checkbox',
     onRowClick: (rowData) => handleRowClick(rowData),
   };
 
-  return (
-    <>
-      <Dashboard homeSelect>
-        <div className={classes.backdrop}>
-          <MUIDataTable
-            title="Entries"
-            columns={columns}
-            options={options}
-            data={data}
-          />
-          <Hidden implementation="css" smUp>
-            <HomeFab handleClick={handleFabClick} />
-          </Hidden>
-        </div>
-      </Dashboard>
-    </>
-  );
+  const reqURL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api/v1/entries' : 'https://diary-app-demo.herokuapp.com/api/v1/entries';
+
+  useEffect(() => {
+    fetch(reqURL, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      credentials: 'include',
+    }).then((response) => response.json())
+      .then(({ error, data }) => {
+        if (error) {
+          if (error.messages) {
+            console.log(document.cookie.token);
+            setFetchErr(error.messages[error.messages.length - 1].msg);
+            setAuth(false);
+          } else if (error.message) {
+            setFetchErr(error.message);
+            setAuth(false);
+          }
+        } else {
+          const rowData = data.entries.map(
+            ({
+              title, body, createdAt, updatedAt,
+            }) => ([title, body, Date(createdAt), Date(updatedAt)]),
+          );
+          setData(rowData);
+        }
+      }).catch((err) => { throw err; });
+  }, [reqURL, history]);
+
+  if (isAuth) {
+    return (
+      <>
+        <Dashboard fetchErr={fetchErr} homeSelect>
+          <div className={classes.backdrop}>
+            <MUIDataTable
+              title="Entries"
+              columns={columns}
+              options={options}
+              data={tableData}
+            />
+            <Hidden implementation="css" smUp>
+              <HomeFab handleClick={handleFabClick} />
+            </Hidden>
+          </div>
+        </Dashboard>
+      </>
+    );
+  }
+  return <Redirect to="/signin" />;
 }
