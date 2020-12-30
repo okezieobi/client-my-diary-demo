@@ -68,7 +68,7 @@ export default function () {
             ({
               title, body, createdAt, updatedAt,
             }) => ([title, body, Date(createdAt), Date(updatedAt)]),
-          );
+          ) || [];
           setData(rowData);
         }
       }).catch((err) => { throw err; });

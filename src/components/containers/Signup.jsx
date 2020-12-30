@@ -1,17 +1,17 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
 
 import SignupLayout from '../layouts/Signup';
 
-export default function () {
+export default function Signup({ isAuth, setAuth }) {
   const [fname, setFname] = useState('');
   const [email, setEmail] = useState('');
   const [signupErr, setSignupErr] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [btnState, setBtnState] = useState(false);
-  const [isAuth, setAuth] = useState(false);
 
   const handleSubmit = () => {
     if (!btnState) {
@@ -46,7 +46,7 @@ export default function () {
       });
   };
 
-  if (isAuth) return <Redirect to="/home" />;
+  if (isAuth) return <Redirect to="/home" push />;
   return (
     <>
       <SignupLayout
@@ -61,3 +61,13 @@ export default function () {
     </>
   );
 }
+
+Signup.propTypes = {
+  isAuth: propTypes.bool,
+  setAuth: propTypes.func,
+};
+
+Signup.defaultProps = {
+  isAuth: false,
+  setAuth: undefined,
+};
