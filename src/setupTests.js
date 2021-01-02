@@ -4,20 +4,20 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 
-import utils from './tests/utils';
+import server from './mocks/server';
 
 beforeAll(() => {
   // Enable the mocking in tests.
-  utils.server.listen();
+  server.listen();
   // document.cookie = 'token=token';
 });
 
 afterEach(() => {
   // Reset any runtime handlers tests may use.
-  utils.server.resetHandlers();
+  server.resetHandlers();
 });
 
 afterAll(() => {
   // Clean up once the tests are done.
-  utils.server.close();
+  server.close();
 });

@@ -1,24 +1,40 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Redirect } from 'react-router-dom';
-import propTypes from 'prop-types';
 
 import SignupLayout from '../layouts/Signup';
 
-export default function Signup({ isAuth, setAuth }) {
-  const [fname, setFname] = useState('');
+export default function Signup() {
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [signupErr, setSignupErr] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [btnState, setBtnState] = useState(false);
+  const [isAuth, setAuth] = useState(false);
 
-  const handleSubmit = () => {
+  const handleFullNameChange = useCallback(({ target: { value } }) => {
+    setFullName(value);
+  }, []);
+
+  const handleUsernameChange = useCallback(({ target: { value } }) => {
+    setUsername(value);
+  }, []);
+
+  const handleEmailChange = useCallback(({ target: { value } }) => {
+    setEmail(value);
+  }, []);
+
+  const handlePasswordChange = useCallback(({ target: { value } }) => {
+    setPassword(value);
+  }, []);
+
+  const handleSubmit = useCallback(() => {
     if (!btnState) {
       setBtnState(true);
     }
     const inputData = {
-      fullName: fname,
+      fullName,
       email,
       username,
       password,
@@ -44,30 +60,20 @@ export default function Signup({ isAuth, setAuth }) {
         setBtnState(false);
         throw err;
       });
-  };
+  }, [btnState, email, fullName, password, username]);
 
   if (isAuth) return <Redirect to="/home" push />;
   return (
     <>
       <SignupLayout
         handleSubmit={handleSubmit}
-        setFname={setFname}
-        setEmail={setEmail}
-        setUsername={setUsername}
-        setPassword={setPassword}
+        setFullName={handleFullNameChange}
+        setEmail={handleEmailChange}
+        setUsername={handleUsernameChange}
+        setPassword={handlePasswordChange}
         formBtnState={btnState}
         signupErr={signupErr}
       />
     </>
   );
 }
-
-Signup.propTypes = {
-  isAuth: propTypes.bool,
-  setAuth: propTypes.func,
-};
-
-Signup.defaultProps = {
-  isAuth: false,
-  setAuth: undefined,
-};

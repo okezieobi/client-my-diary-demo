@@ -58,7 +58,7 @@ export default function () {
           if (error.messages) {
             console.log(document.cookie.token);
             setFetchErr(error.messages[error.messages.length - 1].msg);
-            setAuth(false);
+            // setAuth(false);
           } else if (error.message) {
             setFetchErr(error.message);
             setAuth(false);

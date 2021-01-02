@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signup({
-  setFname, setUsername,
+  setFullName, setUsername,
   setEmail, setPassword, handleSubmit,
   formBtnState, signupErr,
 }) {
@@ -67,7 +67,7 @@ export default function Signup({
                     id="fullName"
                     label="Full Name"
                     autoFocus
-                    onChange={({ target: { value } }) => setFname(value)}
+                    onChange={setFullName}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -80,7 +80,7 @@ export default function Signup({
                     id="username"
                     label="Username"
                     autoFocus
-                    onChange={({ target: { value } }) => setUsername(value)}
+                    onChange={setUsername}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -92,7 +92,7 @@ export default function Signup({
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    onChange={({ target: { value } }) => setEmail(value)}
+                    onChange={setEmail}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -105,7 +105,7 @@ export default function Signup({
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    onChange={({ target: { value } }) => setPassword(value)}
+                    onChange={setPassword}
                   />
                 </Grid>
               </Grid>
@@ -141,7 +141,7 @@ export default function Signup({
 }
 
 Signup.propTypes = {
-  setFname: PropTypes.func,
+  setFullName: PropTypes.func,
   setUsername: PropTypes.func,
   setEmail: PropTypes.func,
   setPassword: PropTypes.func,
@@ -151,7 +151,7 @@ Signup.propTypes = {
 };
 
 Signup.defaultProps = {
-  setFname: undefined,
+  setFullName: undefined,
   setUsername: undefined,
   setEmail: undefined,
   setPassword: undefined,

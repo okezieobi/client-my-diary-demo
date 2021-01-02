@@ -10,7 +10,6 @@ describe('Signup page should render', () => {
     expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument();
   });
 
-  /*
   it('navigates to dashboard when signup is successful', async () => {
     utils.renderWithRouter('/signup');
 
@@ -22,7 +21,6 @@ describe('Signup page should render', () => {
 
     expect(await screen.findByRole('button', { name: /Search/i })).toBeInTheDocument();
   });
-  */
 
   /*
   test('does not navigate to dashboard when signup is not successful', async () => {
