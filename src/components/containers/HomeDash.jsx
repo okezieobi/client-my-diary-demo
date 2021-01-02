@@ -44,7 +44,7 @@ export default function () {
     onRowClick: (rowData) => handleRowClick(rowData),
   };
 
-  const reqURL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api/v1/entries' : 'https://diary-app-demo.herokuapp.com/api/v1/entries';
+  const reqURL = process.env.NODE_ENV === 'production' ? 'https://diary-app-demo.herokuapp.com/api/v1/entries' : '/api/v1/entries';
 
   useEffect(() => {
     fetch(reqURL, {

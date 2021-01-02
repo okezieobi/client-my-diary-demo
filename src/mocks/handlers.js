@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import testUtils from '../tests/utils';
 
 export default [
-  rest.post('http://localhost:5000/api/v1/auth/signup', ({
+  rest.post('/api/v1/auth/signup', ({
     body: {
       username, fullName, email, password,
     },
@@ -35,7 +35,7 @@ export default [
       }),
     );
   }),
-  rest.get('http://localhost:5000/api/v1/entries',
+  rest.get('/api/v1/entries',
     ({ cookies: { fakeToken } }, res, { json, status }) => {
       if (!fakeToken) {
         return res(

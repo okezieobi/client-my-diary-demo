@@ -39,7 +39,8 @@ export default function Signup() {
       username,
       password,
     };
-    const reqURL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api/v1/auth/signup' : 'https://diary-app-demo.herokuapp.com/api/v1/auth/signup';
+
+    const reqURL = process.env.NODE_ENV === 'production' ? 'https://diary-app-demo.herokuapp.com/api/v1/auth/signup' : '/api/v1/auth/signup';
     fetch(reqURL, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -60,5 +60,6 @@
       "<rootDir>/index.jsx",
       "<rootDir>/serviceWorker.js"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
