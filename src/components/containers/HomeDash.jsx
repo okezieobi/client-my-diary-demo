@@ -23,7 +23,6 @@ const useStyles = makeStyles(() => ({
 
 export default function () {
   const [tableData, setData] = useState([]);
-  const [fetchErr, setFetchErr] = useState('');
   const [isAuth, setAuth] = useState(true);
   const history = useHistory();
   const classes = useStyles();
@@ -56,12 +55,11 @@ export default function () {
       .then(({ error, data }) => {
         if (error) {
           if (error.messages) {
-            console.log(document.cookie.token);
-            setFetchErr(error.messages[error.messages.length - 1].msg);
             setAuth(false);
+            throw error.messages[error.messages.length - 1].msg;
           } else if (error.message) {
-            setFetchErr(error.message);
             setAuth(false);
+            throw error.message;
           }
         } else {
           const rowData = data.entries.map(
@@ -77,7 +75,7 @@ export default function () {
   if (isAuth) {
     return (
       <>
-        <Dashboard fetchErr={fetchErr} homeSelect>
+        <Dashboard homeSelect>
           <div className={classes.backdrop}>
             <MUIDataTable
               title="Entries"

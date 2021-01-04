@@ -1,17 +1,19 @@
+import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import utils from './utils';
+import App from '../App';
 
 describe('Signup page should render', () => {
   it('Renders signup page of app for large screens', () => {
-    utils.renderWithRouter('/signup');
+    utils.renderWithRouter(<App />, { route: '/signup' });
 
     expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument();
   });
 
   it('navigates to dashboard when signup is successful', async () => {
-    utils.renderWithRouter('/signup');
+    utils.renderWithRouter(<App />, { route: '/signup' });
 
     await userEvent.type(screen.getByLabelText(/Full Name/i), utils.inputs.fullName);
     await userEvent.type(screen.getByLabelText(/Username/i), utils.inputs.username);
@@ -41,19 +43,16 @@ describe('Signup page should render', () => {
     global.fetch.mockRestore();
   });
 
-  test('does not navigate to dashboard when signup is not successful if input is not valid', async () => {
+  test('does not navigate to dashboard when signup is not successful if input is not valid',
+  async () => {
+    mockAPI.server.use(...mockAPI.errHandlers.err400);
+
     utils.renderWithRouter('/signup');
 
-    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
-      json: () => Promise.resolve(utils.errRes400),
-    }));
+    userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
-
-    await wait(() => expect(screen.getByText(utils.errRes400.error.messages[0].msg))
-      .toBeInTheDocument());
-
-    global.fetch.mockRestore();
+    expect(await screen.findByText(utils.response.user.err400.error.messages[0].msg))
+      .toBeInTheDocument();
   });
   */
 });

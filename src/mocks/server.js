@@ -20,38 +20,38 @@ const defaultHandlers = [
   )),
 ];
 
-const handlers = {
-  user: {
-    err400: rest.post('/api/v1/auth/signup', (req, res, { json, status }) => res(
+const errHandlers = {
+  err400: [
+    rest.post('/api/v1/auth/signup', (req, res, { json, status }) => res(
       status(400),
       json({
         error: { ...testUtils.response.user.err400.error },
       }),
     )),
-    err40X: rest.post('/api/v1/auth/signup', (req, res, { json, status }) => res(
-      status(400),
-      json({
-        error: { ...testUtils.response.user.err40X.error },
-      }),
-    )),
-  },
-  entries: {
-    err400: rest.post('/api/v1/entries', (req, res, { json, status }) => res(
+    rest.post('/api/v1/entries', (req, res, { json, status }) => res(
       status(400),
       json({
         error: { ...testUtils.response.entry.err400.error },
       }),
     )),
-    err40X: rest.post('/api/v1/entries', (req, res, { json, status }) => res(
+  ],
+  err40X: [
+    rest.post('/api/v1/auth/signup', (req, res, { json, status }) => res(
+      status(400),
+      json({
+        error: { ...testUtils.response.user.err40X.error },
+      }),
+    )),
+    rest.post('/api/v1/entries', (req, res, { json, status }) => res(
       status(406),
       json({
         error: { ...testUtils.response.entry.err40X.error },
       }),
     )),
-  },
+  ],
 };
 
 export default {
   server: setupServer(...defaultHandlers),
-  handlers,
+  errHandlers,
 };

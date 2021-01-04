@@ -1,8 +1,5 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-
-import App from '../App';
 
 export default {
   inputs: {
@@ -52,11 +49,8 @@ export default {
       },
     },
   },
-  renderWithRouter(route = '/') {
-    return render(
-      <MemoryRouter initialEntries={[route]}>
-        <App />
-      </MemoryRouter>,
-    );
+  renderWithRouter(ui, { route = '/' } = {}) {
+    window.history.pushState({}, 'Test page', route);
+    return render(ui, { wrapper: BrowserRouter });
   },
 };

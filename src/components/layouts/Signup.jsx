@@ -157,5 +157,5 @@ Signup.defaultProps = {
   setPassword: undefined,
   handleSubmit: undefined,
   formBtnState: false,
-  signupErr: undefined,
+  signupErr: '',
 };

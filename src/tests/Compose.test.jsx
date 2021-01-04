@@ -1,10 +1,12 @@
+import React from 'react';
 import { screen } from '@testing-library/react';
 
 import utils from './utils';
+import App from '../App';
 
 describe('Home dashboard page should render', () => {
   test('Renders diary content for large screens', () => {
-    utils.renderWithRouter('/home/entry/compose');
+    utils.renderWithRouter(<App />, { route: '/home/entry/compose' });
 
     expect(screen.getByRole('button', { name: /Submit/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Back/i })).toBeInTheDocument();

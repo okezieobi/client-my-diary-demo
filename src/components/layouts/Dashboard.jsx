@@ -202,7 +202,7 @@ Dashboard.defaultProps = {
   window: undefined,
   homeSelect: false,
   profileSelect: false,
-  fetchErr: undefined,
+  fetchErr: '',
 };
 
 export default Dashboard;
