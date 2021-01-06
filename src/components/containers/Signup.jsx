@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 import SignupLayout from '../layouts/Signup';
 
-export default function () {
-  const [fname, setFname] = useState('');
+export default function Signup() {
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [signupErr, setSignupErr] = useState('');
   const [username, setUsername] = useState('');
@@ -13,22 +13,39 @@ export default function () {
   const [btnState, setBtnState] = useState(false);
   const [isAuth, setAuth] = useState(false);
 
+  const handleFullNameChange = ({ target: { value } }) => {
+    setFullName(value);
+  };
+
+  const handleUsernameChange = ({ target: { value } }) => {
+    setUsername(value);
+  };
+
+  const handleEmailChange = ({ target: { value } }) => {
+    setEmail(value);
+  };
+
+  const handlePasswordChange = ({ target: { value } }) => {
+    setPassword(value);
+  };
+
   const handleSubmit = () => {
-    if (!btnState) {
-      setBtnState(true);
-    }
+    setBtnState(true);
+
     const inputData = {
-      fullName: fname,
+      fullName,
       email,
       username,
       password,
     };
-    const reqURL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api/v1/auth/signup' : 'https://diary-app-demo.herokuapp.com/api/v1/auth/signup';
+
+    const reqURL = process.env.NODE_ENV === 'production' ? 'https://diary-app-demo.herokuapp.com/api/v1/auth/signup' : '/api/v1/auth/signup';
     fetch(reqURL, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(inputData),
     }).then((response) => response.json())
       .then(({ error }) => {
@@ -40,8 +57,8 @@ export default function () {
           setAuth(true);
         }
       }).catch((err) => {
-        console.log(err);
         setBtnState(false);
+        throw err;
       });
   };
 
@@ -50,10 +67,10 @@ export default function () {
     <>
       <SignupLayout
         handleSubmit={handleSubmit}
-        setFname={setFname}
-        setEmail={setEmail}
-        setUsername={setUsername}
-        setPassword={setPassword}
+        setFullName={handleFullNameChange}
+        setEmail={handleEmailChange}
+        setUsername={handleUsernameChange}
+        setPassword={handlePasswordChange}
         formBtnState={btnState}
         signupErr={signupErr}
       />

@@ -1,28 +1,16 @@
 import React from 'react';
-/*
-import Paper from '@material-ui/core/Paper';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import LockIcon from '@material-ui/icons/Lock';
-import HomeIcon from '@material-ui/icons/Home';
-import LocalConvenienceStoreIcon from '@material-ui/icons/LocalConvenienceStore';
-import TimerIcon from '@material-ui/icons/Timer';
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
-*/
-
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import propTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import HomeBGOne from '../../images/Home_1.svg';
 import HomeBGTwo from '../../images/Home_2.svg';
 import HomeBGThree from '../../images/Home_3.svg';
-import Root from './Root';
+import Root from '../layouts/Root';
 
 const useStyles = makeStyles(() => ({
   homeBackdrop1: {
@@ -38,14 +26,15 @@ const useStyles = makeStyles(() => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     width: '100%',
-    height: '100%',
+    height: '98%',
     backgroundSize: 'contain',
   },
 }));
 
-export default function Home() {
+export default function Home({ isAuth }) {
   const classes = useStyles();
 
+  if (isAuth) return <Redirect to="/home" push />;
   return (
     <>
       <CssBaseline />
@@ -61,3 +50,11 @@ export default function Home() {
     </>
   );
 }
+
+Home.propTypes = {
+  isAuth: propTypes.bool,
+};
+
+Home.defaultProps = {
+  isAuth: false,
+};

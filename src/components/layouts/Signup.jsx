@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signup({
-  setFname, setUsername,
+  setFullName, setUsername,
   setEmail, setPassword, handleSubmit,
   formBtnState, signupErr,
 }) {
@@ -67,7 +67,7 @@ export default function Signup({
                     id="fullName"
                     label="Full Name"
                     autoFocus
-                    onChange={({ target: { value } }) => setFname(value)}
+                    onChange={setFullName}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -80,7 +80,7 @@ export default function Signup({
                     id="username"
                     label="Username"
                     autoFocus
-                    onChange={({ target: { value } }) => setUsername(value)}
+                    onChange={setUsername}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -92,7 +92,7 @@ export default function Signup({
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    onChange={({ target: { value } }) => setEmail(value)}
+                    onChange={setEmail}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -105,7 +105,7 @@ export default function Signup({
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    onChange={({ target: { value } }) => setPassword(value)}
+                    onChange={setPassword}
                   />
                 </Grid>
               </Grid>
@@ -129,7 +129,7 @@ export default function Signup({
               </Grid>
               <Grid container justify="center">
                 <Grid item>
-                  <Typography color="secondary">{signupErr}</Typography>
+                  <Typography color="error">{signupErr}</Typography>
                 </Grid>
               </Grid>
             </form>
@@ -141,21 +141,11 @@ export default function Signup({
 }
 
 Signup.propTypes = {
-  setFname: PropTypes.func,
-  setUsername: PropTypes.func,
-  setEmail: PropTypes.func,
-  setPassword: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  formBtnState: PropTypes.bool,
-  signupErr: PropTypes.string,
-};
-
-Signup.defaultProps = {
-  setFname: undefined,
-  setUsername: undefined,
-  setEmail: undefined,
-  setPassword: undefined,
-  handleSubmit: undefined,
-  formBtnState: false,
-  signupErr: undefined,
+  setFullName: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  formBtnState: PropTypes.bool.isRequired,
+  signupErr: PropTypes.string.isRequired,
 };

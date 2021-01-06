@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "clsx": "^1.1.1",
     "e": "0.0.4",
+    "msw": "^0.24.3",
     "mui-datatables": "^3.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -55,6 +56,10 @@
     "eslint-plugin-testing-library": "^3.10.0"
   },
   "jest": {
-    "watchPathIgnorePatterns": ["<rootDir>/index.jsx", "<rootDir>/serviceWorker.js"]
-  }
+    "watchPathIgnorePatterns": [
+      "<rootDir>/index.jsx",
+      "<rootDir>/serviceWorker.js"
+    ]
+  },
+  "proxy": "http://localhost:5000"
 }
