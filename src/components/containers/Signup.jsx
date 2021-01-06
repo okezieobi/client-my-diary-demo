@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import SignupLayout from '../layouts/Signup';
@@ -13,26 +13,25 @@ export default function Signup() {
   const [btnState, setBtnState] = useState(false);
   const [isAuth, setAuth] = useState(false);
 
-  const handleFullNameChange = useCallback(({ target: { value } }) => {
+  const handleFullNameChange = ({ target: { value } }) => {
     setFullName(value);
-  }, []);
+  };
 
-  const handleUsernameChange = useCallback(({ target: { value } }) => {
+  const handleUsernameChange = ({ target: { value } }) => {
     setUsername(value);
-  }, []);
+  };
 
-  const handleEmailChange = useCallback(({ target: { value } }) => {
+  const handleEmailChange = ({ target: { value } }) => {
     setEmail(value);
-  }, []);
+  };
 
-  const handlePasswordChange = useCallback(({ target: { value } }) => {
+  const handlePasswordChange = ({ target: { value } }) => {
     setPassword(value);
-  }, []);
+  };
 
-  const handleSubmit = useCallback(() => {
-    if (!btnState) {
-      setBtnState(true);
-    }
+  const handleSubmit = () => {
+    setBtnState(true);
+
     const inputData = {
       fullName,
       email,
@@ -61,7 +60,7 @@ export default function Signup() {
         setBtnState(false);
         throw err;
       });
-  }, [btnState, email, fullName, password, username]);
+  };
 
   if (isAuth) return <Redirect to="/home" push />;
   return (

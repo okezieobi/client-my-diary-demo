@@ -141,21 +141,11 @@ export default function Signup({
 }
 
 Signup.propTypes = {
-  setFullName: PropTypes.func,
-  setUsername: PropTypes.func,
-  setEmail: PropTypes.func,
-  setPassword: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  formBtnState: PropTypes.bool,
-  signupErr: PropTypes.string,
-};
-
-Signup.defaultProps = {
-  setFullName: undefined,
-  setUsername: undefined,
-  setEmail: undefined,
-  setPassword: undefined,
-  handleSubmit: undefined,
-  formBtnState: false,
-  signupErr: '',
+  setFullName: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  formBtnState: PropTypes.bool.isRequired,
+  signupErr: PropTypes.string.isRequired,
 };

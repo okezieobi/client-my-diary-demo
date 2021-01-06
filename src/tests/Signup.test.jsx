@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import utils from './utils';
 import App from '../App';
+// import mockAPI from '../mocks/server';
 
 describe('Signup page should render', () => {
   it('Renders signup page of app for large screens', () => {
@@ -22,7 +23,7 @@ describe('Signup page should render', () => {
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     expect(await screen.findByRole('button', { name: /Search/i })).toBeInTheDocument();
-  });
+  }, 10000);
 
   /*
   test('does not navigate to dashboard when signup is not successful', async () => {
@@ -44,15 +45,15 @@ describe('Signup page should render', () => {
   });
 
   test('does not navigate to dashboard when signup is not successful if input is not valid',
-  async () => {
-    mockAPI.server.use(...mockAPI.errHandlers.err400);
+    async () => {
+      mockAPI.server.use(...mockAPI.errHandlers.err400);
 
-    utils.renderWithRouter('/signup');
+      utils.renderWithRouter(<App />, { route: '/signup' });
 
-    userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+      userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    expect(await screen.findByText(utils.response.user.err400.error.messages[0].msg))
-      .toBeInTheDocument();
-  });
-  */
+      expect(await screen.findByText(utils.response.user.err400.error.messages[0].msg))
+        .toBeInTheDocument();
+    }, 10000);
+    */
 });

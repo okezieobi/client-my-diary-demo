@@ -45,6 +45,12 @@ export default {
           {
             title: 'fake', body: 'fake', createdAt: new Date(), updatedAt: new Date(),
           },
+          {
+            title: 'fake', body: 'fake', createdAt: new Date(), updatedAt: new Date(),
+          },
+          {
+            title: 'fake', body: 'fake', createdAt: new Date(), updatedAt: new Date(),
+          },
         ],
       },
     },

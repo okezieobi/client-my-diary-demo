@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed',
     width: '100%',
-    height: '100%',
+    height: '100vh',
     backgroundSize: 'cover',
   },
 }));
