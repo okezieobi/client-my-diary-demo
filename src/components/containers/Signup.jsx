@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import SignupLayout from '../layouts/Signup';
+import authServices from '../../services/Auth';
+import env from '../../utils/env';
 
 export default function Signup() {
   const [fullName, setFullName] = useState('');
@@ -11,7 +13,11 @@ export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [btnState, setBtnState] = useState(false);
-  const [isAuth, setAuth] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
+
+  const { from } = location.state || { from: { pathname: '/home' } };
+  const auth = authServices.useAuth();
 
   const handleFullNameChange = ({ target: { value } }) => {
     setFullName(value);
@@ -39,22 +45,15 @@ export default function Signup() {
       password,
     };
 
-    const reqURL = process.env.NODE_ENV === 'production' ? 'https://diary-app-demo.herokuapp.com/api/v1/auth/signup' : '/api/v1/auth/signup';
-    fetch(reqURL, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify(inputData),
-    }).then((response) => response.json())
+    const reqURL = env.backendAPI('auth/signup');
+    auth.signup(reqURL, inputData)
       .then(({ error }) => {
         if (error) {
           if (error.messages) setSignupErr(error.messages[error.messages.length - 1].msg);
           else if (error.message) setSignupErr(error.message);
           setBtnState(false);
         } else {
-          setAuth(true);
+          history.replace(from);
         }
       }).catch((err) => {
         setBtnState(false);
@@ -62,7 +61,6 @@ export default function Signup() {
       });
   };
 
-  if (isAuth) return <Redirect to="/home" push />;
   return (
     <>
       <SignupLayout

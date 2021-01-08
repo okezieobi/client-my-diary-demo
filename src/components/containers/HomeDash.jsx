@@ -1,13 +1,15 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import Hidden from '@material-ui/core/Hidden';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Dashboard from '../layouts/Dashboard';
 import HomeFab from '../layouts/Fab';
 import DashboardBG from '../../images/Home_Dash.svg';
+import authServices from '../../services/Auth';
+import env from '../../utils/env';
 
 const useStyles = makeStyles(() => ({
   backdrop: {
@@ -23,9 +25,10 @@ const useStyles = makeStyles(() => ({
 
 export default function () {
   const [tableData, setData] = useState([]);
-  const [isAuth, setAuth] = useState(true);
   const history = useHistory();
   const classes = useStyles();
+
+  const auth = authServices.useAuth();
 
   const handleRowClick = (row = []) => {
     const clickedRow = JSON.stringify(row);
@@ -43,22 +46,17 @@ export default function () {
     onRowClick: (rowData) => handleRowClick(rowData),
   };
 
-  const reqURL = process.env.NODE_ENV === 'production' ? 'https://diary-app-demo.herokuapp.com/api/v1/entries' : '/api/v1/entries';
+  const reqURL = env.backendAPI('entries');
 
   useEffect(() => {
-    fetch(reqURL, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      credentials: 'include',
-    }).then((response) => response.json())
+    auth.getResource(reqURL)
       .then(({ error, data }) => {
         if (error) {
           if (error.messages) {
-            setAuth(false);
+            history.push('/');
             throw error.messages[error.messages.length - 1].msg;
           } else if (error.message) {
-            setAuth(false);
+            history.push('/');
             throw error.message;
           }
         } else {
@@ -70,26 +68,23 @@ export default function () {
           setData(rowData);
         }
       }).catch((err) => { throw err; });
-  }, [reqURL, history]);
+  }, [reqURL, history, auth]);
 
-  if (isAuth) {
-    return (
-      <>
-        <Dashboard homeSelect>
-          <div className={classes.backdrop}>
-            <MUIDataTable
-              title="Entries"
-              columns={columns}
-              options={options}
-              data={tableData}
-            />
-            <Hidden implementation="css" smUp>
-              <HomeFab handleClick={handleFabClick} />
-            </Hidden>
-          </div>
-        </Dashboard>
-      </>
-    );
-  }
-  return <Redirect to="/signin" />;
+  return (
+    <>
+      <Dashboard homeSelect>
+        <div className={classes.backdrop}>
+          <MUIDataTable
+            title="Entries"
+            columns={columns}
+            options={options}
+            data={tableData}
+          />
+          <Hidden implementation="css" smUp>
+            <HomeFab handleClick={handleFabClick} />
+          </Hidden>
+        </div>
+      </Dashboard>
+    </>
+  );
 }

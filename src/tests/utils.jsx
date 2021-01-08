@@ -1,5 +1,6 @@
-import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+
+import authServices from '../services/Auth';
 
 export default {
   inputs: {
@@ -57,6 +58,6 @@ export default {
   },
   renderWithRouter(ui, { route = '/' } = {}) {
     window.history.pushState({}, 'Test page', route);
-    return render(ui, { wrapper: BrowserRouter });
+    return render(ui, { wrapper: authServices.PrivateRoute });
   },
 };
