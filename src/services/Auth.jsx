@@ -3,21 +3,6 @@ import React, { useContext, createContext, useState } from 'react';
 import { Redirect, Route, BrowserRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const appAPI = {
-  isAuthenticated: false,
-  authenticate(reqURL, input, method = 'GET') {
-    this.isAuthenticated = true;
-    return fetch(reqURL, {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      method,
-      credentials: 'include',
-      body: null || JSON.stringify(input),
-    }).then((response) => response.json());
-  },
-};
-
 const authContext = createContext();
 
 function useAuth() {
@@ -25,21 +10,30 @@ function useAuth() {
 }
 
 function useProvideAuth() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
 
-  const signup = (reqURL, input) => appAPI.authenticate(reqURL, input, 'POST').then((response) => {
-    setUser(true);
-    return response;
-  });
+  const setResource = (reqURL, input, method = 'POST') => fetch(reqURL, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    method,
+    credentials: 'include',
+    body: JSON.stringify(input),
+  }).then((response) => response.json());
 
-  const getResource = (reqURL) => appAPI.authenticate(reqURL).then((response) => {
-    setUser(true);
-    return response;
+  const getResource = (reqURL) => fetch(reqURL, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    credentials: 'include',
+  }).then((response) => {
+    if (response.status === 200) return response.json();
+    return setUser(false);
   });
 
   return {
     user,
-    signup,
+    setResource,
     getResource,
   };
 }
@@ -69,7 +63,7 @@ function PrivateRoute({ children, ...rest }) {
       ) : (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: '/signin',
             state: { from: location },
           }}
         />

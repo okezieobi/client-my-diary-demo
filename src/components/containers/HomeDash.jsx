@@ -57,7 +57,6 @@ export default function () {
           } else if (error.message) {
             throw error.message;
           }
-          history.push('/');
         } else {
           const rowData = data.entries.map(
             ({

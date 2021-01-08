@@ -19,23 +19,23 @@ export default function Signup() {
   const { from } = location.state || { from: { pathname: '/home' } };
   const auth = authServices.useAuth();
 
-  const handleFullNameChange = ({ target: { value } }) => {
+  function handleFullNameChange(value) {
     setFullName(value);
-  };
+  }
 
-  const handleUsernameChange = ({ target: { value } }) => {
+  function handleUsernameChange(value) {
     setUsername(value);
-  };
+  }
 
-  const handleEmailChange = ({ target: { value } }) => {
+  function handleEmailChange(value) {
     setEmail(value);
-  };
+  }
 
-  const handlePasswordChange = ({ target: { value } }) => {
+  function handlePasswordChange(value) {
     setPassword(value);
-  };
+  }
 
-  const handleSubmit = () => {
+  function handleSubmit() {
     setBtnState(true);
 
     const inputData = {
@@ -46,7 +46,7 @@ export default function Signup() {
     };
 
     const reqURL = env.backendAPI('auth/signup');
-    auth.signup(reqURL, inputData)
+    auth.setResource(reqURL, inputData)
       .then(({ error }) => {
         if (error) {
           if (error.messages) setSignupErr(error.messages[error.messages.length - 1].msg);
@@ -59,7 +59,7 @@ export default function Signup() {
         setBtnState(false);
         throw err;
       });
-  };
+  }
 
   return (
     <>

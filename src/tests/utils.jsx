@@ -58,6 +58,6 @@ export default {
   },
   renderWithRouter(ui, { route = '/' } = {}) {
     window.history.pushState({}, 'Test page', route);
-    return render(ui, { wrapper: authServices.PrivateRoute });
+    return render(ui, { wrapper: authServices.ProvideAuth });
   },
 };

@@ -45,6 +45,10 @@ export default function Signup({
   formBtnState, signupErr,
 }) {
   const classes = useStyles();
+  function handleFullNameChange({ target: { value } }) { setFullName(value); }
+  function handleUsernameChange({ target: { value } }) { setUsername(value); }
+  function handleEmailChange({ target: { value } }) { setEmail(value); }
+  function handlePasswordChange({ target: { value } }) { setPassword(value); }
 
   return (
     <div className={classes.backdrop}>
@@ -67,7 +71,7 @@ export default function Signup({
                     id="fullName"
                     label="Full Name"
                     autoFocus
-                    onChange={setFullName}
+                    onChange={handleFullNameChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -80,7 +84,7 @@ export default function Signup({
                     id="username"
                     label="Username"
                     autoFocus
-                    onChange={setUsername}
+                    onChange={handleUsernameChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -92,7 +96,7 @@ export default function Signup({
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    onChange={setEmail}
+                    onChange={handleEmailChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -105,7 +109,7 @@ export default function Signup({
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    onChange={setPassword}
+                    onChange={handlePasswordChange}
                   />
                 </Grid>
               </Grid>
