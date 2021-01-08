@@ -53,12 +53,11 @@ export default function () {
       .then(({ error, data }) => {
         if (error) {
           if (error.messages) {
-            history.push('/');
             throw error.messages[error.messages.length - 1].msg;
           } else if (error.message) {
-            history.push('/');
             throw error.message;
           }
+          history.push('/');
         } else {
           const rowData = data.entries.map(
             ({
