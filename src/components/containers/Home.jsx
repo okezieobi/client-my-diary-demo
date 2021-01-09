@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import propTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 
 import HomeBGThree from '../../images/Home_3.svg';
 import Root from '../layouts/Root';
