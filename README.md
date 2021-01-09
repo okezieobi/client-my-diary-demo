@@ -12,14 +12,13 @@
 
 ![codacy-coverage-reporter](https://github.com/okezieobi/client-my-diary-demo/workflows/codacy-coverage-reporter/badge.svg)
 
-## Server
-https://github.com/okezieobi/server-my-diary-demo
-
 # client-my-diary-demo-v1
-Web client for MyDiary, an online journal where users can pen down their thoughts and feelings
+Web client for MyDiary, a demo online journal for personal use 
 
 ## Live app
 https://diary-app-demo.netlify.app/
+## Server
+https://github.com/okezieobi/server-my-diary-demo
 
 ## Required Features
 - Users can navigate the app to create an account and log in.
