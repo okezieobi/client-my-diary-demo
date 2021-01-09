@@ -4,21 +4,11 @@ import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import propTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 
-import HomeBGOne from '../../images/Home_1.svg';
-import HomeBGTwo from '../../images/Home_2.svg';
 import HomeBGThree from '../../images/Home_3.svg';
 import Root from '../layouts/Root';
 
 const useStyles = makeStyles(() => ({
-  homeBackdrop1: {
-    backgroundImage: `url(${HomeBGOne})`,
-  },
-  homeBackdrop2: {
-    backgroundImage: `url(${HomeBGTwo})`,
-  },
   homeBackdrop3: {
     backgroundImage: `url(${HomeBGThree})`,
   },
@@ -31,10 +21,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Home({ isAuth }) {
+export default function Home() {
   const classes = useStyles();
 
-  if (isAuth) return <Redirect to="/home" push />;
   return (
     <>
       <CssBaseline />
@@ -50,11 +39,3 @@ export default function Home({ isAuth }) {
     </>
   );
 }
-
-Home.propTypes = {
-  isAuth: propTypes.bool,
-};
-
-Home.defaultProps = {
-  isAuth: false,
-};
