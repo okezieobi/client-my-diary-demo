@@ -56,7 +56,7 @@
     "eslint-plugin-testing-library": "^3.10.0"
   },
   "jest": {
-    "watchPathIgnorePatterns": [
+    "testPathIgnorePatterns": [
       "<rootDir>/src/index.jsx",
       "<rootDir>/src/serviceWorker.js",
       "<rootDir>/src/theme.js",
