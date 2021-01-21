@@ -46,7 +46,7 @@ export default function Signup() {
     };
 
     const reqURL = env.backendAPI('auth/signup');
-    auth.setResource(reqURL, inputData)
+    auth.authenticate(reqURL, inputData)
       .then(({ error }) => {
         if (error) {
           if (error.messages) setSignupErr(error.messages[error.messages.length - 1].msg);
