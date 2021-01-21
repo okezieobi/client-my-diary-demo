@@ -33,6 +33,43 @@ const handlers = [
       );
     } return response;
   }),
+  rest.post('/api/v1/auth/login', ({
+    body: {
+      user, password,
+    },
+  }, res, { json, status, cookie }) => {
+    let response;
+    if (!user || password) {
+      response = res(
+        status(400),
+        json({
+          error: { ...testUtils.response.user.err400.error },
+        }),
+      );
+    } else if (user !== testUtils.inputs.username || user !== testUtils.inputs.email) {
+      response = res(
+        status(406),
+        json({
+          error: { ...testUtils.response.user.err40X.error },
+        }),
+      );
+    } else if (password !== testUtils.inputErr.password) {
+      response = res(
+        status(406),
+        json({
+          error: { ...testUtils.response.user.err40X.error },
+        }),
+      );
+    } else {
+      response = res(
+        status(201),
+        cookie('fakeToken', 'token123'),
+        json({
+          data: { ...testUtils.response.user.data },
+        }),
+      );
+    } return response;
+  }),
   rest.get('/api/v1/entries',
     ({ cookies: { fakeToken } }, res, { json, status }) => {
       let response;
