@@ -42,9 +42,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login({
-  trackUsernameEmail, trackPassword, handleSubmit,
+  setUser, setPassword, handleSubmit, loginErr, formBtnState,
 }) {
   const classes = useStyles();
+  function handleUserChange({ target: { value } }) { setUser(value); }
+  function handlePasswordChange({ target: { value } }) { setPassword(value); }
 
   return (
     <div className={classes.backdrop}>
@@ -66,7 +68,7 @@ export default function Login({
                 name="email-username"
                 autoComplete="email-username"
                 autoFocus
-                onChange={trackUsernameEmail}
+                onChange={handleUserChange}
               />
               <TextField
                 variant="outlined"
@@ -78,7 +80,7 @@ export default function Login({
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={trackPassword}
+                onChange={handlePasswordChange}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -91,8 +93,9 @@ export default function Login({
                 color="primary"
                 className={classes.submit}
                 onClick={handleSubmit}
+                disabled={formBtnState}
               >
-                Submit
+                {formBtnState ? 'Sending ...' : 'Submit'}
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -106,6 +109,11 @@ export default function Login({
                   </Link>
                 </Grid>
               </Grid>
+              <Grid container justify="center">
+                <Grid item>
+                  <Typography color="error">{loginErr}</Typography>
+                </Grid>
+              </Grid>
             </form>
           </Paper>
         </main>
@@ -115,13 +123,9 @@ export default function Login({
 }
 
 Login.propTypes = {
-  trackUsernameEmail: PropTypes.func,
-  trackPassword: PropTypes.func,
-  handleSubmit: PropTypes.func,
-};
-
-Login.defaultProps = {
-  trackUsernameEmail: undefined,
-  trackPassword: undefined,
-  handleSubmit: undefined,
+  setUser: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  loginErr: PropTypes.string.isRequired,
+  formBtnState: PropTypes.bool.isRequired,
 };

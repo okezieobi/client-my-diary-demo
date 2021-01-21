@@ -46,16 +46,16 @@ const handlers = [
           error: { ...testUtils.response.user.err400.error },
         }),
       );
-    } else if (user !== testUtils.inputs.username || user !== testUtils.inputs.email) {
+    } else if (user !== testUtils.inputs.username && user !== testUtils.inputs.email) {
       response = res(
         status(406),
         json({
           error: { ...testUtils.response.user.err40X.error },
         }),
       );
-    } else if (password !== testUtils.inputErr.password) {
+    } else if (password !== testUtils.inputs.password) {
       response = res(
-        status(406),
+        status(401),
         json({
           error: { ...testUtils.response.user.err40X.error },
         }),
