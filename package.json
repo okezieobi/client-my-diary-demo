@@ -57,8 +57,10 @@
   },
   "jest": {
     "watchPathIgnorePatterns": [
-      "<rootDir>/index.jsx",
-      "<rootDir>/serviceWorker.js"
+      "<rootDir>/src/index.jsx",
+      "<rootDir>/src/serviceWorker.js",
+      "<rootDir>/src/theme.js",
+      "<rootDir>/src/mocks/*.js"
     ]
   },
   "proxy": "http://localhost:5000"
