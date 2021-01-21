@@ -39,7 +39,7 @@ const handlers = [
     },
   }, res, { json, status, cookie }) => {
     let response;
-    if (!user || password) {
+    if (!user || !password) {
       response = res(
         status(400),
         json({
