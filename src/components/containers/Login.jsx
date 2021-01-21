@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import SigninLayout from '../layouts/Signin';
+import LoginLayout from '../layouts/Login';
 
 export default function () {
   const history = useHistory();
@@ -12,7 +12,7 @@ export default function () {
 
   return (
     <>
-      <SigninLayout
+      <LoginLayout
         handleSubmit={handleSubmit}
       />
     </>

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Signin({
+export default function Login({
   trackUsernameEmail, trackPassword, handleSubmit,
 }) {
   const classes = useStyles();
@@ -114,13 +114,13 @@ export default function Signin({
   );
 }
 
-Signin.propTypes = {
+Login.propTypes = {
   trackUsernameEmail: PropTypes.func,
   trackPassword: PropTypes.func,
   handleSubmit: PropTypes.func,
 };
 
-Signin.defaultProps = {
+Login.defaultProps = {
   trackUsernameEmail: undefined,
   trackPassword: undefined,
   handleSubmit: undefined,
