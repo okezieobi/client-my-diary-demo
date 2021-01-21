@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       <CssBaseline />
-      <Root href="/signin" headerLink="Already have account ? Sign in">
+      <Root href="/login" headerLink="Already have account ? Sign in">
         <Grid className={`${classes.home} ${classes.setBackground} ${classes.homeBackdrop3}`} alignItems="center" justify="center" container>
           <Grid item>
             <Link underline="none" href="/signup" color="inherit">

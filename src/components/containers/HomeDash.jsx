@@ -50,21 +50,13 @@ export default function () {
 
   useEffect(() => {
     auth.getResource(reqURL)
-      .then(({ error, data }) => {
-        if (error) {
-          if (error.messages) {
-            throw error.messages[error.messages.length - 1].msg;
-          } else if (error.message) {
-            throw error.message;
-          }
-        } else {
-          const rowData = data.entries.map(
-            ({
-              title, body, createdAt, updatedAt,
-            }) => ([title, body, Date(createdAt), Date(updatedAt)]),
-          ) || [];
-          setData(rowData);
-        }
+      .then(({ data }) => {
+        const rowData = data.entries.map(
+          ({
+            title, body, createdAt, updatedAt,
+          }) => ([title, body, Date(createdAt), Date(updatedAt)]),
+        ) || [];
+        setData(rowData);
       }).catch((err) => { throw err; });
   }, [reqURL, history, auth]);
 

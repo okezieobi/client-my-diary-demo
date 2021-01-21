@@ -1,16 +1,13 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import SignupLayout from '../layouts/Signup';
+import LoginLayout from '../layouts/Login';
 import authServices from '../../services/Auth';
 import env from '../../utils/env';
 
-export default function Signup() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [signupErr, setSignupErr] = useState('');
-  const [username, setUsername] = useState('');
+export default function () {
+  const [loginErr, setLoginErr] = useState('');
+  const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [btnState, setBtnState] = useState(false);
   const history = useHistory();
@@ -19,16 +16,8 @@ export default function Signup() {
   const { from } = location.state || { from: { pathname: '/home' } };
   const auth = authServices.useAuth();
 
-  function handleFullNameChange(value) {
-    setFullName(value);
-  }
-
-  function handleUsernameChange(value) {
-    setUsername(value);
-  }
-
-  function handleEmailChange(value) {
-    setEmail(value);
+  function handleUserChange(value) {
+    setUser(value);
   }
 
   function handlePasswordChange(value) {
@@ -39,18 +28,16 @@ export default function Signup() {
     setBtnState(true);
 
     const inputData = {
-      fullName,
-      email,
-      username,
+      user,
       password,
     };
 
-    const reqURL = env.backendAPI('auth/signup');
+    const reqURL = env.backendAPI('auth/login');
     auth.authenticate(reqURL, inputData)
       .then(({ error }) => {
         if (error) {
-          if (error.messages) setSignupErr(error.messages[error.messages.length - 1].msg);
-          else if (error.message) setSignupErr(error.message);
+          if (error.messages) setLoginErr(error.messages[error.messages.length - 1].msg);
+          else if (error.message) setLoginErr(error.message);
           setBtnState(false);
         } else {
           history.replace(from);
@@ -63,14 +50,12 @@ export default function Signup() {
 
   return (
     <>
-      <SignupLayout
+      <LoginLayout
         handleSubmit={handleSubmit}
-        setFullName={handleFullNameChange}
-        setEmail={handleEmailChange}
-        setUsername={handleUsernameChange}
-        setPassword={handlePasswordChange}
         formBtnState={btnState}
-        signupErr={signupErr}
+        loginErr={loginErr}
+        setUser={handleUserChange}
+        setPassword={handlePasswordChange}
       />
     </>
   );

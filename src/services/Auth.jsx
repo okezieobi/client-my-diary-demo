@@ -12,11 +12,11 @@ function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState(true);
 
-  const setResource = (reqURL, input, method = 'POST') => fetch(reqURL, {
+  const authenticate = (reqURL, input) => fetch(reqURL, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    method,
+    method: 'POST',
     credentials: 'include',
     body: JSON.stringify(input),
   }).then((response) => response.json());
@@ -33,7 +33,7 @@ function useProvideAuth() {
 
   return {
     user,
-    setResource,
+    authenticate,
     getResource,
   };
 }
@@ -63,7 +63,7 @@ function PrivateRoute({ children, ...rest }) {
       ) : (
         <Redirect
           to={{
-            pathname: '/signin',
+            pathname: '/login',
             state: { from: location },
           }}
         />

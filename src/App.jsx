@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from './components/containers/Home';
 import Signup from './components/containers/Signup';
-import Signin from './components/containers/Signin';
+import Login from './components/containers/Login';
 import HomeDash from './components/containers/HomeDash';
 import ContentDash from './components/containers/ContentDash';
 import ComposeForm from './components/containers/Compose';
@@ -31,8 +31,8 @@ export default function App() {
       <authServices.PrivateRoute path="/home">
         <HomeDash />
       </authServices.PrivateRoute>
-      <Route path="/signin">
-        <Signin />
+      <Route path="/login">
+        <Login />
       </Route>
       <Route path="/signup">
         <Signup />

@@ -67,7 +67,7 @@ function Dashboard({
 
   const history = useHistory();
   const handleLogout = () => {
-    history.push('/signin');
+    history.push('/login');
   };
 
   const clickHome = () => {

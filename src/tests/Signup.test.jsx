@@ -7,13 +7,13 @@ import App from '../App';
 // import mockAPI from '../mocks/server';
 
 describe('Signup page should render', () => {
-  it('Renders signup page of app for large screens', () => {
+  test('Renders signup page of app for large screens', () => {
     utils.renderWithRouter(<App />, { route: '/signup' });
 
     expect(screen.getByRole('heading', { name: /Sign up/i })).toBeInTheDocument();
   });
 
-  it('navigates to dashboard when signup is successful', async () => {
+  test('navigates to dashboard when signup is successful', async () => {
     utils.renderWithRouter(<App />, { route: '/signup' });
 
     await userEvent.type(screen.getByLabelText(/Full Name/i), utils.inputs.fullName);

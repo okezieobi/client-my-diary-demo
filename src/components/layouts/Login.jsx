@@ -41,10 +41,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Signin({
-  trackUsernameEmail, trackPassword, handleSubmit,
+export default function Login({
+  setUser, setPassword, handleSubmit, loginErr, formBtnState,
 }) {
   const classes = useStyles();
+  function handleUserChange({ target: { value } }) { setUser(value); }
+  function handlePasswordChange({ target: { value } }) { setPassword(value); }
 
   return (
     <div className={classes.backdrop}>
@@ -62,11 +64,11 @@ export default function Signin({
                 required
                 fullWidth
                 id="email-username"
-                label="Email Address / Username"
+                label="Email Address or Username"
                 name="email-username"
                 autoComplete="email-username"
                 autoFocus
-                onChange={trackUsernameEmail}
+                onChange={handleUserChange}
               />
               <TextField
                 variant="outlined"
@@ -78,7 +80,7 @@ export default function Signin({
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={trackPassword}
+                onChange={handlePasswordChange}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -91,8 +93,9 @@ export default function Signin({
                 color="primary"
                 className={classes.submit}
                 onClick={handleSubmit}
+                disabled={formBtnState}
               >
-                Submit
+                {formBtnState ? 'Sending ...' : 'Submit'}
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -106,6 +109,11 @@ export default function Signin({
                   </Link>
                 </Grid>
               </Grid>
+              <Grid container justify="center">
+                <Grid item>
+                  <Typography color="error">{loginErr}</Typography>
+                </Grid>
+              </Grid>
             </form>
           </Paper>
         </main>
@@ -114,14 +122,10 @@ export default function Signin({
   );
 }
 
-Signin.propTypes = {
-  trackUsernameEmail: PropTypes.func,
-  trackPassword: PropTypes.func,
-  handleSubmit: PropTypes.func,
-};
-
-Signin.defaultProps = {
-  trackUsernameEmail: undefined,
-  trackPassword: undefined,
-  handleSubmit: undefined,
+Login.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  loginErr: PropTypes.string.isRequired,
+  formBtnState: PropTypes.bool.isRequired,
 };

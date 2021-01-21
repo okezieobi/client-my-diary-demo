@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
 
 import utils from './utils';
 import App from '../App';
@@ -11,5 +12,7 @@ describe('Home dashboard page should render', () => {
     expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
     expect(screen.getByRole('table')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Search/i })).toBeInTheDocument();
+
+    // userEvent.click(screen.getByRole('row', { name: /Submit/ }));
   });
 });
