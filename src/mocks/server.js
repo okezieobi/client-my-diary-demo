@@ -11,6 +11,13 @@ const defaultHandlers = [
       data: { ...testUtils.response.user.data },
     }),
   )),
+  rest.post('/api/v1/auth/login', (req, res, { json, status, cookie }) => res(
+    status(200),
+    cookie('fakeToken', 'token123'),
+    json({
+      data: { ...testUtils.response.user.data },
+    }),
+  )),
   rest.get('/api/v1/entries', (req, res, { json, status }) => res(
     status(201),
     json({

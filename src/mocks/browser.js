@@ -62,7 +62,7 @@ const handlers = [
       );
     } else {
       response = res(
-        status(201),
+        status(200),
         cookie('fakeToken', 'token123'),
         json({
           data: { ...testUtils.response.user.data },

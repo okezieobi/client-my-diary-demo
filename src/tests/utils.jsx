@@ -20,12 +20,12 @@ export default {
     user: {
       err400: {
         error: {
-          messages: [{ msg: 'fakeErr-signup-1' }],
+          messages: [{ msg: 'fakeErr-auth-1' }],
         },
       },
       err40X: {
         error: {
-          message: 'fakeErr-signup-2',
+          message: 'fakeErr-auth-2',
         },
       },
       data: { user: 'user details' },
@@ -33,12 +33,12 @@ export default {
     entry: {
       err400: {
         error: {
-          messages: [{ msg: 'fakeErr-token400-get-entries' }],
+          messages: [{ msg: 'fakeErr-token400-entries' }],
         },
       },
       err40X: {
         error: {
-          message: 'fakeErr-token401-get-entries',
+          message: 'fakeErr-token401-entries',
         },
       },
       data: {
