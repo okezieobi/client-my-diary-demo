@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import utils from './utils';
 import App from '../App';
-// import mockAPI from '../mocks/server';
 
 describe('Signup page should render', () => {
   test('Renders signup page of app for large screens', () => {
@@ -46,8 +45,6 @@ describe('Signup page should render', () => {
 
   test('does not navigate to dashboard when signup is not successful if input is not valid',
     async () => {
-      mockAPI.server.use(...mockAPI.errHandlers.err400);
-
       utils.renderWithRouter(<App />, { route: '/signup' });
 
       userEvent.click(screen.getByRole('button', { name: /Submit/ }));
