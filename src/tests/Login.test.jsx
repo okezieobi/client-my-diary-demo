@@ -12,7 +12,7 @@ describe('Signin page should render', () => {
     expect(screen.getByRole('heading', { name: /Sign in/i })).toBeInTheDocument();
   });
 
-  it('navigates to dashboard when login is successful', async () => {
+  test('navigates to dashboard when login is successful', async () => {
     utils.renderWithRouter(<App />, { route: '/login' });
 
     await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.inputs.email);
