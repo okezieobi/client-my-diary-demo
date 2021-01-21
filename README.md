@@ -1,3 +1,7 @@
+# client-my-diary-demo-v1
+
+Web client for MyDiary, a demo online journal for personal use
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e54b2167-63be-4b0e-8773-b72d72660f00/deploy-status)](https://app.netlify.com/sites/diary-app-demo/deploys)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ecd44881e1ea4364afe36a9f963ad44f)](https://www.codacy.com/manual/okezieobi/client-my-diary-demo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=okezieobi/client-my-diary-demo&amp;utm_campaign=Badge_Grade)
@@ -12,23 +16,27 @@
 
 ![codacy-coverage-reporter](https://github.com/okezieobi/client-my-diary-demo/workflows/codacy-coverage-reporter/badge.svg)
 
-# client-my-diary-demo-v1
-Web client for MyDiary, a demo online journal for personal use 
-
 ## Live app
-https://diary-app-demo.netlify.app/
+
+<https://diary-app-demo.netlify.app/>
+
 ## Server
-https://github.com/okezieobi/server-my-diary-demo
+
+<https://github.com/okezieobi/server-my-diary-demo>
 
 ## Required Features
+
 - Users can navigate the app to create an account and log in.
 - Users can navigate the app to view all entries to their diary.
 - Users can navigate the app to view the contents of a diary entry.
 - Users can navigate the app to add or modify an entry.
+
 ## Optional Features
+
 - Users can navigate the app to set and get daily notifications that prompt them to add an entry to their diary.
 
 ## Stack
+
 ReactJS, Material-UI
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -39,23 +47,23 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
+The page will reload if you make edits
 You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
+Launches the test runner in the interactive watch mode.
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
+Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
@@ -78,24 +86,24 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+This section has moved here: <https://facebook.github.io/create-react-app/docs/code-splitting>
 
 ### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+This section has moved here: <https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size>
 
 ### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+This section has moved here: <https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app>
 
 ### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+This section has moved here: <https://facebook.github.io/create-react-app/docs/advanced-configuration>
 
 ### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+This section has moved here: <https://facebook.github.io/create-react-app/docs/deployment>
 
 ### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This section has moved here: <https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify>
