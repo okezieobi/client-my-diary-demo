@@ -12,6 +12,27 @@ describe('Signin page should render', () => {
     expect(screen.getByRole('heading', { name: /Sign in/i })).toBeInTheDocument();
   });
 
+  test('does not navigate to dashboard when login is not successful if input is not valid',
+    async () => {
+      utils.renderWithRouter(<App />, { route: '/login' });
+
+      userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+      expect(await screen.findByText(utils.response.user.err400.error.messages[0].msg))
+        .toBeInTheDocument();
+    }, 10000);
+
+  test('does not navigate to dashboard when login is not successful if user is not signed up', async () => {
+    utils.renderWithRouter(<App />, { route: '/login' });
+
+    await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.inputErr.email);
+    await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.password);
+    userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+    expect(await screen.findByText(utils.response.user.err40X.error.message))
+      .toBeInTheDocument();
+  }, 10000);
+
   test('navigates to dashboard when login is successful', async () => {
     utils.renderWithRouter(<App />, { route: '/login' });
 
