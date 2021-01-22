@@ -20,4 +20,16 @@ describe('Home dashboard page should render', () => {
     expect(await screen.findByText(utils.response.entry.data.entries[0].body))
       .toBeInTheDocument();
   });
+
+  /*
+  test('Navigates to profile page from home dashboard', async () => {
+    utils.renderWithRouter(<App />, { route: '/home' });
+
+    userEvent.click(screen.getByRole('button', { name: /Profile/ }));
+    expect(await screen.findByRole('button', { name: /Compose/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /Number of entries/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /Set reminder/i })).toBeInTheDocument();
+    expect(await screen.findByText('Off' || 'On')).toBeInTheDocument();
+  });
+  */
 });
