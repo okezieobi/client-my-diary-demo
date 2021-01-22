@@ -12,9 +12,12 @@ describe('Home dashboard page should render', () => {
     expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
     expect(screen.getByRole('table')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Search/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Profile/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Home/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Signout/i })).toBeInTheDocument();
     expect(await screen.findByText(utils.response.entry.data.entries[0].title))
       .toBeInTheDocument();
-
-    // userEvent.click(screen.getByRole('row', { name: /Submit/ }));
+    expect(await screen.findByText(utils.response.entry.data.entries[0].body))
+      .toBeInTheDocument();
   });
 });
