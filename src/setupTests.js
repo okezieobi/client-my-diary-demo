@@ -4,19 +4,19 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 
-import mockAPI from './mocks/server';
+import server from './mocks/server';
 
 beforeAll(() => {
   // Enable the mocking in tests.
-  mockAPI.server.listen();
+  server.listen();
 });
 
 afterEach(() => {
   // Reset any runtime handlers tests may use.
-  mockAPI.server.resetHandlers();
+  server.resetHandlers();
 });
 
 afterAll(() => {
   // Clean up once the tests are done.
-  mockAPI.server.close();
+  server.close();
 });

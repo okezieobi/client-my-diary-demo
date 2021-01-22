@@ -3,62 +3,80 @@ import { rest } from 'msw';
 
 import testUtils from '../tests/utils';
 
-const defaultHandlers = [
-  rest.post('/api/v1/auth/signup', (req, res, { json, status, cookie }) => res(
-    status(201),
-    cookie('fakeToken', 'token123'),
-    json({
-      data: { ...testUtils.response.user.data },
-    }),
-  )),
-  rest.post('/api/v1/auth/login', (req, res, { json, status, cookie }) => res(
-    status(200),
-    cookie('fakeToken', 'token123'),
-    json({
-      data: { ...testUtils.response.user.data },
-    }),
-  )),
-  rest.get('/api/v1/entries', (req, res, { json, status }) => res(
-    status(201),
-    json({
-      data: { ...testUtils.response.entry.data },
-
-    }),
-  )),
+const handlers = [
+  rest.post('/api/v1/auth/signup', ({
+    body: {
+      username, fullName, email, password,
+    },
+  }, res, { json, status, cookie }) => {
+    let response;
+    if (!username || !fullName || !email || !password) {
+      response = res(
+        status(400),
+        json({
+          error: { ...testUtils.response.user.err400.error },
+        }),
+      );
+    } else if (username === testUtils.inputErr.username || email === testUtils.inputErr.email) {
+      response = res(
+        status(406),
+        json({
+          error: { ...testUtils.response.user.err40X.error },
+        }),
+      );
+    } else {
+      response = res(
+        status(201),
+        cookie('fakeToken', 'token123'),
+        json({
+          data: { ...testUtils.response.user.data },
+        }),
+      );
+    } return response;
+  }),
+  rest.post('/api/v1/auth/login', ({
+    body: {
+      user, password,
+    },
+  }, res, { json, status, cookie }) => {
+    let response;
+    if (!user || !password) {
+      response = res(
+        status(400),
+        json({
+          error: { ...testUtils.response.user.err400.error },
+        }),
+      );
+    } else if (user !== testUtils.inputs.username && user !== testUtils.inputs.email) {
+      response = res(
+        status(406),
+        json({
+          error: { ...testUtils.response.user.err40X.error },
+        }),
+      );
+    } else if (password !== testUtils.inputs.password) {
+      response = res(
+        status(401),
+        json({
+          error: { ...testUtils.response.user.err40X.error },
+        }),
+      );
+    } else {
+      response = res(
+        status(200),
+        cookie('fakeToken', 'token123'),
+        json({
+          data: { ...testUtils.response.user.data },
+        }),
+      );
+    } return response;
+  }),
+  rest.get('/api/v1/entries',
+    (req, res, { json }) => res(
+      json({
+        data: { ...testUtils.response.entry.data },
+      }),
+    )),
 ];
 
-const errHandlers = {
-  err400: [
-    rest.post('/api/v1/auth/signup', (req, res, { json, status }) => res(
-      status(400),
-      json({
-        error: { ...testUtils.response.user.err400.error },
-      }),
-    )),
-    rest.post('/api/v1/entries', (req, res, { json, status }) => res(
-      status(400),
-      json({
-        error: { ...testUtils.response.entry.err400.error },
-      }),
-    )),
-  ],
-  err40X: [
-    rest.post('/api/v1/auth/signup', (req, res, { json, status }) => res(
-      status(400),
-      json({
-        error: { ...testUtils.response.user.err40X.error },
-      }),
-    )),
-    rest.post('/api/v1/entries', (req, res, { json, status }) => res(
-      status(406),
-      json({
-        error: { ...testUtils.response.entry.err40X.error },
-      }),
-    )),
-  ],
-};
-
-export default {
-  server: setupServer(...defaultHandlers),
-  errHandlers,
-};
+export default setupServer(...handlers);

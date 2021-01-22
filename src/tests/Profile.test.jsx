@@ -12,5 +12,8 @@ describe('Home dashboard page should render', () => {
     expect(screen.getByRole('heading', { name: /Number of entries/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Set reminder/i })).toBeInTheDocument();
     expect(screen.getByText('Off' || 'On')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Profile/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Home/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Signout/i })).toBeInTheDocument();
   });
 });
