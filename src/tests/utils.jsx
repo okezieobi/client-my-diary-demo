@@ -44,13 +44,13 @@ export default {
       data: {
         entries: [
           {
-            title: 'fake', body: 'fake', createdAt: new Date(), updatedAt: new Date(),
+            title: 'fake-title-1', body: 'fake-body-1', createdAt: new Date(), updatedAt: new Date(),
           },
           {
-            title: 'fake', body: 'fake', createdAt: new Date(), updatedAt: new Date(),
+            title: 'fake-title-2', body: 'fake-body-2', createdAt: new Date(), updatedAt: new Date(),
           },
           {
-            title: 'fake', body: 'fake', createdAt: new Date(), updatedAt: new Date(),
+            title: 'fake-title-3', body: 'fake-body-3', createdAt: new Date(), updatedAt: new Date(),
           },
         ],
       },
