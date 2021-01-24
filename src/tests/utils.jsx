@@ -20,7 +20,7 @@ export default {
     user: {
       err400: {
         error: {
-          messages: [{ msg: 'fakeErr-auth-1' }],
+          messages: [{ msg: 'fakeErr-auth-1' }, { location: 'token', msg: 'token-err-1' }],
         },
       },
       err40X: {

@@ -73,14 +73,7 @@ const handlers = [
   rest.get('/api/v1/entries',
     ({ cookies: { fakeToken } }, res, { json, status }) => {
       let response;
-      if (!fakeToken) {
-        response = res(
-          status(400),
-          json({
-            error: { ...testUtils.response.entry.err400.error },
-          }),
-        );
-      } else if (fakeToken === testUtils.inputErr.token) {
+      if (!fakeToken || fakeToken === testUtils.inputErr.token) {
         response = res(
           status(401),
           json({
@@ -90,6 +83,35 @@ const handlers = [
       } else {
         response = res(
           json({
+            data: { ...testUtils.response.entry.data },
+          }),
+        );
+      } return response;
+    }),
+  rest.post('/api/v1/entries',
+    ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
+      let response;
+      if (!title || !body) {
+        response = res(
+          status(400),
+          json({
+            error: { ...testUtils.response.entry.err400.error },
+          }),
+        );
+      } else if (!fakeToken || fakeToken === testUtils.inputErr.token) {
+        response = res(
+          status(401),
+          json({
+            error: { ...testUtils.response.entry.err40X.error },
+          }),
+        );
+      } else {
+        testUtils.response.entry.data.entries.push({
+          title, body, createdAt: new Date(), updatedAt: new Date(),
+        });
+        response = res(
+          json({
+            status: 201,
             data: { ...testUtils.response.entry.data },
           }),
         );
