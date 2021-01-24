@@ -20,7 +20,7 @@ Web client for MyDiary, a demo online journal for personal use
 
 <https://diary-app-demo.netlify.app/>
 
-## Server
+## Server repo
 
 <https://github.com/okezieobi/server-my-diary-demo>
 
