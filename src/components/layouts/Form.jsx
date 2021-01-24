@@ -87,15 +87,19 @@ export default function Form({
 Form.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
-  setBody: PropTypes.func.isRequired,
-  setTitle: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  setBody: PropTypes.func,
+  setTitle: PropTypes.func,
+  handleSubmit: PropTypes.func,
   reqErr: PropTypes.string,
-  formBtnState: PropTypes.bool.isRequired,
+  formBtnState: PropTypes.bool,
 };
 
 Form.defaultProps = {
   title: '',
   body: '',
   reqErr: '',
+  setBody: undefined,
+  setTitle: undefined,
+  handleSubmit: undefined,
+  formBtnState: undefined,
 };

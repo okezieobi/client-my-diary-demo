@@ -22,9 +22,9 @@ export default function App() {
       <Route path="/home/entry/edit">
         <EditForm />
       </Route>
-      <Route path="/home/entry/compose">
+      <authServices.PrivateRoute path="/home/entry/compose">
         <ComposeForm />
-      </Route>
+      </authServices.PrivateRoute>
       <Route path="/home/entry">
         <ContentDash />
       </Route>
