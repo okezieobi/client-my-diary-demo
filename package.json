@@ -63,6 +63,5 @@
       "<rootDir>/src/mocks/browser.js",
       "<rootDir>/src/mocks/server.js"
     ]
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }

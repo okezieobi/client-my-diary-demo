@@ -21,6 +21,18 @@ function useProvideAuth() {
     body: JSON.stringify(input),
   }).then((response) => response.json());
 
+  const setResource = (reqURL, input, method = 'POST') => fetch(reqURL, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    method,
+    credentials: 'include',
+    body: JSON.stringify(input),
+  }).then((response) => {
+    if (response.status === 401) return setUser(false);
+    return response.json();
+  });
+
   const getResource = (reqURL) => fetch(reqURL, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -35,6 +47,7 @@ function useProvideAuth() {
     user,
     authenticate,
     getResource,
+    setResource,
   };
 }
 

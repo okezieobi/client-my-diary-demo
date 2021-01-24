@@ -4,17 +4,27 @@ import authServices from '../services/Auth';
 
 export default {
   inputs: {
-    fullName: 'Frank Okezie',
-    username: 'Obiedere',
-    email: 'foobar@mail.com',
-    password: '456789Lovely',
-  },
-  inputErr: {
-    fullName: 'fake fullName',
-    username: 'fake username',
-    email: 'fake@mail.com',
-    password: 'fake-password',
-    token: 'fake-token',
+    data: {
+      user: {
+        fullName: 'Frank Okezie',
+        username: 'Obiedere',
+        email: 'foobar@mail.com',
+        password: '456789Lovely',
+      },
+      entry: {
+        title: 'fake-entry-title-1',
+        body: 'fake-entry-body-1',
+      },
+    },
+    error: {
+      user: {
+        fullName: 'fake fullName',
+        username: 'fake username',
+        email: 'fake@mail.com',
+        password: 'fake-password',
+        token: 'fake-token',
+      },
+    },
   },
   response: {
     user: {
@@ -33,12 +43,12 @@ export default {
     entry: {
       err400: {
         error: {
-          messages: [{ msg: 'fakeErr-token400-entries' }],
+          messages: [{ msg: 'fakeErr-400-entries' }],
         },
       },
       err40X: {
         error: {
-          message: 'fakeErr-token401-entries',
+          message: 'fakeErr-40X-entries',
         },
       },
       data: {

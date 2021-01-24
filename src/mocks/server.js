@@ -17,7 +17,8 @@ const handlers = [
           error: { ...testUtils.response.user.err400.error },
         }),
       );
-    } else if (username === testUtils.inputErr.username || email === testUtils.inputErr.email) {
+    } else if (username === testUtils.inputs.error.user.username
+      || email === testUtils.inputs.error.user.email) {
       response = res(
         status(406),
         json({
@@ -47,14 +48,15 @@ const handlers = [
           error: { ...testUtils.response.user.err400.error },
         }),
       );
-    } else if (user !== testUtils.inputs.username && user !== testUtils.inputs.email) {
+    } else if (user !== testUtils.inputs.data.user.username
+      && user !== testUtils.inputs.data.user.email) {
       response = res(
         status(406),
         json({
           error: { ...testUtils.response.user.err40X.error },
         }),
       );
-    } else if (password !== testUtils.inputs.password) {
+    } else if (password !== testUtils.inputs.data.user.password) {
       response = res(
         status(401),
         json({
@@ -77,6 +79,28 @@ const handlers = [
         data: { ...testUtils.response.entry.data },
       }),
     )),
+  rest.post('/api/v1/entries',
+    ({ body: { title, body } }, res, { json, status }) => {
+      let response;
+      if (!title || !body) {
+        response = res(
+          status(400),
+          json({
+            error: { ...testUtils.response.entry.err400.error },
+          }),
+        );
+      } else {
+        testUtils.response.entry.data.entries.push({
+          title, body, createdAt: new Date(), updatedAt: new Date(),
+        });
+        response = res(
+          json({
+            status: 201,
+            data: { ...testUtils.response.entry.data },
+          }),
+        );
+      } return response;
+    }),
 ];
 
 export default setupServer(...handlers);
