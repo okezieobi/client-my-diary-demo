@@ -37,7 +37,7 @@ Web client for MyDiary, a demo online journal for personal use
 
 ## Stack
 
-ReactJS, Material-UI
+ReactJS ie Create-React-App, Material-UI
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
