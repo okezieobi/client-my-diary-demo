@@ -2,14 +2,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './components/containers/Home';
+import Home from './components/views/Home';
 import Signup from './components/containers/Signup';
 import Login from './components/containers/Login';
-import HomeDash from './components/containers/HomeDash';
-import ContentDash from './components/containers/ContentDash';
+import HomeDash from './components/containers/Dashboard';
+import ContentDash from './components/views/Content';
 import ComposeForm from './components/containers/Compose';
 import EditForm from './components/containers/Edit';
-import Profile from './components/containers/Profile';
+import Profile from './components/views/Profile';
 
 import authServices from './services/Auth';
 

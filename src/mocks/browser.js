@@ -90,6 +90,24 @@ const handlers = [
         );
       } return response;
     }),
+  rest.get('/api/v1/entries/:id',
+    ({ cookies: { fakeToken } }, res, { json, status }) => {
+      let response;
+      if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
+        response = res(
+          status(401),
+          json({
+            error: { ...testUtils.response.entry.err40X.error },
+          }),
+        );
+      } else {
+        response = res(
+          json({
+            data: { ...testUtils.response.entry.data.entries[0] },
+          }),
+        );
+      } return response;
+    }),
   rest.post('/api/v1/entries',
     ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
       let response;

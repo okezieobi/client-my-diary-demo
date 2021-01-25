@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Dashboard from '../layouts/Dashboard';
-import Switch from '../layouts/Switch';
+import Dashboard from '../templates/Dashboard';
+import Switch from '../templates/Switch';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

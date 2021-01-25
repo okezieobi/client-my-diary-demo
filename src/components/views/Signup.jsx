@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import Root from './Root';
+import Root from '../templates/Root';
 import SignupBG from '../../images/Signup.svg';
 
 const useStyles = makeStyles((theme) => ({

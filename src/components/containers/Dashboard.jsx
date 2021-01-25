@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Dashboard from '../layouts/Dashboard';
-import HomeFab from '../layouts/Fab';
+import Dashboard from '../templates/Dashboard';
+import HomeFab from '../templates/Fab';
 import DashboardBG from '../../images/Home_Dash.svg';
 import authServices from '../../services/Auth';
 import env from '../../utils/env';

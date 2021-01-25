@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import LoginLayout from '../layouts/Login';
+import LoginLayout from '../views/Login';
 import authServices from '../../services/Auth';
 import env from '../../utils/env';
 

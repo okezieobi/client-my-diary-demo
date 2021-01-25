@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import SignupLayout from '../layouts/Signup';
+import SignupLayout from '../views/Signup';
 import authServices from '../../services/Auth';
 import env from '../../utils/env';
 

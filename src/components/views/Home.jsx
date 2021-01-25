@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 import HomeBGThree from '../../images/Home_3.svg';
-import Root from '../layouts/Root';
+import Root from '../templates/Root';
 
 const useStyles = makeStyles(() => ({
   homeBackdrop3: {
