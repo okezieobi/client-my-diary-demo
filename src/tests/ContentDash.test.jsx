@@ -6,7 +6,7 @@ import App from '../App';
 
 describe('Home dashboard page should render', () => {
   test('Renders diary content for large screens', () => {
-    utils.renderWithRouter(<App />, { route: '/home/entry' });
+    utils.renderWithRouter(<App />, { route: '/entry' });
 
     expect(screen.getByRole('button', { name: /Edit/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Back/i })).toBeInTheDocument();
