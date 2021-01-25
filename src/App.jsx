@@ -19,16 +19,16 @@ export default function App() {
       <Route path="/profile">
         <Profile />
       </Route>
-      <Route path="/home/entry/edit">
+      <Route path="/edit">
         <EditForm />
       </Route>
-      <authServices.PrivateRoute path="/home/entry/compose">
+      <authServices.PrivateRoute path="/compose">
         <ComposeForm />
       </authServices.PrivateRoute>
-      <Route path="/home/entry">
+      <Route path="/entry">
         <ContentDash />
       </Route>
-      <authServices.PrivateRoute path="/home">
+      <authServices.PrivateRoute path="/entries">
         <HomeDash />
       </authServices.PrivateRoute>
       <Route path="/login">

@@ -37,7 +37,7 @@ export default function () {
           if (error.messages) setReqErr(error.messages[error.messages.length - 1].msg);
           setBtnState(false);
         } else {
-          history.push('/home');
+          history.push('/entries');
         }
       }).catch((err) => {
         setBtnState(false);

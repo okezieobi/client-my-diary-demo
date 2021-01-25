@@ -37,7 +37,7 @@ export default function () {
   };
 
   const handleFabClick = () => {
-    history.push('/home/entry/compose');
+    history.push('/compose');
   };
 
   const columns = ['title', 'body', 'created on', 'updated on'];

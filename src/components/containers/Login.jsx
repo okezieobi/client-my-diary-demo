@@ -13,7 +13,7 @@ export default function () {
   const history = useHistory();
   const location = useLocation();
 
-  const { from } = location.state || { from: { pathname: '/home' } };
+  const { from } = location.state || { from: { pathname: '/entries' } };
   const auth = authServices.useAuth();
 
   function handleUserChange(value) {
