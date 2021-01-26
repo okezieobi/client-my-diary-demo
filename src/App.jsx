@@ -6,7 +6,7 @@ import Home from './components/views/Home';
 import Signup from './components/containers/Signup';
 import Login from './components/containers/Login';
 import HomeDash from './components/containers/Dashboard';
-import ContentDash from './components/views/Content';
+import ContentDash from './components/containers/Content';
 import ComposeForm from './components/containers/Compose';
 import EditForm from './components/containers/Edit';
 import Profile from './components/views/Profile';

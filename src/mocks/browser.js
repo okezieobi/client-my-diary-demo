@@ -91,7 +91,7 @@ const handlers = [
       } return response;
     }),
   rest.get('/api/v1/entries/:id',
-    ({ cookies: { fakeToken } }, res, { json, status }) => {
+    ({ cookies: { fakeToken }, params }, res, { json, status }) => {
       let response;
       if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
         response = res(
@@ -101,11 +101,21 @@ const handlers = [
           }),
         );
       } else {
-        response = res(
-          json({
-            data: { ...testUtils.response.entry.data.entries[0] },
-          }),
-        );
+        const entry = testUtils.response.entry.data.entries.find(({ id }) => id === params.id);
+        if (entry) {
+          response = res(
+            json({
+              data: { entry },
+            }),
+          );
+        } else {
+          response = res(
+            json({
+              status: 404,
+              error: { ...testUtils.response.entry.err40X.error },
+            }),
+          );
+        }
       } return response;
     }),
   rest.post('/api/v1/entries',

@@ -31,16 +31,58 @@ export default function () {
   const auth = authServices.useAuth();
 
   const handleRowClick = (row = []) => {
-    const clickedRow = JSON.stringify(row);
-    localStorage.setItem('clickedRow', clickedRow);
-    history.push('/home/entry');
+    const entryId = JSON.stringify(row[0]);
+    localStorage.setItem('entryId', entryId);
+    history.push('/entry');
   };
 
   const handleFabClick = () => {
     history.push('/compose');
   };
 
-  const columns = ['title', 'body', 'created on', 'updated on'];
+  const columns = [
+    {
+      name: 'id',
+      label: 'Id',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'title',
+      label: 'Title',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'body',
+      label: 'Body',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'createdOn',
+      label: 'Created On',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: 'updatedAt',
+      label: 'Updated At',
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+  ];
+
   const options = {
     filterType: 'checkbox',
     onRowClick: (rowData) => handleRowClick(rowData),
@@ -53,8 +95,8 @@ export default function () {
       .then(({ data }) => {
         const rowData = data.entries.map(
           ({
-            title, body, createdAt, updatedAt,
-          }) => ([title, body, Date(createdAt), Date(updatedAt)]),
+            title, body, createdOn, updatedAt, id,
+          }) => ([id, title, body, Date(createdOn), Date(updatedAt)]),
         ) || [];
         setData(rowData);
       }).catch((err) => { throw err; });

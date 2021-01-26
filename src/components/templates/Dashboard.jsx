@@ -71,7 +71,7 @@ function Dashboard({
   };
 
   const clickHome = () => {
-    history.push('/home');
+    history.push('/entries');
   };
 
   const clickProfile = () => {
