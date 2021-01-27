@@ -47,6 +47,7 @@ export default function () {
       options: {
         filter: true,
         sort: true,
+        display: 'exclude',
       },
     },
     {

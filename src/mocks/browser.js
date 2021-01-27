@@ -110,8 +110,8 @@ const handlers = [
           );
         } else {
           response = res(
+            status(401),
             json({
-              status: 404,
               error: { ...testUtils.response.entry.err40X.error },
             }),
           );
@@ -136,13 +136,18 @@ const handlers = [
           }),
         );
       } else {
-        testUtils.response.entry.data.entries.push({
-          title, body, createdAt: new Date(), updatedAt: new Date(),
-        });
+        const entry = {
+          id: testUtils.response.entry.data.entries.length + 1000,
+          title,
+          body,
+          createdOn: new Date(),
+          updatedAt: new Date(),
+        };
+        testUtils.response.entry.data.entries.push(entry);
         response = res(
+          status(201),
           json({
-            status: 201,
-            data: { ...testUtils.response.entry.data },
+            data: { entry },
           }),
         );
       } return response;

@@ -25,9 +25,9 @@ export default function App() {
       <authServices.PrivateRoute path="/compose">
         <ComposeForm />
       </authServices.PrivateRoute>
-      <Route path="/entry">
+      <authServices.PrivateRoute path="/entry">
         <ContentDash />
-      </Route>
+      </authServices.PrivateRoute>
       <authServices.PrivateRoute path="/entries">
         <HomeDash />
       </authServices.PrivateRoute>
