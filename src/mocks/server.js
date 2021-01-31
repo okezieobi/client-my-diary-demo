@@ -79,6 +79,26 @@ const handlers = [
         data: { ...testUtils.response.entry.data },
       }),
     )),
+  rest.get('/api/v1/entries/:id',
+    ({ params }, res, { json, status }) => {
+      let response;
+      const entry = testUtils.response.entry.data.entries.find(({ id }) => id === params.id);
+      if (entry) {
+        response = res(
+          json({
+            data: { entry },
+          }),
+        );
+      } else {
+        response = res(
+          status(404),
+          json({
+            error: { ...testUtils.response.entry.err40X.error },
+          }),
+        );
+      }
+      return response;
+    }),
   rest.post('/api/v1/entries',
     ({ body: { title, body } }, res, { json, status }) => {
       let response;

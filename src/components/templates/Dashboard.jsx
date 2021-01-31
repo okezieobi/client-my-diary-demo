@@ -71,7 +71,7 @@ function Dashboard({
   };
 
   const clickHome = () => {
-    history.push('/home');
+    history.push('/entries');
   };
 
   const clickProfile = () => {
@@ -79,7 +79,7 @@ function Dashboard({
   };
 
   const handleCompose = () => {
-    history.push('/home/entry/compose');
+    history.push('/compose');
   };
 
   const handleDrawerToggle = () => {

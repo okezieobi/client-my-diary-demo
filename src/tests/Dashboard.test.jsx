@@ -7,7 +7,7 @@ import App from '../App';
 
 describe('Home dashboard page should render', () => {
   test('Renders home dashboard page of app for large screens', async () => {
-    utils.renderWithRouter(<App />, { route: '/home' });
+    utils.renderWithRouter(<App />, { route: '/entries' });
 
     expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
     expect(screen.getByRole('table')).toBeInTheDocument();

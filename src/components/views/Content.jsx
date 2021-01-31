@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -6,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Dashboard from '../layouts/Dashboard';
+import Dashboard from '../templates/Dashboard';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -14,13 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function () {
+export default function Content({
+  title, body, createdOn, updatedAt, reqErr,
+}) {
   const history = useHistory();
   const classes = useStyles();
-  const rowData = JSON.parse(localStorage.getItem('clickedRow'));
 
   const handleEditClick = () => {
-    history.push('/home/entry/edit');
+    history.push('/edit');
   };
 
   return (
@@ -28,31 +30,36 @@ export default function () {
       <Paper className={classes.paper}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
+            <Typography color="error" gutterBottom>
+              {reqErr}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
             <Typography variant="h4" gutterBottom>
               Title:
               <br />
-              {rowData ? rowData[0] : ''}
+              {title}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body1" gutterBottom>
               Body:
               <br />
-              {rowData ? rowData[1] : ''}
+              {body}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body1" gutterBottom>
               Created On:
               <br />
-              {rowData ? rowData[2] : ''}
+              {createdOn}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body1" gutterBottom>
               Updated On:
               <br />
-              {rowData ? rowData[3] : ''}
+              {updatedAt}
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -79,3 +86,19 @@ export default function () {
     </Dashboard>
   );
 }
+
+Content.propTypes = {
+  title: PropTypes.string,
+  body: PropTypes.string,
+  createdOn: PropTypes.string,
+  updatedAt: PropTypes.string,
+  reqErr: PropTypes.string,
+};
+
+Content.defaultProps = {
+  title: '',
+  body: '',
+  createdOn: '',
+  updatedAt: '',
+  reqErr: '',
+};

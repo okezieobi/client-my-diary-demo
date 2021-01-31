@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import LoginLayout from '../layouts/Login';
+import LoginLayout from '../views/Login';
 import authServices from '../../services/Auth';
 import env from '../../utils/env';
 
@@ -13,7 +13,7 @@ export default function () {
   const history = useHistory();
   const location = useLocation();
 
-  const { from } = location.state || { from: { pathname: '/home' } };
+  const { from } = location.state || { from: { pathname: '/entries' } };
   const auth = authServices.useAuth();
 
   function handleUserChange(value) {

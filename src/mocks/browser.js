@@ -90,6 +90,34 @@ const handlers = [
         );
       } return response;
     }),
+  rest.get('/api/v1/entries/:id',
+    ({ cookies: { fakeToken }, params }, res, { json, status }) => {
+      let response;
+      if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
+        response = res(
+          status(401),
+          json({
+            error: { ...testUtils.response.entry.err40X.error },
+          }),
+        );
+      } else {
+        const entry = testUtils.response.entry.data.entries.find(({ id }) => id === params.id);
+        if (entry) {
+          response = res(
+            json({
+              data: { entry },
+            }),
+          );
+        } else {
+          response = res(
+            status(401),
+            json({
+              error: { ...testUtils.response.entry.err40X.error },
+            }),
+          );
+        }
+      } return response;
+    }),
   rest.post('/api/v1/entries',
     ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
       let response;
@@ -108,13 +136,18 @@ const handlers = [
           }),
         );
       } else {
-        testUtils.response.entry.data.entries.push({
-          title, body, createdAt: new Date(), updatedAt: new Date(),
-        });
+        const entry = {
+          id: testUtils.response.entry.data.entries.length + 1000,
+          title,
+          body,
+          createdOn: new Date(),
+          updatedAt: new Date(),
+        };
+        testUtils.response.entry.data.entries.push(entry);
         response = res(
+          status(201),
           json({
-            status: 201,
-            data: { ...testUtils.response.entry.data },
+            data: { entry },
           }),
         );
       } return response;

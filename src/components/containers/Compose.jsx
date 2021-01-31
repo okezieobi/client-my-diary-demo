@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Dashboard from '../layouts/Dashboard';
-import Form from '../layouts/Form';
+import Dashboard from '../templates/Dashboard';
+import Form from '../templates/Form';
 import authServices from '../../services/Auth';
 import env from '../../utils/env';
 
@@ -37,7 +37,7 @@ export default function () {
           if (error.messages) setReqErr(error.messages[error.messages.length - 1].msg);
           setBtnState(false);
         } else {
-          history.push('/home');
+          history.push('/entries');
         }
       }).catch((err) => {
         setBtnState(false);

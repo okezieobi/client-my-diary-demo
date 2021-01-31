@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import SignupLayout from '../layouts/Signup';
+import SignupLayout from '../views/Signup';
 import authServices from '../../services/Auth';
 import env from '../../utils/env';
 
@@ -16,7 +16,7 @@ export default function Signup() {
   const history = useHistory();
   const location = useLocation();
 
-  const { from } = location.state || { from: { pathname: '/home' } };
+  const { from } = location.state || { from: { pathname: '/entries' } };
   const auth = authServices.useAuth();
 
   function handleFullNameChange(value) {
