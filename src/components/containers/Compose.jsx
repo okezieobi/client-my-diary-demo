@@ -32,12 +32,11 @@ export default function () {
 
     const reqURL = env.backendAPI('entries');
     auth.setResource(reqURL, inputData)
-      .then(({ error, data: { entry } }) => {
+      .then(({ error }) => {
         if (error) {
           if (error.messages) setReqErr(error.messages[error.messages.length - 1].msg);
           setBtnState(false);
         } else {
-          localStorage.setItem('entryId', JSON.stringify(entry.id));
           history.push('/entries');
         }
       }).catch((err) => {
