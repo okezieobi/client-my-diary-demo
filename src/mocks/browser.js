@@ -118,6 +118,43 @@ const handlers = [
         }
       } return response;
     }),
+  rest.put('/api/v1/entries/:id',
+    ({ cookies: { fakeToken }, params, body: { title, body } }, res, { json, status }) => {
+      let response;
+      if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
+        response = res(
+          status(401),
+          json({
+            error: { ...testUtils.response.entry.err40X.error },
+          }),
+        );
+      } else {
+        const entry = testUtils.response.entry.data.entries.find(({ id }) => id === params.id);
+        if (entry) {
+          const updatedEntry = {
+            id: '8989',
+            title: title || entry.title,
+            body: body || entry.body,
+            createdOn: new Date(),
+            updatedAt: new Date(),
+          };
+          const entryIndex = testUtils.response.entry.data.entries.indexOf(entry);
+          testUtils.response.entry.data.entries.splice(entryIndex, 1, updatedEntry);
+          response = res(
+            json({
+              data: { ...testUtils.response.entry.data.entries },
+            }),
+          );
+        } else {
+          response = res(
+            status(401),
+            json({
+              error: { ...testUtils.response.entry.err40X.error },
+            }),
+          );
+        }
+      } return response;
+    }),
   rest.post('/api/v1/entries',
     ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
       let response;
