@@ -7,7 +7,10 @@ import authServices from '../../services/Auth';
 import env from '../../utils/env';
 
 export default function () {
-  const [reqErr, setReqErr] = useState('');
+  const [titleErr, setTitleErr] = useState('');
+  const [errInTitle, setErrInTitle] = useState(false);
+  const [errInBody, setErrInBody] = useState(false);
+  const [bodyErr, setBodyErr] = useState('');
   const [body, setBody] = useState('');
   const [title, setTitle] = useState('');
   const [btnState, setBtnState] = useState(false);
@@ -33,9 +36,15 @@ export default function () {
     const reqURL = env.backendAPI('entries');
     auth.setResource(reqURL, inputData)
       .then(({ error }) => {
-        if (error) {
-          if (error.messages) setReqErr(error.messages[error.messages.length - 1].msg);
-          setBtnState(false);
+        if (error && error.messages) {
+          const err = error.messages.find(({ params }) => params);
+          if (err.params === 'title') {
+            setErrInTitle(true);
+            setTitleErr(err.msg);
+          } else if (err.params === 'body') {
+            setErrInBody(true);
+            setBodyErr(err.msg);
+          } setBtnState(false);
         } else {
           history.push('/entries');
         }
@@ -51,8 +60,11 @@ export default function () {
         handleSubmit={handleSubmit}
         setTitle={handleTitleChange}
         setBody={handleBodyChange}
-        reqErr={reqErr}
+        titleErr={titleErr}
+        bodyErr={bodyErr}
         formBtnState={btnState}
+        errInTitle={errInTitle}
+        errInBody={errInBody}
       />
     </Dashboard>
   );

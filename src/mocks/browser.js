@@ -16,8 +16,8 @@ const handlers = [
           error: { ...testUtils.response.user.err400.error },
         }),
       );
-    } else if (username === testUtils.inputs.data.user.username
-      || email === testUtils.inputs.error.user.email) {
+    } else if (testUtils.response.user.data.users.includes({ username })
+      || testUtils.response.user.data.users.includes({ email })) {
       response = res(
         status(406),
         json({
@@ -25,11 +25,14 @@ const handlers = [
         }),
       );
     } else {
+      testUtils.response.user.data.users.push({
+        username, fullName, email, password,
+      });
       response = res(
         status(201),
         cookie('fakeToken', 'token123'),
         json({
-          data: { ...testUtils.response.user.data },
+          data: {},
         }),
       );
     } return response;
@@ -47,29 +50,32 @@ const handlers = [
           error: { ...testUtils.response.user.err400.error },
         }),
       );
-    } else if (user !== testUtils.inputs.data.user.username
-      && user !== testUtils.inputs.data.user.email) {
-      response = res(
-        status(406),
-        json({
-          error: { ...testUtils.response.user.err40X.error },
-        }),
-      );
-    } else if (password !== testUtils.inputs.data.user.password) {
-      response = res(
-        status(401),
-        json({
-          error: { ...testUtils.response.user.err40X.error },
-        }),
-      );
     } else {
-      response = res(
-        status(200),
-        cookie('fakeToken', 'token123'),
-        json({
-          data: { ...testUtils.response.user.data },
-        }),
-      );
+      const userExists = testUtils.response
+        .user.data.users.find(({ username, email }) => user === username || email);
+      if (userExists) {
+        response = res(
+          status(406),
+          json({
+            error: { ...testUtils.response.user.err40X.error },
+          }),
+        );
+      } else if (password !== userExists.password) {
+        response = res(
+          status(401),
+          json({
+            error: { ...testUtils.response.user.err40X.error },
+          }),
+        );
+      } else {
+        response = res(
+          status(200),
+          cookie('fakeToken', 'token123'),
+          json({
+            data: {},
+          }),
+        );
+      }
     } return response;
   }),
   rest.get('/api/v1/entries',
@@ -158,7 +164,16 @@ const handlers = [
   rest.post('/api/v1/entries',
     ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
       let response;
-      if (!title || !body) {
+      if (!title) {
+        testUtils.response.entry.err400.error.messages.splice(1, 1, { msg: 'fake error title', params: 'title' });
+        response = res(
+          status(400),
+          json({
+            error: { ...testUtils.response.entry.err400.error },
+          }),
+        );
+      } else if (!body) {
+        testUtils.response.entry.err400.error.messages.splice(1, 2, { msg: 'fake error body', params: 'body' });
         response = res(
           status(400),
           json({

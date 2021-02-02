@@ -7,7 +7,7 @@ import env from '../../utils/env';
 export default function () {
   const [reqErr, setReqErr] = useState('');
   const [entry, setEntry] = useState({
-    title: '', body: '', createdOn: 'test', updatedAt: '',
+    title: '', body: '', createdOn: '', updatedAt: '',
   });
   const entryId = JSON.parse(localStorage.getItem('entryId'));
   const auth = authServices.useAuth();

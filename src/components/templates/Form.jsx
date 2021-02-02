@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +13,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form({
-  title, setTitle, body, setBody, formBtnState, reqErr, handleSubmit,
+  title, setTitle, body, setBody,
+  formBtnState, handleSubmit, titleErr, bodyErr,
+  errInTitle, errInBody,
 }) {
   const classes = useStyles();
   function handleTitleChange({ target: { value } }) { setTitle(value); }
@@ -25,10 +26,9 @@ export default function Form({
       <form>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Typography color="error">{reqErr}</Typography>
-          </Grid>
-          <Grid item xs={12}>
             <TextField
+              error={errInTitle}
+              helperText={titleErr}
               variant="outlined"
               margin="normal"
               required
@@ -37,7 +37,6 @@ export default function Form({
               label="Title"
               name="entry-title"
               autoComplete="entry-title"
-              autoFocus
               defaultValue={title}
               onChange={handleTitleChange}
             />
@@ -45,6 +44,8 @@ export default function Form({
           <Grid item xs={12}>
             <TextField
               variant="outlined"
+              error={errInBody}
+              helperText={bodyErr}
               margin="normal"
               required
               fullWidth
@@ -52,6 +53,7 @@ export default function Form({
               label="Body"
               name="entry-body"
               autoComplete="entry-body"
+              autoFocus
               multiline
               rows={12}
               defaultValue={body}
@@ -86,20 +88,26 @@ export default function Form({
 
 Form.propTypes = {
   title: PropTypes.string,
+  titleErr: PropTypes.string,
+  errInTitle: PropTypes.bool,
   body: PropTypes.string,
+  bodyErr: PropTypes.string,
+  errInBody: PropTypes.bool,
   setBody: PropTypes.func,
   setTitle: PropTypes.func,
   handleSubmit: PropTypes.func,
-  reqErr: PropTypes.string,
   formBtnState: PropTypes.bool,
 };
 
 Form.defaultProps = {
   title: '',
+  titleErr: '',
+  errInTitle: false,
+  errInBody: false,
   body: '',
-  reqErr: '',
+  bodyErr: '',
   setBody: undefined,
   setTitle: undefined,
   handleSubmit: undefined,
-  formBtnState: undefined,
+  formBtnState: false,
 };

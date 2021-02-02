@@ -19,9 +19,9 @@ export default function App() {
       <Route path="/profile">
         <Profile />
       </Route>
-      <Route path="/edit">
+      <authServices.PrivateRoute path="/edit">
         <EditForm />
-      </Route>
+      </authServices.PrivateRoute>
       <authServices.PrivateRoute path="/compose">
         <ComposeForm />
       </authServices.PrivateRoute>

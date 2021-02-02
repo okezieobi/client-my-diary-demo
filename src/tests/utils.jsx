@@ -30,7 +30,7 @@ export default {
     user: {
       err400: {
         error: {
-          messages: [{ msg: 'fakeErr-auth-1' }],
+          messages: ['fake 1', 'fake 2'],
         },
       },
       err40X: {
@@ -38,7 +38,7 @@ export default {
           message: 'fakeErr-auth-2',
         },
       },
-      data: { user: 'user details' },
+      data: { users: [{ email: 'email 1', username: 'username 1' }, { email: 'email 2', username: 'username 2' }] },
     },
     entry: {
       err400: {
