@@ -19,10 +19,14 @@ export default function () {
   const history = useHistory();
 
   function handleTitleChange(value) {
+    setErrInTitle(false);
+    setTitleErr('');
     setTitle(value);
   }
 
   function handleBodyChange(value) {
+    setErrInBody(false);
+    setBodyErr('');
     setBody(value);
   }
 

@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup({
   setFullName, setUsername,
   setEmail, setPassword, handleSubmit,
-  formBtnState, signupErr,
+  formBtnState, signupErr, fullNameErr,
+  usernameErr, emailErr, passwordErr,
+  errInFullName, errInUsername, errInEmail, errInPassword,
 }) {
   const classes = useStyles();
   function handleFullNameChange({ target: { value } }) { setFullName(value); }
@@ -63,6 +65,8 @@ export default function Signup({
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
+                    error={errInFullName}
+                    helperText={fullNameErr}
                     autoComplete="fname"
                     name="fullName"
                     variant="outlined"
@@ -76,6 +80,8 @@ export default function Signup({
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    error={errInUsername}
+                    helperText={usernameErr}
                     autoComplete="username"
                     name="username"
                     variant="outlined"
@@ -89,6 +95,8 @@ export default function Signup({
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    error={errInEmail}
+                    helperText={emailErr}
                     variant="outlined"
                     required
                     fullWidth
@@ -101,6 +109,8 @@ export default function Signup({
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    error={errInPassword}
+                    helperText={passwordErr}
                     variant="outlined"
                     required
                     fullWidth
@@ -146,9 +156,17 @@ export default function Signup({
 
 Signup.propTypes = {
   setFullName: PropTypes.func.isRequired,
+  errInFullName: PropTypes.bool.isRequired,
+  fullNameErr: PropTypes.string.isRequired,
   setUsername: PropTypes.func.isRequired,
+  errInUsername: PropTypes.bool.isRequired,
+  usernameErr: PropTypes.string.isRequired,
   setEmail: PropTypes.func.isRequired,
+  errInEmail: PropTypes.bool.isRequired,
+  emailErr: PropTypes.string.isRequired,
   setPassword: PropTypes.func.isRequired,
+  errInPassword: PropTypes.bool.isRequired,
+  passwordErr: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   formBtnState: PropTypes.bool.isRequired,
   signupErr: PropTypes.string.isRequired,
