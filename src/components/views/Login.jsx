@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login({
   setUser, setPassword, handleSubmit, loginErr, formBtnState,
+  userErr, errInUser, passwordErr, errInPassword,
 }) {
   const classes = useStyles();
   function handleUserChange({ target: { value } }) { setUser(value); }
@@ -69,6 +70,8 @@ export default function Login({
                 autoComplete="email-username"
                 autoFocus
                 onChange={handleUserChange}
+                error={errInUser}
+                helperText={userErr}
               />
               <TextField
                 variant="outlined"
@@ -81,6 +84,8 @@ export default function Login({
                 id="password"
                 autoComplete="current-password"
                 onChange={handlePasswordChange}
+                error={errInPassword}
+                helperText={passwordErr}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -128,4 +133,8 @@ Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   loginErr: PropTypes.string.isRequired,
   formBtnState: PropTypes.bool.isRequired,
+  userErr: PropTypes.string.isRequired,
+  errInUser: PropTypes.bool.isRequired,
+  passwordErr: PropTypes.string.isRequired,
+  errInPassword: PropTypes.bool.isRequired,
 };

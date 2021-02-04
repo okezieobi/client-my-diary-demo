@@ -8,7 +8,11 @@ import env from '../../utils/env';
 export default function () {
   const [loginErr, setLoginErr] = useState('');
   const [user, setUser] = useState('');
+  const [userErr, setUserErr] = useState('');
+  const [errInUser, setErrInUser] = useState(false);
   const [password, setPassword] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [errInPassword, setErrInPassword] = useState(false);
   const [btnState, setBtnState] = useState(false);
   const history = useHistory();
   const location = useLocation();
@@ -17,10 +21,14 @@ export default function () {
   const auth = authServices.useAuth();
 
   function handleUserChange(value) {
+    setUserErr('');
+    setErrInUser(false);
     setUser(value);
   }
 
   function handlePasswordChange(value) {
+    setPasswordErr('');
+    setErrInPassword(false);
     setPassword(value);
   }
 
@@ -36,8 +44,16 @@ export default function () {
     auth.authenticate(reqURL, inputData)
       .then(({ error }) => {
         if (error) {
-          if (error.messages) setLoginErr(error.messages[error.messages.length - 1].msg);
-          else if (error.message) setLoginErr(error.message);
+          if (error.messages) {
+            const err = error.messages.find(({ params }) => params);
+            if (err.params === 'user') {
+              setUserErr(err.msg);
+              setErrInUser(true);
+            } else if (err.params === 'password') {
+              setPasswordErr(err.msg);
+              setErrInPassword(true);
+            }
+          } else if (error.message) setLoginErr(error.message);
           setBtnState(false);
         } else {
           history.replace(from);
@@ -56,6 +72,10 @@ export default function () {
         loginErr={loginErr}
         setUser={handleUserChange}
         setPassword={handlePasswordChange}
+        errInUser={errInUser}
+        userErr={userErr}
+        passwordErr={passwordErr}
+        errInPassword={errInPassword}
       />
     </>
   );

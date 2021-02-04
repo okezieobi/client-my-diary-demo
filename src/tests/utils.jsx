@@ -38,7 +38,7 @@ export default {
           message: 'fakeErr-auth-2',
         },
       },
-      data: { users: [{ email: 'email 1', username: 'username 1' }] },
+      data: { users: [{ email: 'email-1', username: 'username-1', password: 'password-1' }] },
     },
     entry: {
       err400: {
