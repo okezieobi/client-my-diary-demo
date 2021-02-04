@@ -4,73 +4,106 @@ import { rest } from 'msw';
 import testUtils from '../tests/utils';
 
 const handlers = [
-  rest.post('/api/v1/auth/signup', ({
-    body: {
-      username, fullName, email, password,
-    },
-  }, res, { json, status, cookie }) => {
+  rest.post('/api/v1/auth/signup', ({ body }, res, { json, status, cookie }) => {
     let response;
-    if (!username || !fullName || !email || !password) {
+    if (!body.fullName) {
+      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error fullName', params: 'fullName' });
       response = res(
         status(400),
         json({
           error: { ...testUtils.response.user.err400.error },
         }),
       );
-    } else if (username === testUtils.inputs.error.user.username
-      || email === testUtils.inputs.error.user.email) {
+    } else if (!body.username) {
+      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error username', params: 'username' });
       response = res(
-        status(406),
+        status(400),
         json({
-          error: { ...testUtils.response.user.err40X.error },
+          error: { ...testUtils.response.user.err400.error },
+        }),
+      );
+    } else if (!body.email) {
+      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error email', params: 'email' });
+      response = res(
+        status(400),
+        json({
+          error: { ...testUtils.response.user.err400.error },
+        }),
+      );
+    } else if (!body.password) {
+      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error password', params: 'password' });
+      response = res(
+        status(400),
+        json({
+          error: { ...testUtils.response.user.err400.error },
         }),
       );
     } else {
-      response = res(
-        status(201),
-        cookie('fakeToken', 'token123'),
-        json({
-          data: { ...testUtils.response.user.data },
-        }),
-      );
+      const userExists = testUtils.response.user.data.users
+        .some(({ email, username }) => username === body.username || email === body.email);
+      if (userExists) {
+        response = res(
+          status(406),
+          json({
+            error: { ...testUtils.response.user.err40X.error },
+          }),
+        );
+      } else {
+        testUtils.response.user.data.users.push({ ...body });
+        response = res(
+          status(201),
+          cookie('fakeToken', 'token123'),
+          json({
+            data: {},
+          }),
+        );
+      }
     } return response;
   }),
-  rest.post('/api/v1/auth/login', ({
-    body: {
-      user, password,
-    },
-  }, res, { json, status, cookie }) => {
+  rest.post('/api/v1/auth/login', ({ body }, res, { json, status, cookie }) => {
     let response;
-    if (!user || !password) {
+    if (!body.user) {
+      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error user', params: 'user' });
       response = res(
         status(400),
         json({
           error: { ...testUtils.response.user.err400.error },
         }),
       );
-    } else if (user !== testUtils.inputs.data.user.username
-      && user !== testUtils.inputs.data.user.email) {
+    } else if (!body.password) {
+      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error password', params: 'password' });
       response = res(
-        status(406),
+        status(400),
         json({
-          error: { ...testUtils.response.user.err40X.error },
-        }),
-      );
-    } else if (password !== testUtils.inputs.data.user.password) {
-      response = res(
-        status(401),
-        json({
-          error: { ...testUtils.response.user.err40X.error },
+          error: { ...testUtils.response.user.err400.error },
         }),
       );
     } else {
-      response = res(
-        status(200),
-        cookie('fakeToken', 'token123'),
-        json({
-          data: { ...testUtils.response.user.data },
-        }),
-      );
+      const userExists = testUtils.response.user.data.users
+        .find(({ username, email }) => body.user === username || email);
+      if (!userExists) {
+        response = res(
+          status(406),
+          json({
+            error: { ...testUtils.response.user.err40X.error },
+          }),
+        );
+      } else if (body.password !== userExists.password) {
+        response = res(
+          status(401),
+          json({
+            error: { ...testUtils.response.user.err40X.error },
+          }),
+        );
+      } else {
+        response = res(
+          status(200),
+          cookie('fakeToken', 'token123'),
+          json({
+            data: {},
+          }),
+        );
+      }
     } return response;
   }),
   rest.get('/api/v1/entries',
@@ -131,7 +164,16 @@ const handlers = [
   rest.post('/api/v1/entries',
     ({ body: { title, body } }, res, { json, status }) => {
       let response;
-      if (!title || !body) {
+      if (!title) {
+        testUtils.response.entry.err400.error.messages.splice(0, 1, { msg: 'fake error title', params: 'title' });
+        response = res(
+          status(400),
+          json({
+            error: { ...testUtils.response.entry.err400.error },
+          }),
+        );
+      } else if (!body) {
+        testUtils.response.entry.err400.error.messages.splice(0, 1, { msg: 'fake error body', params: 'body' });
         response = res(
           status(400),
           json({
@@ -139,13 +181,18 @@ const handlers = [
           }),
         );
       } else {
-        testUtils.response.entry.data.entries.push({
-          title, body, createdAt: new Date(), updatedAt: new Date(),
-        });
+        const entry = {
+          id: testUtils.response.entry.data.entries.length + 1000,
+          title,
+          body,
+          createdOn: new Date(),
+          updatedAt: new Date(),
+        };
+        testUtils.response.entry.data.entries.push(entry);
         response = res(
+          status(201),
           json({
-            status: 201,
-            data: { ...testUtils.response.entry.data },
+            data: { entry },
           }),
         );
       } return response;

@@ -17,6 +17,7 @@ describe('Home dashboard page should render', () => {
     expect(screen.getByRole('button', { name: /Signout/i })).toBeInTheDocument();
   });
 
+  /*
   test('Renders diary content for large screens and displays input error', async () => {
     utils.renderWithRouter(<App />, { route: '/compose' });
 
@@ -35,4 +36,5 @@ describe('Home dashboard page should render', () => {
     expect(await screen.findByText(utils.inputs.data.entry.title))
       .toBeInTheDocument();
   });
+  */
 });

@@ -11,6 +11,7 @@ export default {
         email: 'foobar@mail.com',
         password: '456789Lovely',
       },
+      signedUp: { email: 'email-1', username: 'username-1', password: 'password-1' },
       entry: {
         title: 'fake-entry-title-1',
         body: 'fake-entry-body-1',
@@ -30,7 +31,7 @@ export default {
     user: {
       err400: {
         error: {
-          messages: [],
+          messages: [{ msg: 'fake error fullName' || 'fake error username' || 'fake error email' || 'fake error password' }],
         },
       },
       err40X: {
