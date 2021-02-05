@@ -6,7 +6,7 @@ const handlers = [
   rest.post('/api/v1/auth/signup', ({ body }, res, { json, status, cookie }) => {
     let response;
     if (!body.fullName) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error fullName', params: 'fullName' });
+      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.fullName);
       response = res(
         status(400),
         json({
@@ -14,7 +14,7 @@ const handlers = [
         }),
       );
     } else if (!body.username) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error username', params: 'username' });
+      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.username);
       response = res(
         status(400),
         json({
@@ -22,7 +22,7 @@ const handlers = [
         }),
       );
     } else if (!body.email) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error email', params: 'email' });
+      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.email);
       response = res(
         status(400),
         json({
@@ -30,7 +30,7 @@ const handlers = [
         }),
       );
     } else if (!body.password) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error password', params: 'password' });
+      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.password);
       response = res(
         status(400),
         json({
@@ -62,7 +62,7 @@ const handlers = [
   rest.post('/api/v1/auth/login', ({ body }, res, { json, status, cookie }) => {
     let response;
     if (!body.user) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error user', params: 'user' });
+      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.self);
       response = res(
         status(400),
         json({
@@ -70,7 +70,7 @@ const handlers = [
         }),
       );
     } else if (!body.password) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, { msg: 'fake error password', params: 'password' });
+      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.password);
       response = res(
         status(400),
         json({
@@ -108,7 +108,7 @@ const handlers = [
   rest.get('/api/v1/entries',
     ({ cookies: { fakeToken } }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
+      if (!fakeToken || fakeToken === testUtils.errors.user.token) {
         response = res(
           status(401),
           json({
@@ -126,7 +126,7 @@ const handlers = [
   rest.get('/api/v1/entries/:id',
     ({ cookies: { fakeToken }, params }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
+      if (!fakeToken || fakeToken === testUtils.errors.user.token) {
         response = res(
           status(401),
           json({
@@ -154,7 +154,7 @@ const handlers = [
   rest.put('/api/v1/entries/:id',
     ({ cookies: { fakeToken }, params, body: { title, body } }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
+      if (!fakeToken || fakeToken === testUtils.errors.user.token) {
         response = res(
           status(401),
           json({
@@ -192,7 +192,7 @@ const handlers = [
     ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
       let response;
       if (!title) {
-        testUtils.response.entry.err400.error.messages.splice(0, 1, { msg: 'fake error title', params: 'title' });
+        testUtils.response.entry.err400.error.messages.splice(0, 1, testUtils.errors.entry.title);
         response = res(
           status(400),
           json({
@@ -200,14 +200,14 @@ const handlers = [
           }),
         );
       } else if (!body) {
-        testUtils.response.entry.err400.error.messages.splice(0, 1, { msg: 'fake error body', params: 'body' });
+        testUtils.response.entry.err400.error.messages.splice(0, 1, testUtils.errors.entry.body);
         response = res(
           status(400),
           json({
             error: { ...testUtils.response.entry.err400.error },
           }),
         );
-      } else if (!fakeToken || fakeToken === testUtils.inputs.error.user.token) {
+      } else if (!fakeToken || fakeToken === testUtils.errors.user.token) {
         response = res(
           status(401),
           json({
