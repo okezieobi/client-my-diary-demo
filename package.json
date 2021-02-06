@@ -60,8 +60,7 @@
       "<rootDir>/src/index.jsx",
       "<rootDir>/src/serviceWorker.js",
       "<rootDir>/src/theme.js",
-      "<rootDir>/src/mocks/browser.js",
-      "<rootDir>/src/mocks/server.js"
+      "<rootDir>/src/mocks/*.js"
     ]
   }
 }

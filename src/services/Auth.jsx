@@ -55,9 +55,7 @@ function ProvideAuth({ children }) {
   const auth = useProvideAuth();
   return (
     <authContext.Provider value={auth}>
-      <BrowserRouter>
-        {children}
-      </BrowserRouter>
+      <BrowserRouter>{children}</BrowserRouter>
     </authContext.Provider>
   );
 }

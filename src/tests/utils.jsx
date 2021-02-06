@@ -8,13 +8,13 @@ const inputs = {
       fullName: 'Okezie',
       username: 'Obiedere',
       email: 'foobar@mail.com',
-      password: '456789Lovely',
+      password: 'sate234',
     },
     registered: {
       fullName: 'Frank',
       username: 'Eke',
       email: 'barfoo@mail.com',
-      password: '456789Lovely',
+      password: 'sate234',
     },
   },
   entry: {
@@ -52,10 +52,16 @@ const data = {
   ],
 };
 
+function renderWithRouter(ui, { route = '/' } = {}) {
+  window.history.pushState({}, 'Test page', route);
+  return render(ui, { wrapper: authServices.ProvideAuth });
+}
+
 export default {
   inputs,
   errors,
   data,
+  renderWithRouter,
   response: {
     user: {
       err400: {
@@ -85,9 +91,5 @@ export default {
         entries: data.entries,
       },
     },
-  },
-  renderWithRouter(ui, { route = '/' } = {}) {
-    window.history.pushState({}, 'Test page', route);
-    return render(ui, { wrapper: authServices.ProvideAuth });
   },
 };
