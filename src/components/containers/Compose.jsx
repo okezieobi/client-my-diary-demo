@@ -39,18 +39,20 @@ export default function () {
 
     const reqURL = env.backendAPI('entries');
     auth.setResource(reqURL, inputData)
-      .then(({ error }) => {
-        if (error && error.messages) {
-          const err = error.messages.find(({ params }) => params);
-          if (err.params === 'title') {
-            setErrInTitle(true);
-            setTitleErr(err.msg);
-          } else if (err.params === 'body') {
-            setErrInBody(true);
-            setBodyErr(err.msg);
-          } setBtnState(false);
-        } else {
-          history.push('/entries');
+      .then((response) => {
+        if (response) {
+          if (response.error && response.error.messages) {
+            const err = response.error.messages.find(({ params }) => params);
+            if (err.params === 'title') {
+              setErrInTitle(true);
+              setTitleErr(err.msg);
+            } else if (err.params === 'body') {
+              setErrInBody(true);
+              setBodyErr(err.msg);
+            } setBtnState(false);
+          } else {
+            history.push('/entries');
+          }
         }
       }).catch((err) => {
         setBtnState(false);

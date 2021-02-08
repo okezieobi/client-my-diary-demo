@@ -16,13 +16,13 @@ if (process.env.NODE_ENV === 'development') {
 
 ReactDOM.render(
   <React.StrictMode>
-    <authServices.ProvideAuth>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <authServices.ProvideAuth>
         <App />
-      </ThemeProvider>
-    </authServices.ProvideAuth>
+      </authServices.ProvideAuth>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

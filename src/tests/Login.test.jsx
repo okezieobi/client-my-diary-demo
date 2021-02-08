@@ -47,6 +47,6 @@ describe('Signin page should render', () => {
     await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.user.registered.password);
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    expect(await screen.findByRole('button', { name: /Search/i })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /Home/i })).toBeInTheDocument();
   });
 });

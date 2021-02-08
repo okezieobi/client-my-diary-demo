@@ -93,13 +93,15 @@ export default function () {
 
   useEffect(() => {
     auth.getResource(reqURL)
-      .then(({ data }) => {
-        const rowData = data.entries.map(
-          ({
-            title, body, createdOn, updatedAt, id,
-          }) => ([id, title, body, Date(createdOn), Date(updatedAt)]),
-        ) || [];
-        setData(rowData);
+      .then((response) => {
+        if (response) {
+          const rowData = response.data.entries.map(
+            ({
+              title, body, createdOn, updatedAt, id,
+            }) => ([id, title, body, Date(createdOn), Date(updatedAt)]),
+          );
+          setData(rowData);
+        }
       }).catch((err) => { throw err; });
   }, [reqURL, history, auth]);
 

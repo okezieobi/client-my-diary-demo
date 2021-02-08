@@ -51,7 +51,7 @@ export default [
         testUtils.response.user.data.users.push({ ...body });
         response = res(
           status(201),
-          cookie('fakeToken', 'token123'),
+          cookie('fakeToken', testUtils.inputs.user.token),
           json({
             data: {},
           }),
@@ -97,7 +97,7 @@ export default [
       } else {
         response = res(
           status(200),
-          cookie('fakeToken', 'token123'),
+          cookie('fakeToken', testUtils.inputs.user.token),
           json({
             data: {},
           }),

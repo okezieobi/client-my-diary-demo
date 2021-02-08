@@ -6,16 +6,32 @@ import utils from './utils';
 import App from '../App';
 
 describe('Home dashboard page should render', () => {
-  test('Renders diary content for large screens', () => {
-    utils.renderWithRouter(<App />, { route: '/compose' });
+  test('Renders diary content for large screens', async () => {
+    utils.renderWithRouter(<App />, { route: '/login' });
 
-    expect(screen.getByRole('button', { name: /Submit/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Back/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Compose/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Profile/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Home/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Signout/i })).toBeInTheDocument();
-  });
+    await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.inputs.user.registered.email);
+    await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.user.registered.password);
+    userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+    const composeBtn = await screen.findByRole('button', { name: /Compose/ });
+    expect(composeBtn).toBeInTheDocument();
+    userEvent.click(composeBtn);
+
+    const titleTxtBox = screen.getByLabelText(/Title/i);
+    const bodyTxtBox = screen.getByLabelText(/Body/i);
+    const composeFormBtn = screen.getByRole('button', { name: /Submit/ });
+    expect(titleTxtBox).toBeInTheDocument();
+    expect(bodyTxtBox).toBeInTheDocument();
+    expect(composeFormBtn).toBeInTheDocument();
+
+    await userEvent.type(titleTxtBox, utils.inputs.entry.title);
+    await userEvent.type(bodyTxtBox, utils.inputs.entry.body);
+    userEvent.click(composeFormBtn);
+
+    expect(screen.getByRole('button', { name: /Compose/ })).toBeInTheDocument();
+    // const titleResponse = await screen.findByText(utils.inputs.entry.title);
+    // expect(titleResponse).toBeInTheDocument();
+  }, 10000);
 
   /*
   test('Renders diary content for large screens and displays input error', async () => {

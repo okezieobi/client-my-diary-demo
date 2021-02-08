@@ -16,6 +16,7 @@ const inputs = {
       email: 'barfoo@mail.com',
       password: 'sate234',
     },
+    token: 'real-token',
   },
   entry: {
     title: 'title',

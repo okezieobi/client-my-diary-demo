@@ -16,9 +16,11 @@ export default function () {
 
   useEffect(() => {
     auth.getResource(reqURL)
-      .then(({ data, error }) => {
-        if (error && error.message) setReqErr(error.message);
-        else setEntry(data.entry);
+      .then((response) => {
+        if (response) {
+          if (response.error && response.error.message) setReqErr(response.error.message);
+          else setEntry(response.data.entry);
+        }
       }).catch((err) => { throw err; });
   }, [auth, reqURL]);
 

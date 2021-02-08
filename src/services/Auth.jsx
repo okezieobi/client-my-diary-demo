@@ -28,20 +28,14 @@ function useProvideAuth() {
     method,
     credentials: 'include',
     body: JSON.stringify(input),
-  }).then((response) => {
-    if (response.status === 401) return setUser(false);
-    return response.json();
-  });
+  }).then((response) => (response.status === 401 ? setUser(false) : response.json()));
 
   const getResource = (reqURL) => fetch(reqURL, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
     credentials: 'include',
-  }).then((response) => {
-    if (response.status === 200) return response.json();
-    return setUser(false);
-  });
+  }).then((response) => (response.status === 200 ? response.json() : setUser(false)));
 
   return {
     user,
