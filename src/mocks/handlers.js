@@ -38,7 +38,7 @@ export default [
         }),
       );
     } else {
-      const userExists = testUtils.response.user.data.users
+      const userExists = testUtils.response.user.data
         .some(({ email, username }) => username === body.username || email === body.email);
       if (userExists) {
         response = res(
@@ -48,10 +48,10 @@ export default [
           }),
         );
       } else {
-        testUtils.response.user.data.users.push({ ...body });
+        testUtils.response.user.data.push({ ...body });
         response = res(
           status(201),
-          cookie('fakeToken', testUtils.inputs.user.token),
+          cookie('fakeToken', testUtils.data.token),
           json({
             data: {},
           }),
@@ -78,7 +78,7 @@ export default [
         }),
       );
     } else {
-      const userExists = testUtils.response.user.data.users
+      const userExists = testUtils.response.user.data
         .find(({ username, email }) => body.user === username || body.user === email);
       if (!userExists) {
         response = res(
@@ -97,7 +97,7 @@ export default [
       } else {
         response = res(
           status(200),
-          cookie('fakeToken', testUtils.inputs.user.token),
+          cookie('fakeToken', testUtils.data.token),
           json({
             data: {},
           }),
@@ -105,10 +105,17 @@ export default [
       }
     } return response;
   }),
+  rest.post('/api/v1/auth/logout', (req, res, { json, status, cookie }) => res(
+    status(200),
+    cookie('fake-token', null),
+    json({
+      data: {},
+    }),
+  )),
   rest.get('/api/v1/entries',
     ({ cookies: { fakeToken } }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken === testUtils.errors.user.token) {
+      if (!fakeToken || fakeToken !== testUtils.data.token) {
         response = res(
           status(401),
           json({
@@ -126,7 +133,7 @@ export default [
   rest.get('/api/v1/entries/:id',
     ({ cookies: { fakeToken }, params }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken === testUtils.errors.user.token) {
+      if (!fakeToken || fakeToken !== testUtils.data.token) {
         response = res(
           status(401),
           json({
@@ -154,7 +161,7 @@ export default [
   rest.put('/api/v1/entries/:id',
     ({ cookies: { fakeToken }, params, body: { title, body } }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken === testUtils.errors.user.token) {
+      if (!fakeToken || fakeToken !== testUtils.data.token) {
         response = res(
           status(401),
           json({
@@ -207,7 +214,7 @@ export default [
             error: { ...testUtils.response.entry.err400.error },
           }),
         );
-      } else if (!fakeToken || fakeToken === testUtils.errors.user.token) {
+      } else if (!fakeToken || fakeToken !== testUtils.data.token) {
         response = res(
           status(401),
           json({

@@ -10,38 +10,59 @@ function useAuth() {
 }
 
 function useProvideAuth() {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
 
-  const authenticate = (reqURL, input) => fetch(reqURL, {
+  const authenticate = (url, input) => fetch(url, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(input),
-  }).then((response) => response.json());
+  }).then((response) => {
+    if (response.status === 200 || response.status === 201) return setUser(true);
+    setUser(false);
+    return response.json();
+  });
 
-  const setResource = (reqURL, input, method = 'POST') => fetch(reqURL, {
+  const setResource = (url, input = {}, method = 'POST') => fetch(url, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
     method,
     credentials: 'include',
     body: JSON.stringify(input),
-  }).then((response) => (response.status === 401 ? setUser(false) : response.json()));
+  }).then((response) => {
+    if (response.status === 401) return setUser(false);
+    setUser(true);
+    return response.json();
+  });
 
-  const getResource = (reqURL) => fetch(reqURL, {
+  const getResource = (url) => fetch(url, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
     credentials: 'include',
-  }).then((response) => (response.status === 200 ? response.json() : setUser(false)));
+  }).then((response) => {
+    if (response.status === 401) return setUser(false);
+    setUser(true);
+    return response.json();
+  });
+
+  const logout = (url) => fetch(url, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    method: 'POST',
+    credentials: 'include',
+  }).then(() => setUser(false));
 
   return {
     user,
     authenticate,
     getResource,
     setResource,
+    logout,
   };
 }
 
@@ -83,8 +104,6 @@ PrivateRoute.propTypes = {
 
 export default {
   useAuth,
-  useProvideAuth,
-  authContext,
   ProvideAuth,
   PrivateRoute,
 };

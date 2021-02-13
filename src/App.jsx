@@ -11,7 +11,7 @@ import ComposeForm from './components/containers/Compose';
 import EditForm from './components/containers/Edit';
 import Profile from './components/views/Profile';
 
-import authServices from './services/Auth';
+import authServices from './components/Auth';
 
 export default function App() {
   return (

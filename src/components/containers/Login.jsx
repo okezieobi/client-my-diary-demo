@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import LoginLayout from '../views/Login';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 import env from '../../utils/env';
 
 export default function () {
@@ -42,19 +42,21 @@ export default function () {
 
     const reqURL = env.backendAPI('auth/login');
     auth.authenticate(reqURL, inputData)
-      .then(({ error }) => {
-        if (error) {
-          if (error.messages) {
-            const err = error.messages.find(({ params }) => params);
-            if (err.params === 'user') {
-              setUserErr(err.msg);
-              setErrInUser(true);
-            } else if (err.params === 'password') {
-              setPasswordErr(err.msg);
-              setErrInPassword(true);
-            }
-          } else if (error.message) setLoginErr(error.message);
-          setBtnState(false);
+      .then((response) => {
+        if (response) {
+          if (response.error) {
+            if (response.error.messages) {
+              const err = response.error.messages.find(({ params }) => params);
+              if (err.params === 'user') {
+                setUserErr(err.msg);
+                setErrInUser(true);
+              } else if (err.params === 'password') {
+                setPasswordErr(err.msg);
+                setErrInPassword(true);
+              }
+            } else if (response.error.message) setLoginErr(response.error.message);
+            setBtnState(false);
+          }
         } else {
           history.replace(from);
         }

@@ -1,22 +1,13 @@
 import { render } from '@testing-library/react';
 
-import authServices from '../services/Auth';
+import authServices from '../components/Auth';
 
 const inputs = {
   user: {
-    new: {
-      fullName: 'Okezie',
-      username: 'Obiedere',
-      email: 'foobar@mail.com',
-      password: 'sate234',
-    },
-    registered: {
-      fullName: 'Frank',
-      username: 'Eke',
-      email: 'barfoo@mail.com',
-      password: 'sate234',
-    },
-    token: 'real-token',
+    fullName: 'Okezie',
+    username: 'Obiedere',
+    email: 'foobar@mail.com',
+    password: 'sate234',
   },
   entry: {
     title: 'title',
@@ -40,6 +31,15 @@ const errors = {
 };
 
 const data = {
+  token: 'real-token',
+  users: [
+    {
+      fullName: 'Frank',
+      username: 'Eke',
+      email: 'barfoo@mail.com',
+      password: 'sate234',
+    },
+  ],
   entries: [
     {
       id: '222', title: 'fake-title-1', body: 'fake-body-1', createdOn: new Date(), updatedAt: new Date(),
@@ -75,7 +75,7 @@ export default {
           message: 'fakeErr-auth-2',
         },
       },
-      data: { users: [{ ...inputs.user.registered }] },
+      data: data.users,
     },
     entry: {
       err400: {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import SignupLayout from '../views/Signup';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 import env from '../../utils/env';
 
 export default function Signup() {
@@ -63,25 +63,27 @@ export default function Signup() {
 
     const reqURL = env.backendAPI('auth/signup');
     auth.authenticate(reqURL, inputData)
-      .then(({ error }) => {
-        if (error) {
-          if (error.messages) {
-            const err = error.messages.find(({ params }) => params);
-            if (err.params === 'fullName') {
-              setErrInFullName(true);
-              setFullNameErr(err.msg);
-            } else if (err.params === 'username') {
-              setErrInUsername(true);
-              setUsernameErr(err.msg);
-            } else if (err.params === 'email') {
-              setErrInEmail(true);
-              setEmailErr(err.msg);
-            } else if (err.params === 'password') {
-              setErrInPassword(true);
-              setPasswordErr(err.msg);
-            }
-          } else if (error.message) setSignupErr(error.message);
-          setBtnState(false);
+      .then((response) => {
+        if (response) {
+          if (response.error) {
+            if (response.error.messages) {
+              const err = response.error.messages.find(({ params }) => params);
+              if (err.params === 'fullName') {
+                setErrInFullName(true);
+                setFullNameErr(err.msg);
+              } else if (err.params === 'username') {
+                setErrInUsername(true);
+                setUsernameErr(err.msg);
+              } else if (err.params === 'email') {
+                setErrInEmail(true);
+                setEmailErr(err.msg);
+              } else if (err.params === 'password') {
+                setErrInPassword(true);
+                setPasswordErr(err.msg);
+              }
+            } else if (response.error.message) setSignupErr(response.error.message);
+            setBtnState(false);
+          }
         } else {
           history.replace(from);
         }

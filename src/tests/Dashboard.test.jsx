@@ -13,8 +13,6 @@ describe('Home dashboard page should render', () => {
     await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.user.registered.password);
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    expect(await screen.findByRole('button', { name: /Home/ })).toBeInTheDocument();
-    // const titleResponse = screen.getByText(utils.inputs.entry.title);
-    // expect(titleResponse).toBeInTheDocument();
+    expect(await screen.findByRole('table')).toBeInTheDocument();
   });
 });

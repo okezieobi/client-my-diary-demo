@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Dashboard from '../templates/Dashboard';
 import Form from '../templates/Form';
 import env from '../../utils/env';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 
 export default function Edit() {
   const [reqErr, setReqErr] = useState('');

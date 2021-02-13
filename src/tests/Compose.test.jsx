@@ -28,9 +28,7 @@ describe('Home dashboard page should render', () => {
     await userEvent.type(bodyTxtBox, utils.inputs.entry.body);
     userEvent.click(composeFormBtn);
 
-    expect(screen.getByRole('button', { name: /Compose/ })).toBeInTheDocument();
-    // const titleResponse = await screen.findByText(utils.inputs.entry.title);
-    // expect(titleResponse).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Home/ })).toBeInTheDocument();
   }, 10000);
 
   /*
@@ -40,16 +38,6 @@ describe('Home dashboard page should render', () => {
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     expect(await screen.findByText(utils.response.entry.err400.error.messages[0].msg))
-      .toBeInTheDocument();
-  });
-
-  test('Renders diary content for large screens and displays input error', async () => {
-    utils.renderWithRouter(<App />, { route: '/compose' });
-    await userEvent.type(screen.getByLabelText(/Title/i), utils.inputs.data.entry.title);
-    await userEvent.type(screen.getByLabelText(/Body/i), utils.inputs.data.entry.body);
-    userEvent.click(screen.getByRole('button', { name: /Submit/ }));
-
-    expect(await screen.findByText(utils.inputs.data.entry.title))
       .toBeInTheDocument();
   });
   */

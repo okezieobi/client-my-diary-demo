@@ -8,7 +8,7 @@ import App from './App';
 // import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 import worker from './mocks/browser';
-import authServices from './services/Auth';
+import authServices from './components/Auth';
 
 if (process.env.NODE_ENV === 'development') {
   worker.start();

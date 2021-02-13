@@ -65,6 +65,6 @@ describe('Signup page should render', () => {
     await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.user.new.password);
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    expect(await screen.findByRole('button', { name: /Compose/i })).toBeInTheDocument();
-  });
+    expect(await screen.findByRole('button', { name: /Home/i })).toBeInTheDocument();
+  }, 10000);
 });

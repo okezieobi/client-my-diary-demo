@@ -20,7 +20,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
+import env from '../../utils/env';
+import authServices from '../Auth';
+
 const drawerWidth = 240;
+const reqURL = env.backendAPI('auth/logout');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,8 +70,13 @@ function Dashboard({
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const history = useHistory();
-  const handleLogout = () => {
-    history.push('/login');
+  const auth = authServices.useAuth();
+
+  const handleLogout = async () => {
+    auth.logout(reqURL)
+      .then(() => {
+        history.push('/login');
+      }).catch((err) => { throw err; });
   };
 
   const clickHome = () => {

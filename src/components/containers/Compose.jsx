@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import Dashboard from '../templates/Dashboard';
 import Form from '../templates/Form';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 import env from '../../utils/env';
 
 export default function () {
@@ -38,7 +38,7 @@ export default function () {
     };
 
     const reqURL = env.backendAPI('entries');
-    auth.setResource(reqURL, inputData)
+    auth.setResource(reqURL, inputData, 'POST')
       .then((response) => {
         if (response) {
           if (response.error && response.error.messages) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Content from '../views/Content';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 import env from '../../utils/env';
 
 export default function () {

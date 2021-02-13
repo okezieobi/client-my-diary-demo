@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Dashboard from '../templates/Dashboard';
 import HomeFab from '../templates/Fab';
 import DashboardBG from '../../images/Home_Dash.svg';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 import env from '../../utils/env';
 
 const useStyles = makeStyles(() => ({
@@ -87,6 +87,7 @@ export default function () {
   const options = {
     filterType: 'checkbox',
     onRowClick: (rowData) => handleRowClick(rowData),
+    serverSide: true,
   };
 
   const reqURL = env.backendAPI('entries');
@@ -103,7 +104,7 @@ export default function () {
           setData(rowData);
         }
       }).catch((err) => { throw err; });
-  }, [reqURL, history, auth]);
+  }, [reqURL, auth]);
 
   return (
     <>
