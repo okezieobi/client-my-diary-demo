@@ -107,7 +107,7 @@ export default [
   }),
   rest.post('/api/v1/auth/logout', (req, res, { json, status, cookie }) => res(
     status(200),
-    cookie('fake-token', null),
+    cookie('fakeToken', undefined),
     json({
       data: {},
     }),

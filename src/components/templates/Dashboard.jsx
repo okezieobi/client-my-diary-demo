@@ -75,7 +75,7 @@ function Dashboard({
   const handleLogout = async () => {
     auth.logout(reqURL)
       .then(() => {
-        history.push('/login');
+        history.push('/entries');
       }).catch((err) => { throw err; });
   };
 
