@@ -90,10 +90,10 @@ export default function () {
     serverSide: true,
   };
 
-  const reqURL = env.backendAPI('entries');
+  const url = env.backendAPI('entries');
 
   useEffect(() => {
-    auth.getResource(reqURL)
+    auth.getResource(url)
       .then((response) => {
         if (response) {
           const rowData = response.data.entries.map(
@@ -104,7 +104,7 @@ export default function () {
           setData(rowData);
         }
       }).catch((err) => { throw err; });
-  }, [reqURL, auth]);
+  }, [url, auth]);
 
   return (
     <>

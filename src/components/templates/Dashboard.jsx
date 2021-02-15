@@ -24,7 +24,7 @@ import env from '../../utils/env';
 import authServices from '../Auth';
 
 const drawerWidth = 240;
-const reqURL = env.backendAPI('auth/logout');
+const url = env.backendAPI('auth/logout');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,9 +73,9 @@ function Dashboard({
   const auth = authServices.useAuth();
 
   const handleLogout = async () => {
-    auth.logout(reqURL)
+    auth.logout(url)
       .then(() => {
-        history.push('/entries');
+        history.push('/login');
       }).catch((err) => { throw err; });
   };
 
@@ -128,7 +128,7 @@ function Dashboard({
         </ListItem>
         <ListItem onClick={handleLogout} button key="Signout">
           <ListItemIcon><SignoutIcon /></ListItemIcon>
-          <ListItemText primary="Signout" />
+          <ListItemText primary="Logout" />
         </ListItem>
       </List>
     </div>

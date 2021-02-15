@@ -40,8 +40,8 @@ export default function () {
       password,
     };
 
-    const reqURL = env.backendAPI('auth/login');
-    auth.authenticate(reqURL, inputData)
+    const url = env.backendAPI('auth/login');
+    auth.authenticate(url, inputData)
       .then((response) => {
         if (response) {
           if (response.error) {

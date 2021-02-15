@@ -17,7 +17,7 @@ export default function Edit() {
   const entryId = JSON.parse(localStorage.getItem('entryId'));
   const auth = authServices.useAuth();
   const history = useHistory();
-  const reqURL = env.backendAPI(`entries/${entryId}`);
+  const url = env.backendAPI(`entries/${entryId}`);
 
   function handleTitleChange(value) {
     setTitle(value);
@@ -28,14 +28,14 @@ export default function Edit() {
   }
 
   useEffect(() => {
-    auth.getResource(reqURL)
+    auth.getResource(url)
       .then((response) => {
         if (response) {
           if (response.error && response.error.message) setReqErr(response.error.message);
           else setEntry(response.data.entry);
         }
       }).catch((err) => { throw err; });
-  }, [auth, reqURL]);
+  }, [auth, url]);
 
   function handleSubmit() {
     setBtnState(true);
@@ -44,7 +44,7 @@ export default function Edit() {
       title, body,
     };
 
-    auth.setResource(reqURL, inputData, 'PUT')
+    auth.setResource(url, inputData, 'PUT')
       .then(() => {
         history.push('/entries');
       }).catch((err) => {

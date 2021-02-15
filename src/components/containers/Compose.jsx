@@ -37,8 +37,8 @@ export default function () {
       title, body,
     };
 
-    const reqURL = env.backendAPI('entries');
-    auth.setResource(reqURL, inputData, 'POST')
+    const url = env.backendAPI('entries');
+    auth.setResource(url, inputData, 'POST')
       .then((response) => {
         if (response) {
           if (response.error && response.error.messages) {

@@ -12,17 +12,17 @@ export default function () {
   const entryId = JSON.parse(localStorage.getItem('entryId'));
   const auth = authServices.useAuth();
 
-  const reqURL = env.backendAPI(`entries/${entryId}`);
+  const url = env.backendAPI(`entries/${entryId}`);
 
   useEffect(() => {
-    auth.getResource(reqURL)
+    auth.getResource(url)
       .then((response) => {
         if (response) {
           if (response.error && response.error.message) setReqErr(response.error.message);
           else setEntry(response.data.entry);
         }
       }).catch((err) => { throw err; });
-  }, [auth, reqURL]);
+  }, [auth, url]);
 
   return (
     <>

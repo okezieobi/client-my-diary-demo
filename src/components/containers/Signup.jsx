@@ -61,8 +61,8 @@ export default function Signup() {
       password,
     };
 
-    const reqURL = env.backendAPI('auth/signup');
-    auth.authenticate(reqURL, inputData)
+    const url = env.backendAPI('auth/signup');
+    auth.authenticate(url, inputData)
       .then((response) => {
         if (response) {
           if (response.error) {
