@@ -10,7 +10,13 @@ function useAuth() {
 }
 
 function useProvideAuth() {
-  const [user, setUser] = useState(false);
+  const isAuth = JSON.parse(sessionStorage.getItem('isAuth'));
+  const [user, setUser] = useState(isAuth);
+
+  const setAuth = (state) => {
+    sessionStorage.setItem('isAuth', `${state}`);
+    setUser(state);
+  };
 
   const authenticate = (url, input) => fetch(url, {
     headers: {
@@ -20,8 +26,8 @@ function useProvideAuth() {
     credentials: 'include',
     body: JSON.stringify(input),
   }).then((response) => {
-    if (response.status === 200 || response.status === 201) return setUser(true);
-    setUser(false);
+    if (response.status === 200 || response.status === 201) return setAuth(true);
+    setAuth(false);
     return response.json();
   });
 
@@ -33,8 +39,8 @@ function useProvideAuth() {
     credentials: 'include',
     body: JSON.stringify(input),
   }).then((response) => {
-    if (response.status === 401) return setUser(false);
-    setUser(true);
+    if (response.status === 401) return setAuth(false);
+    setAuth(true);
     return response.json();
   });
 
@@ -44,8 +50,8 @@ function useProvideAuth() {
     },
     credentials: 'include',
   }).then((response) => {
-    if (response.status === 401) return setUser(false);
-    setUser(true);
+    if (response.status === 401) return setAuth(false);
+    setAuth(true);
     return response.json();
   });
 
@@ -55,7 +61,7 @@ function useProvideAuth() {
     },
     method: 'POST',
     credentials: 'include',
-  }).then(() => setUser(false));
+  }).then(() => setAuth(false));
 
   return {
     user,
