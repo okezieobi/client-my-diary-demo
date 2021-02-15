@@ -25,6 +25,10 @@ export default function Content({
     history.push('/edit');
   };
 
+  const handleGoBack = () => {
+    history.goBack();
+  };
+
   return (
     <Dashboard homeSelect>
       <Paper className={classes.paper}>
@@ -77,6 +81,7 @@ export default function Content({
               fullWidth
               variant="contained"
               color="secondary"
+              onClick={handleGoBack}
             >
               Back
             </Button>

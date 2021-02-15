@@ -13,7 +13,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import UserIcon from '@material-ui/icons/AccountCircleOutlined';
-import SignoutIcon from '@material-ui/icons/PowerSettingsNew';
+import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -127,7 +127,7 @@ function Dashboard({
           <ListItemText>Profile</ListItemText>
         </ListItem>
         <ListItem onClick={handleLogout} button key="Signout">
-          <ListItemIcon><SignoutIcon /></ListItemIcon>
+          <ListItemIcon><LogoutIcon /></ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItem>
       </List>

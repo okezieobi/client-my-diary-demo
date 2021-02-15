@@ -49,7 +49,7 @@ describe('Signin page should render', () => {
 
     expect(await screen.findByRole('button', { name: /Home/i })).toBeInTheDocument();
     expect(screen.getByRole('table')).toBeInTheDocument();
-    // expect(await screen.findByText(utils.data.entries[0].body), { timeout: 12000 })
+    // expect(screen.getByText(utils.data.entries[0].body))
     //  .toBeInTheDocument();
   }, 15000);
 });

@@ -16,6 +16,15 @@ import authServices from './components/Auth';
 export default function App() {
   return (
     <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
       <Route path="/profile">
         <Profile />
       </Route>
@@ -31,15 +40,6 @@ export default function App() {
       <authServices.PrivateRoute path="/entries">
         <HomeDash />
       </authServices.PrivateRoute>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/signup">
-        <Signup />
-      </Route>
-      <Route path="/">
-        <Home />
-      </Route>
     </Switch>
   );
 }
