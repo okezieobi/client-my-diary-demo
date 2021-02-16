@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -18,8 +19,12 @@ export default function Form({
   errInTitle, errInBody,
 }) {
   const classes = useStyles();
+  const history = useHistory();
   function handleTitleChange({ target: { value } }) { setTitle(value); }
   function handleBodyChange({ target: { value } }) { setBody(value); }
+  const handleGoBack = () => {
+    history.goBack();
+  };
 
   return (
     <Paper className={classes.paper}>
@@ -76,6 +81,7 @@ export default function Form({
               fullWidth
               variant="contained"
               color="secondary"
+              onClick={handleGoBack}
             >
               Back
             </Button>

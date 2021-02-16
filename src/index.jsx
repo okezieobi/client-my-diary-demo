@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -6,15 +8,13 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import './index.css';
 import App from './App';
 import theme from './theme';
-// import worker from './mocks/browser';
+import worker from './mocks/browser';
 import authServices from './components/Auth';
 import reportWebVitals from './reportWebVitals';
 
-/*
 if (process.env.NODE_ENV === 'development') {
   worker.start();
 }
-*/
 
 ReactDOM.render(
   <React.StrictMode>
