@@ -14,5 +14,6 @@ describe('Home dashboard page should render', () => {
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     expect(await screen.findByRole('table')).toBeInTheDocument();
+    // expect(screen.getByText(utils.data.entries[0].body)).toBeInTheDocument();
   });
 });
