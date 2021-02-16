@@ -67,17 +67,17 @@ export default function Signup() {
         if (response) {
           if (response.error) {
             if (response.error.messages) {
-              const err = response.error.messages.find(({ params }) => params);
-              if (err.params === 'fullName') {
+              const err = response.error.messages.find(({ param }) => param);
+              if (err.param === 'fullName') {
                 setErrInFullName(true);
                 setFullNameErr(err.msg);
-              } else if (err.params === 'username') {
+              } else if (err.param === 'username') {
                 setErrInUsername(true);
                 setUsernameErr(err.msg);
-              } else if (err.params === 'email') {
+              } else if (err.param === 'email') {
                 setErrInEmail(true);
                 setEmailErr(err.msg);
-              } else if (err.params === 'password') {
+              } else if (err.param === 'password') {
                 setErrInPassword(true);
                 setPasswordErr(err.msg);
               }

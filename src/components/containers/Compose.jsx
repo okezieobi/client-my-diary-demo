@@ -42,11 +42,11 @@ export default function Compose() {
       .then((response) => {
         if (response) {
           if (response.error && response.error.messages) {
-            const err = response.error.messages.find(({ params }) => params);
-            if (err.params === 'title') {
+            const err = response.error.messages.find(({ param }) => param);
+            if (err.param === 'title') {
               setErrInTitle(true);
               setTitleErr(err.msg);
-            } else if (err.params === 'body') {
+            } else if (err.param === 'body') {
               setErrInBody(true);
               setBodyErr(err.msg);
             } setBtnState(false);

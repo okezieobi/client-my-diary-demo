@@ -46,11 +46,11 @@ export default function Login() {
         if (response) {
           if (response.error) {
             if (response.error.messages) {
-              const err = response.error.messages.find(({ params }) => params);
-              if (err.params === 'user') {
+              const err = response.error.messages.find(({ param }) => param);
+              if (err.param === 'user') {
                 setUserErr(err.msg);
                 setErrInUser(true);
-              } else if (err.params === 'password') {
+              } else if (err.param === 'password') {
                 setPasswordErr(err.msg);
                 setErrInPassword(true);
               }

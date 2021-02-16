@@ -17,16 +17,16 @@ const inputs = {
 
 const errors = {
   user: {
-    fullName: { msg: 'fake error fullName', params: 'fullName' },
-    username: { msg: 'fake error username', params: 'username' },
-    email: { msg: 'fake error email', params: 'email' },
-    password: { msg: 'fake error password', params: 'password' },
-    self: { msg: 'fake error user', params: 'user' },
+    fullName: { msg: 'fake error fullName', param: 'fullName' },
+    username: { msg: 'fake error username', param: 'username' },
+    email: { msg: 'fake error email', param: 'email' },
+    password: { msg: 'fake error password', param: 'password' },
+    self: { msg: 'fake error user', param: 'user' },
     token: 'fake-token',
   },
   entry: {
-    title: { msg: 'fake error title', params: 'title' },
-    body: { msg: 'fake error body', params: 'body' },
+    title: { msg: 'fake error title', param: 'title' },
+    body: { msg: 'fake error body', param: 'body' },
   },
 };
 
