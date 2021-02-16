@@ -51,7 +51,7 @@ export default function Signup() {
     setPassword(value);
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     setBtnState(true);
 
     const inputData = {
@@ -91,6 +91,7 @@ export default function Signup() {
         setBtnState(false);
         throw err;
       });
+    event.preventDefault();
   }
 
   return (

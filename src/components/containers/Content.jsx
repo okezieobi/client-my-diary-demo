@@ -4,7 +4,7 @@ import Content from '../views/Content';
 import authServices from '../Auth';
 import env from '../../utils/env';
 
-export default function () {
+export default function ContentContainer() {
   const [reqErr, setReqErr] = useState('');
   const [entry, setEntry] = useState({
     title: '', body: '', createdOn: '', updatedAt: '',

@@ -23,7 +23,7 @@ export default function Form({
 
   return (
     <Paper className={classes.paper}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextField
@@ -65,8 +65,8 @@ export default function Form({
               fullWidth
               variant="contained"
               color="primary"
-              onClick={handleSubmit}
               disabled={formBtnState}
+              type="submit"
             >
               {formBtnState ? 'Sending' : 'Submit'}
             </Button>

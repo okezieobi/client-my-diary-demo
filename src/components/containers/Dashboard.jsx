@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function () {
+export default function DashboardContainer() {
   const [tableData, setData] = useState([]);
   const history = useHistory();
   const classes = useStyles();
@@ -47,7 +47,6 @@ export default function () {
       options: {
         filter: true,
         sort: true,
-        display: 'exclude',
       },
     },
     {

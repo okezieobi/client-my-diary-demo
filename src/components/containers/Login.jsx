@@ -5,7 +5,7 @@ import LoginLayout from '../views/Login';
 import authServices from '../Auth';
 import env from '../../utils/env';
 
-export default function () {
+export default function Login() {
   const [loginErr, setLoginErr] = useState('');
   const [user, setUser] = useState('');
   const [userErr, setUserErr] = useState('');
@@ -32,7 +32,7 @@ export default function () {
     setPassword(value);
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     setBtnState(true);
 
     const inputData = {
@@ -64,6 +64,8 @@ export default function () {
         setBtnState(false);
         throw err;
       });
+
+    event.preventDefault();
   }
 
   return (

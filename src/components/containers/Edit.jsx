@@ -37,7 +37,7 @@ export default function Edit() {
       }).catch((err) => { throw err; });
   }, [auth, url]);
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     setBtnState(true);
 
     const inputData = {
@@ -51,6 +51,8 @@ export default function Edit() {
         setBtnState(false);
         throw err;
       });
+
+    event.preventDefault();
   }
 
   return (

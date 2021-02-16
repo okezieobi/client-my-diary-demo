@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function () {
+export default function ProfileView() {
   const classes = useStyles();
 
   return (

@@ -6,7 +6,7 @@ import Form from '../templates/Form';
 import authServices from '../Auth';
 import env from '../../utils/env';
 
-export default function () {
+export default function Compose() {
   const [titleErr, setTitleErr] = useState('');
   const [errInTitle, setErrInTitle] = useState(false);
   const [errInBody, setErrInBody] = useState(false);
@@ -30,7 +30,7 @@ export default function () {
     setBody(value);
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     setBtnState(true);
 
     const inputData = {
@@ -58,6 +58,8 @@ export default function () {
         setBtnState(false);
         throw err;
       });
+
+    event.preventDefault();
   }
 
   return (
