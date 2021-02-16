@@ -42,14 +42,16 @@ export default function Compose() {
       .then((response) => {
         if (response) {
           if (response.error && response.error.messages) {
-            const err = response.error.messages.find(({ param }) => param);
-            if (err.param === 'title') {
-              setErrInTitle(true);
-              setTitleErr(err.msg);
-            } else if (err.param === 'body') {
-              setErrInBody(true);
-              setBodyErr(err.msg);
-            } setBtnState(false);
+            response.error.messages.forEach((err) => {
+              if (err.param === 'title') {
+                setErrInTitle(true);
+                setTitleErr(err.msg);
+              } else if (err.param === 'body') {
+                setErrInBody(true);
+                setBodyErr(err.msg);
+              }
+            });
+            setBtnState(false);
           } else {
             history.push('/entries');
           }

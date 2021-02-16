@@ -67,20 +67,21 @@ export default function Signup() {
         if (response) {
           if (response.error) {
             if (response.error.messages) {
-              const err = response.error.messages.find(({ param }) => param);
-              if (err.param === 'fullName') {
-                setErrInFullName(true);
-                setFullNameErr(err.msg);
-              } else if (err.param === 'username') {
-                setErrInUsername(true);
-                setUsernameErr(err.msg);
-              } else if (err.param === 'email') {
-                setErrInEmail(true);
-                setEmailErr(err.msg);
-              } else if (err.param === 'password') {
-                setErrInPassword(true);
-                setPasswordErr(err.msg);
-              }
+              response.error.messages.forEach((err) => {
+                if (err.param === 'fullName') {
+                  setErrInFullName(true);
+                  setFullNameErr(err.msg);
+                } else if (err.param === 'username') {
+                  setErrInUsername(true);
+                  setUsernameErr(err.msg);
+                } else if (err.param === 'email') {
+                  setErrInEmail(true);
+                  setEmailErr(err.msg);
+                } else if (err.param === 'password') {
+                  setErrInPassword(true);
+                  setPasswordErr(err.msg);
+                }
+              });
             } else if (response.error.message) setSignupErr(response.error.message);
             setBtnState(false);
           }
