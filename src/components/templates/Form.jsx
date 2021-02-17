@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form({
-  entry, setTitle, setBody,
+  entryTitle, entryBody, setTitle, setBody,
   formBtnState, handleSubmit, titleErr, bodyErr,
   errInTitle, errInBody,
 }) {
@@ -42,7 +42,7 @@ export default function Form({
               label="Title"
               name="entry-title"
               autoComplete="entry-title"
-              defaultValue={entry.title}
+              defaultValue={entryTitle}
               onChange={handleTitleChange}
             />
           </Grid>
@@ -61,7 +61,7 @@ export default function Form({
               multiline
               autoFocus
               rows={12}
-              defaultValue={entry.body}
+              defaultValue={entryBody}
               onChange={handleBodyChange}
             />
           </Grid>
@@ -93,7 +93,8 @@ export default function Form({
 }
 
 Form.propTypes = {
-  entry: PropTypes.objectOf,
+  entryTitle: PropTypes.string,
+  entryBody: PropTypes.string,
   titleErr: PropTypes.string,
   errInTitle: PropTypes.bool,
   bodyErr: PropTypes.string,
@@ -105,7 +106,8 @@ Form.propTypes = {
 };
 
 Form.defaultProps = {
-  entry: {},
+  entryTitle: '',
+  entryBody: '',
   titleErr: '',
   errInTitle: false,
   errInBody: false,

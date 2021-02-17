@@ -61,7 +61,8 @@ export default function Edit() {
         setBody={handleBodyChange}
         reqErr={reqErr}
         formBtnState={btnState}
-        entry={entry}
+        entryTitle={entry.title}
+        entryBody={entry.body}
       />
     </Dashboard>
   );

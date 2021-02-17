@@ -90,6 +90,5 @@
       "<rootDir>/src/theme.js",
       "<rootDir>/src/mocks/*.js"
     ]
-  },
-  "proxy": "http://localhost:5000"
+  }
 }
