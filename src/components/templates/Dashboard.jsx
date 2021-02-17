@@ -13,14 +13,18 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import UserIcon from '@material-ui/icons/AccountCircleOutlined';
-import SignoutIcon from '@material-ui/icons/PowerSettingsNew';
+import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
+import env from '../../utils/env';
+import authServices from '../Auth';
+
 const drawerWidth = 240;
+const url = env.backendAPI('auth/logout');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,8 +70,13 @@ function Dashboard({
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const history = useHistory();
-  const handleLogout = () => {
-    history.push('/login');
+  const auth = authServices.useAuth();
+
+  const handleLogout = async () => {
+    auth.logout(url)
+      .then(() => {
+        history.push('/login');
+      }).catch((err) => { throw err; });
   };
 
   const clickHome = () => {
@@ -118,8 +127,8 @@ function Dashboard({
           <ListItemText>Profile</ListItemText>
         </ListItem>
         <ListItem onClick={handleLogout} button key="Signout">
-          <ListItemIcon><SignoutIcon /></ListItemIcon>
-          <ListItemText primary="Signout" />
+          <ListItemIcon><LogoutIcon /></ListItemIcon>
+          <ListItemText primary="Logout" />
         </ListItem>
       </List>
     </div>

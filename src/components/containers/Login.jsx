@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import LoginLayout from '../views/Login';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 import env from '../../utils/env';
 
-export default function () {
+export default function Login() {
   const [loginErr, setLoginErr] = useState('');
   const [user, setUser] = useState('');
+  const [userErr, setUserErr] = useState('');
+  const [errInUser, setErrInUser] = useState(false);
   const [password, setPassword] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [errInPassword, setErrInPassword] = useState(false);
   const [btnState, setBtnState] = useState(false);
   const history = useHistory();
   const location = useLocation();
@@ -17,14 +21,18 @@ export default function () {
   const auth = authServices.useAuth();
 
   function handleUserChange(value) {
+    setUserErr('');
+    setErrInUser(false);
     setUser(value);
   }
 
   function handlePasswordChange(value) {
+    setPasswordErr('');
+    setErrInPassword(false);
     setPassword(value);
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     setBtnState(true);
 
     const inputData = {
@@ -32,13 +40,24 @@ export default function () {
       password,
     };
 
-    const reqURL = env.backendAPI('auth/login');
-    auth.authenticate(reqURL, inputData)
-      .then(({ error }) => {
-        if (error) {
-          if (error.messages) setLoginErr(error.messages[error.messages.length - 1].msg);
-          else if (error.message) setLoginErr(error.message);
-          setBtnState(false);
+    const url = env.backendAPI('auth/login');
+    auth.authenticate(url, inputData)
+      .then((response) => {
+        if (response) {
+          if (response.error) {
+            if (response.error.messages) {
+              response.error.messages.forEach((err) => {
+                if (err.param === 'user') {
+                  setUserErr(err.msg);
+                  setErrInUser(true);
+                } else if (err.param === 'password') {
+                  setPasswordErr(err.msg);
+                  setErrInPassword(true);
+                }
+              });
+            } else if (response.error.message) setLoginErr(response.error.message);
+            setBtnState(false);
+          }
         } else {
           history.replace(from);
         }
@@ -46,6 +65,8 @@ export default function () {
         setBtnState(false);
         throw err;
       });
+
+    event.preventDefault();
   }
 
   return (
@@ -56,6 +77,10 @@ export default function () {
         loginErr={loginErr}
         setUser={handleUserChange}
         setPassword={handlePasswordChange}
+        errInUser={errInUser}
+        userErr={userErr}
+        passwordErr={passwordErr}
+        errInPassword={errInPassword}
       />
     </>
   );

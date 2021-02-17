@@ -18,28 +18,38 @@ describe('Signin page should render', () => {
 
       userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-      expect(await screen.findByText(utils.response.user.err400.error.messages[0].msg))
+      expect(await screen.findByText(utils.errors.user.self.msg))
+        .toBeInTheDocument();
+
+      await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.data.users[0].email);
+
+      userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+
+      expect(await screen.findByText(utils.errors.user.password.msg))
         .toBeInTheDocument();
     });
 
   test('does not navigate to dashboard when login is not successful if user is not signed up', async () => {
     utils.renderWithRouter(<App />, { route: '/login' });
 
-    await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.inputs.error.user.email);
-    await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.data.user.password);
+    await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.inputs.user.username);
+    await userEvent.type(screen.getByLabelText(/Password/i), utils.data.users[0].password);
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     expect(await screen.findByText(utils.response.user.err40X.error.message))
       .toBeInTheDocument();
-  });
+  }, 10000);
 
   test('navigates to dashboard when login is successful', async () => {
     utils.renderWithRouter(<App />, { route: '/login' });
 
-    await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.inputs.data.user.email);
-    await userEvent.type(screen.getByLabelText(/Password/i), utils.inputs.data.user.password);
+    await userEvent.type(screen.getByLabelText(/Email Address or Username/i), utils.data.users[0].email);
+    await userEvent.type(screen.getByLabelText(/Password/i), utils.data.users[0].password);
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
-    expect(await screen.findByRole('button', { name: /Search/i })).toBeInTheDocument();
-  });
+    expect(await screen.findByRole('button', { name: /Home/i })).toBeInTheDocument();
+    expect(screen.getByRole('table')).toBeInTheDocument();
+    // expect(screen.getByText(utils.data.entries[0].body))
+    //  .toBeInTheDocument();
+  }, 15000);
 });

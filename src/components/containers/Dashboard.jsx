@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Dashboard from '../templates/Dashboard';
 import HomeFab from '../templates/Fab';
 import DashboardBG from '../../images/Home_Dash.svg';
-import authServices from '../../services/Auth';
+import authServices from '../Auth';
 import env from '../../utils/env';
 
 const useStyles = makeStyles(() => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function () {
+export default function DashboardContainer() {
   const [tableData, setData] = useState([]);
   const history = useHistory();
   const classes = useStyles();
@@ -47,7 +47,6 @@ export default function () {
       options: {
         filter: true,
         sort: true,
-        display: 'exclude',
       },
     },
     {
@@ -87,21 +86,24 @@ export default function () {
   const options = {
     filterType: 'checkbox',
     onRowClick: (rowData) => handleRowClick(rowData),
+    serverSide: true,
   };
 
-  const reqURL = env.backendAPI('entries');
+  const url = env.backendAPI('entries');
 
   useEffect(() => {
-    auth.getResource(reqURL)
-      .then(({ data }) => {
-        const rowData = data.entries.map(
-          ({
-            title, body, createdOn, updatedAt, id,
-          }) => ([id, title, body, Date(createdOn), Date(updatedAt)]),
-        ) || [];
-        setData(rowData);
+    auth.getResource(url)
+      .then((response) => {
+        if (response) {
+          const rowData = response.data.entries.map(
+            ({
+              title, body, createdOn, updatedAt, id,
+            }) => ([id, title, body, Date(createdOn), Date(updatedAt)]),
+          );
+          setData(rowData);
+        }
       }).catch((err) => { throw err; });
-  }, [reqURL, history, auth]);
+  }, [url, auth]);
 
   return (
     <>

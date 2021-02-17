@@ -11,17 +11,26 @@ import ComposeForm from './components/containers/Compose';
 import EditForm from './components/containers/Edit';
 import Profile from './components/views/Profile';
 
-import authServices from './services/Auth';
+import authServices from './components/Auth';
 
 export default function App() {
   return (
     <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
       <Route path="/profile">
         <Profile />
       </Route>
-      <Route path="/edit">
+      <authServices.PrivateRoute path="/edit">
         <EditForm />
-      </Route>
+      </authServices.PrivateRoute>
       <authServices.PrivateRoute path="/compose">
         <ComposeForm />
       </authServices.PrivateRoute>
@@ -31,15 +40,6 @@ export default function App() {
       <authServices.PrivateRoute path="/entries">
         <HomeDash />
       </authServices.PrivateRoute>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/signup">
-        <Signup />
-      </Route>
-      <Route path="/">
-        <Home />
-      </Route>
     </Switch>
   );
 }

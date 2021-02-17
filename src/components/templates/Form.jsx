@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,21 +14,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form({
-  title, setTitle, body, setBody, formBtnState, reqErr, handleSubmit,
+  entryTitle, entryBody, setTitle, setBody,
+  formBtnState, handleSubmit, titleErr, bodyErr,
+  errInTitle, errInBody,
 }) {
   const classes = useStyles();
+  const history = useHistory();
   function handleTitleChange({ target: { value } }) { setTitle(value); }
   function handleBodyChange({ target: { value } }) { setBody(value); }
+  const handleGoBack = () => {
+    history.goBack();
+  };
 
   return (
     <Paper className={classes.paper}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <Typography color="error">{reqErr}</Typography>
-          </Grid>
-          <Grid item xs={12}>
             <TextField
+              error={errInTitle}
+              helperText={titleErr}
               variant="outlined"
               margin="normal"
               required
@@ -37,14 +42,15 @@ export default function Form({
               label="Title"
               name="entry-title"
               autoComplete="entry-title"
-              autoFocus
-              defaultValue={title}
+              defaultValue={entryTitle}
               onChange={handleTitleChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               variant="outlined"
+              error={errInBody}
+              helperText={bodyErr}
               margin="normal"
               required
               fullWidth
@@ -53,8 +59,9 @@ export default function Form({
               name="entry-body"
               autoComplete="entry-body"
               multiline
+              autoFocus
               rows={12}
-              defaultValue={body}
+              defaultValue={entryBody}
               onChange={handleBodyChange}
             />
           </Grid>
@@ -63,8 +70,8 @@ export default function Form({
               fullWidth
               variant="contained"
               color="primary"
-              onClick={handleSubmit}
               disabled={formBtnState}
+              type="submit"
             >
               {formBtnState ? 'Sending' : 'Submit'}
             </Button>
@@ -74,6 +81,7 @@ export default function Form({
               fullWidth
               variant="contained"
               color="secondary"
+              onClick={handleGoBack}
             >
               Back
             </Button>
@@ -85,21 +93,27 @@ export default function Form({
 }
 
 Form.propTypes = {
-  title: PropTypes.string,
-  body: PropTypes.string,
+  entryTitle: PropTypes.string,
+  entryBody: PropTypes.string,
+  titleErr: PropTypes.string,
+  errInTitle: PropTypes.bool,
+  bodyErr: PropTypes.string,
+  errInBody: PropTypes.bool,
   setBody: PropTypes.func,
   setTitle: PropTypes.func,
   handleSubmit: PropTypes.func,
-  reqErr: PropTypes.string,
   formBtnState: PropTypes.bool,
 };
 
 Form.defaultProps = {
-  title: '',
-  body: '',
-  reqErr: '',
+  entryTitle: '',
+  entryBody: '',
+  titleErr: '',
+  errInTitle: false,
+  errInBody: false,
+  bodyErr: '',
   setBody: undefined,
   setTitle: undefined,
   handleSubmit: undefined,
-  formBtnState: undefined,
+  formBtnState: false,
 };
