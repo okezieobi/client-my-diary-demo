@@ -11,9 +11,7 @@ export default function Edit() {
   const [body, setBody] = useState('');
   const [title, setTitle] = useState('');
   const [btnState, setBtnState] = useState(false);
-  const [entry, setEntry] = useState({
-    title: '', body: '',
-  });
+  const [entry, setEntry] = useState({});
   const entryId = JSON.parse(localStorage.getItem('entryId'));
   const auth = authServices.useAuth();
   const history = useHistory();
@@ -63,8 +61,7 @@ export default function Edit() {
         setBody={handleBodyChange}
         reqErr={reqErr}
         formBtnState={btnState}
-        title={entry.title}
-        body={entry.body}
+        entry={entry}
       />
     </Dashboard>
   );
