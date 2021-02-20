@@ -9,7 +9,7 @@ import HomeDash from './components/containers/Dashboard';
 import ContentDash from './components/containers/Content';
 import ComposeForm from './components/containers/Compose';
 import EditForm from './components/containers/Edit';
-import Profile from './components/views/Profile';
+import Profile from './components/containers/Profile';
 
 import authServices from './components/Auth';
 
@@ -25,9 +25,9 @@ export default function App() {
       <Route path="/signup">
         <Signup />
       </Route>
-      <Route path="/profile">
+      <authServices.PrivateRoute path="/profile">
         <Profile />
-      </Route>
+      </authServices.PrivateRoute>
       <authServices.PrivateRoute path="/edit">
         <EditForm />
       </authServices.PrivateRoute>

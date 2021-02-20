@@ -29,7 +29,7 @@ export default function ContentContainer() {
       <Content
         title={entry.title}
         body={entry.body}
-        createdOn={entry.createdOn}
+        createdAt={entry.createdAt}
         updatedAt={entry.updatedAt}
         reqErr={reqErr}
       />

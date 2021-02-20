@@ -66,8 +66,8 @@ export default function DashboardContainer() {
       },
     },
     {
-      name: 'createdOn',
-      label: 'Created On',
+      name: 'createdAt',
+      label: 'Created At',
       options: {
         filter: true,
         sort: true,
@@ -97,8 +97,8 @@ export default function DashboardContainer() {
         if (response) {
           const rowData = response.data.entries.map(
             ({
-              title, body, createdOn, updatedAt, id,
-            }) => ([id, title, body, Date(createdOn), Date(updatedAt)]),
+              title, body, createdAt, updatedAt, id,
+            }) => ([id, title, body, Date(createdAt), Date(updatedAt)]),
           );
           setData(rowData);
         }

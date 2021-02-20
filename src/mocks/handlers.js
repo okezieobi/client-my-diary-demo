@@ -112,6 +112,24 @@ export default [
       data: {},
     }),
   )),
+  rest.get('/api/v1/auth/profile',
+    ({ cookies: { fakeToken } }, res, { json, status }) => {
+      let response;
+      if (!fakeToken || fakeToken !== testUtils.data.token) {
+        response = res(
+          status(401),
+          json({
+            error: { ...testUtils.response.entry.err40X.error },
+          }),
+        );
+      } else {
+        response = res(
+          json({
+            data: { ...testUtils.response.user.data[0], Entries: testUtils.response.entry.data },
+          }),
+        );
+      } return response;
+    }),
   rest.get('/api/v1/entries',
     ({ cookies: { fakeToken } }, res, { json, status }) => {
       let response;
@@ -226,7 +244,7 @@ export default [
           id: testUtils.response.entry.data.entries.length + 1000,
           title,
           body,
-          createdOn: new Date(),
+          createdAt: new Date(),
           updatedAt: new Date(),
         };
         testUtils.response.entry.data.entries.push(entry);
