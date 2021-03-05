@@ -14,6 +14,7 @@ describe('Home dashboard page should render', () => {
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     expect(await screen.findByRole('table')).toBeInTheDocument();
-    // expect(screen.getByText(utils.data.entries[0].body)).toBeInTheDocument();
+    //  expect(await screen.findByText(utils.data.entries[0].body), {}, { timeout: 5000 })
+    // .toBeInTheDocument();
   });
 });

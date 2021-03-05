@@ -41,7 +41,7 @@ describe('Signup page should render', () => {
 
       expect(await screen.findByText(utils.errors.user.password.msg))
         .toBeInTheDocument();
-    });
+    }, 10000);
 
   test('does not navigate to dashboard when signup is not successful if user already exists', async () => {
     utils.renderWithRouter(<App />, { route: '/signup' });

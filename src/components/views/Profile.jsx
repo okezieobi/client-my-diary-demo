@@ -34,47 +34,47 @@ export default function ProfileView({
       <div className={classes.backdrop}>
         <Paper className={classes.paper}>
           <Grid container spacing={4}>
-            <Grid item md={12} xs={12}>
+            <Grid item sm={12} xs={12}>
               <Grid container justify="center" spacing={1}>
                 <Grid item xs={4}>
                   <Avatar />
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h5" gutterBottom>Full Name:</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h6" gutterBottom>{fullName}</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h5" gutterBottom>Email</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h6" gutterBottom>{email}</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h5" gutterBottom>Username</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h6" gutterBottom>{username}</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h5" gutterBottom>Number of entries:</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h6" gutterBottom>{entries}</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h5" gutterBottom>Created on:</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h6" gutterBottom>{createdAt}</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h5" gutterBottom>Updated on:</Typography>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item sm={6} xs={12}>
               <Typography variant="h6" gutterBottom>{updatedAt}</Typography>
             </Grid>
           </Grid>
