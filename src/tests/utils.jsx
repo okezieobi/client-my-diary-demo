@@ -38,17 +38,19 @@ const data = {
       username: 'Eke',
       email: 'barfoo@mail.com',
       password: 'sate234',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ],
   entries: [
     {
-      id: '222', title: 'fake-title-1', body: 'fake-body-1', createdOn: new Date(), updatedAt: new Date(),
+      id: '222', title: 'fake-title-1', body: 'fake-body-1', createdAt: new Date(), updatedAt: new Date(),
     },
     {
-      id: '4444', title: 'fake-title-2', body: 'fake-body-2', createdOn: new Date(), updatedAt: new Date(),
+      id: '4444', title: 'fake-title-2', body: 'fake-body-2', createdAt: new Date(), updatedAt: new Date(),
     },
     {
-      id: '6777', title: 'fake-title-3', body: 'fake-body-3', createdOn: new Date(), updatedAt: new Date(),
+      id: '6777', title: 'fake-title-3', body: 'fake-body-3', createdAt: new Date(), updatedAt: new Date(),
     },
   ],
 };

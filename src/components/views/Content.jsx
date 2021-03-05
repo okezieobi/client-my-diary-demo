@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Content({
-  title, body, createdOn, updatedAt, reqErr,
+  title, body, createdAt, updatedAt, reqErr,
 }) {
   const history = useHistory();
   const classes = useStyles();
@@ -56,7 +56,7 @@ export default function Content({
             <Typography variant="body1" gutterBottom>
               Created On:
               <br />
-              {createdOn}
+              {createdAt}
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -95,7 +95,7 @@ export default function Content({
 Content.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
-  createdOn: PropTypes.string,
+  createdAt: PropTypes.string,
   updatedAt: PropTypes.string,
   reqErr: PropTypes.string,
 };
@@ -103,7 +103,7 @@ Content.propTypes = {
 Content.defaultProps = {
   title: '',
   body: '',
-  createdOn: '',
+  createdAt: '',
   updatedAt: '',
   reqErr: '',
 };
