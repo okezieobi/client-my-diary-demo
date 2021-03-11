@@ -11,7 +11,7 @@ export default function Profile() {
 
   const auth = authServices.useAuth();
 
-  const url = env.backendAPI('auth/profile');
+  const url = env.backendAPI('users/profile');
 
   useEffect(() => {
     auth.getResource(url)
