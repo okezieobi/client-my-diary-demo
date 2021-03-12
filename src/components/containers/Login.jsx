@@ -45,8 +45,8 @@ export default function Login() {
       .then((response) => {
         if (response) {
           if (response.error) {
-            if (response.error.messages) {
-              response.error.messages.forEach((err) => {
+            if (response.error instanceof Array) {
+              response.error.forEach((err) => {
                 if (err.param === 'user') {
                   setUserErr(err.msg);
                   setErrInUser(true);
@@ -55,7 +55,7 @@ export default function Login() {
                   setErrInPassword(true);
                 }
               });
-            } else if (response.error.message) setLoginErr(response.error.message);
+            } else setLoginErr(response.error);
             setBtnState(false);
           }
         } else {

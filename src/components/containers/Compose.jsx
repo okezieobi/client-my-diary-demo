@@ -41,8 +41,8 @@ export default function Compose() {
     auth.setResource(url, inputData, 'POST')
       .then((response) => {
         if (response) {
-          if (response.error && response.error.messages) {
-            response.error.messages.forEach((err) => {
+          if (response.error) {
+            response.error.forEach((err) => {
               if (err.param === 'title') {
                 setErrInTitle(true);
                 setTitleErr(err.msg);

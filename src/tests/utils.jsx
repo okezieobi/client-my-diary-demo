@@ -68,27 +68,19 @@ export default {
   response: {
     user: {
       err400: {
-        error: {
-          messages: [],
-        },
+        error: [],
       },
       err40X: {
-        error: {
-          message: 'fakeErr-auth-2',
-        },
+        error: 'fakeErr-auth-2',
       },
       data: data.users,
     },
     entry: {
       err400: {
-        error: {
-          messages: [],
-        },
+        error: [],
       },
       err40X: {
-        error: {
-          message: 'fakeErr-40X-entries',
-        },
+        error: 'fakeErr-40X-entries',
       },
       data: {
         entries: data.entries,

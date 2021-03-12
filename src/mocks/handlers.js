@@ -6,35 +6,35 @@ export default [
   rest.post('/api/v1/auth/signup', ({ body }, res, { json, status, cookie }) => {
     let response;
     if (!body.fullName) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.fullName);
+      testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.fullName);
       response = res(
         status(400),
         json({
-          error: { ...testUtils.response.user.err400.error },
+          error: testUtils.response.user.err400.error,
         }),
       );
     } else if (!body.username) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.username);
+      testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.username);
       response = res(
         status(400),
         json({
-          error: { ...testUtils.response.user.err400.error },
+          error: testUtils.response.user.err400.error,
         }),
       );
     } else if (!body.email) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.email);
+      testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.email);
       response = res(
         status(400),
         json({
-          error: { ...testUtils.response.user.err400.error },
+          error: testUtils.response.user.err400.error,
         }),
       );
     } else if (!body.password) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.password);
+      testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.password);
       response = res(
         status(400),
         json({
-          error: { ...testUtils.response.user.err400.error },
+          error: testUtils.response.user.err400.error,
         }),
       );
     } else {
@@ -44,7 +44,7 @@ export default [
         response = res(
           status(406),
           json({
-            error: { ...testUtils.response.user.err40X.error },
+            error: testUtils.response.user.err40X.error,
           }),
         );
       } else {
@@ -62,19 +62,19 @@ export default [
   rest.post('/api/v1/auth/login', ({ body }, res, { json, status, cookie }) => {
     let response;
     if (!body.user) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.self);
+      testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.self);
       response = res(
         status(400),
         json({
-          error: { ...testUtils.response.user.err400.error },
+          error: testUtils.response.user.err400.error,
         }),
       );
     } else if (!body.password) {
-      testUtils.response.user.err400.error.messages.splice(0, 1, testUtils.errors.user.password);
+      testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.password);
       response = res(
         status(400),
         json({
-          error: { ...testUtils.response.user.err400.error },
+          error: testUtils.response.user.err400.error,
         }),
       );
     } else {
@@ -84,14 +84,14 @@ export default [
         response = res(
           status(406),
           json({
-            error: { ...testUtils.response.user.err40X.error },
+            error: testUtils.response.user.err40X.error,
           }),
         );
       } else if (body.password !== userExists.password) {
         response = res(
           status(401),
           json({
-            error: { ...testUtils.response.user.err40X.error },
+            error: testUtils.response.user.err40X.error,
           }),
         );
       } else {
@@ -112,14 +112,14 @@ export default [
       data: {},
     }),
   )),
-  rest.get('/api/v1/auth/profile',
+  rest.get('/api/v1/users/profile',
     ({ cookies: { fakeToken } }, res, { json, status }) => {
       let response;
       if (!fakeToken || fakeToken !== testUtils.data.token) {
         response = res(
           status(401),
           json({
-            error: { ...testUtils.response.entry.err40X.error },
+            error: testUtils.response.entry.err40X.error,
           }),
         );
       } else {
@@ -137,7 +137,7 @@ export default [
         response = res(
           status(401),
           json({
-            error: { ...testUtils.response.entry.err40X.error },
+            error: testUtils.response.entry.err40X.error,
           }),
         );
       } else {
@@ -155,7 +155,7 @@ export default [
         response = res(
           status(401),
           json({
-            error: { ...testUtils.response.entry.err40X.error },
+            error: testUtils.response.entry.err40X.error,
           }),
         );
       } else {
@@ -170,7 +170,7 @@ export default [
           response = res(
             status(401),
             json({
-              error: { ...testUtils.response.entry.err40X.error },
+              error: testUtils.response.entry.err40X.error,
             }),
           );
         }
@@ -183,7 +183,7 @@ export default [
         response = res(
           status(401),
           json({
-            error: { ...testUtils.response.entry.err40X.error },
+            error: testUtils.response.entry.err40X.error,
           }),
         );
       } else {
@@ -217,26 +217,26 @@ export default [
     ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
       let response;
       if (!title) {
-        testUtils.response.entry.err400.error.messages.splice(0, 1, testUtils.errors.entry.title);
+        testUtils.response.entry.err400.error.splice(0, 1, testUtils.errors.entry.title);
         response = res(
           status(400),
           json({
-            error: { ...testUtils.response.entry.err400.error },
+            error: testUtils.response.entry.err400.error,
           }),
         );
       } else if (!body) {
-        testUtils.response.entry.err400.error.messages.splice(0, 1, testUtils.errors.entry.body);
+        testUtils.response.entry.err400.error.splice(0, 1, testUtils.errors.entry.body);
         response = res(
           status(400),
           json({
-            error: { ...testUtils.response.entry.err400.error },
+            error: testUtils.response.entry.err400.error,
           }),
         );
       } else if (!fakeToken || fakeToken !== testUtils.data.token) {
         response = res(
           status(401),
           json({
-            error: { ...testUtils.response.entry.err40X.error },
+            error: testUtils.response.entry.err40X.error,
           }),
         );
       } else {

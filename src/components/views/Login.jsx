@@ -101,12 +101,7 @@ export default function Login({
               >
                 {formBtnState ? 'Sending ...' : 'Submit'}
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/password-reset" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+              <Grid container justify="flex-end">
                 <Grid item>
                   <Link href="/signup" variant="body2">
                     Do not have an account yet ? Sign up

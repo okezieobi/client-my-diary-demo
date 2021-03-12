@@ -29,7 +29,7 @@ export default function Edit() {
     auth.getResource(url)
       .then((response) => {
         if (response) {
-          if (response.error && response.error.message) setReqErr(response.error.message);
+          if (response.error) setReqErr(response.error);
           else setEntry(response.data.entry);
         }
       }).catch((err) => { throw err; });

@@ -66,8 +66,8 @@ export default function Signup() {
       .then((response) => {
         if (response) {
           if (response.error) {
-            if (response.error.messages) {
-              response.error.messages.forEach((err) => {
+            if (response.error instanceof Array) {
+              response.error.forEach((err) => {
                 if (err.param === 'fullName') {
                   setErrInFullName(true);
                   setFullNameErr(err.msg);
@@ -82,7 +82,7 @@ export default function Signup() {
                   setPasswordErr(err.msg);
                 }
               });
-            } else if (response.error.message) setSignupErr(response.error.message);
+            } else setSignupErr(response.error);
             setBtnState(false);
           }
         } else {
