@@ -17,7 +17,7 @@ function useProvideAuth() {
       'Content-Type': 'application/json;charset=utf-8',
     },
     method: 'POST',
-    credentials: 'include',
+    credentials: 'same-site',
     body: JSON.stringify(input),
   }).then((response) => {
     if (response.status === 200 || response.status === 201) return setUser(true);
