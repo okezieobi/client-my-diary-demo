@@ -30,7 +30,7 @@ function useProvideAuth() {
       'Content-Type': 'application/json;charset=utf-8',
     },
     method,
-    credentials: 'include',
+    credentials: 'same-site',
     body: JSON.stringify(input),
   }).then((response) => {
     if (response.status === 401) return setUser(false);
@@ -42,7 +42,7 @@ function useProvideAuth() {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    credentials: 'include',
+    credentials: 'same-site',
   }).then((response) => {
     if (response.status === 401) return setUser(false);
     setUser(true);
