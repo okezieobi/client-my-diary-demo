@@ -17,7 +17,7 @@ function useProvideAuth() {
       'Content-Type': 'application/json;charset=utf-8',
     },
     method: 'POST',
-    credentials: 'same-site',
+    credentials: 'same-origin',
     body: JSON.stringify(input),
   }).then((response) => {
     if (response.status === 200 || response.status === 201) return setUser(true);
@@ -30,7 +30,7 @@ function useProvideAuth() {
       'Content-Type': 'application/json;charset=utf-8',
     },
     method,
-    credentials: 'same-site',
+    credentials: 'same-origin',
     body: JSON.stringify(input),
   }).then((response) => {
     if (response.status === 401) return setUser(false);
@@ -42,7 +42,7 @@ function useProvideAuth() {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    credentials: 'same-site',
+    credentials: 'same-origin',
   }).then((response) => {
     if (response.status === 401) return setUser(false);
     setUser(true);
