@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import testUtils from '../tests/utils';
 
 export default [
-  rest.post('/api/v1/auth/signup', ({ body }, res, { json, status, cookie }) => {
+  rest.post('/api/v1/auth/signup', ({ body }, res, { json, status }) => {
     let response;
     if (!body.fullName) {
       testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.fullName);
@@ -51,15 +51,14 @@ export default [
         testUtils.response.user.data.push({ ...body });
         response = res(
           status(201),
-          cookie('fakeToken', testUtils.data.token),
           json({
-            data: {},
+            data: { token: testUtils.data.token },
           }),
         );
       }
     } return response;
   }),
-  rest.post('/api/v1/auth/login', ({ body }, res, { json, status, cookie }) => {
+  rest.post('/api/v1/auth/login', ({ body }, res, { json, status }) => {
     let response;
     if (!body.user) {
       testUtils.response.user.err400.error.splice(0, 1, testUtils.errors.user.self);
@@ -97,25 +96,18 @@ export default [
       } else {
         response = res(
           status(200),
-          cookie('fakeToken', testUtils.data.token),
           json({
-            data: {},
+            data: { token: testUtils.data.token },
           }),
         );
       }
     } return response;
   }),
-  rest.post('/api/v1/auth/logout', (req, res, { json, status, cookie }) => res(
-    status(200),
-    cookie('fakeToken', undefined),
-    json({
-      data: {},
-    }),
-  )),
   rest.get('/api/v1/users/profile',
-    ({ cookies: { fakeToken } }, res, { json, status }) => {
+    (req, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken !== testUtils.data.token) {
+      const isAuth = JSON.parse(sessionStorage.getItem('authorization'));
+      if (!isAuth || isAuth !== testUtils.data.token) {
         response = res(
           status(401),
           json({
@@ -131,9 +123,10 @@ export default [
       } return response;
     }),
   rest.get('/api/v1/entries',
-    ({ cookies: { fakeToken } }, res, { json, status }) => {
+    (req, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken !== testUtils.data.token) {
+      const isAuth = JSON.parse(sessionStorage.getItem('authorization'));
+      if (!isAuth || isAuth !== testUtils.data.token) {
         response = res(
           status(401),
           json({
@@ -149,9 +142,10 @@ export default [
       } return response;
     }),
   rest.get('/api/v1/entries/:id',
-    ({ cookies: { fakeToken }, params }, res, { json, status }) => {
+    ({ params }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken !== testUtils.data.token) {
+      const isAuth = JSON.parse(sessionStorage.getItem('authorization'));
+      if (!isAuth || isAuth !== testUtils.data.token) {
         response = res(
           status(401),
           json({
@@ -177,9 +171,10 @@ export default [
       } return response;
     }),
   rest.put('/api/v1/entries/:id',
-    ({ cookies: { fakeToken }, params, body: { title, body } }, res, { json, status }) => {
+    ({ params, body: { title, body } }, res, { json, status }) => {
       let response;
-      if (!fakeToken || fakeToken !== testUtils.data.token) {
+      const isAuth = JSON.parse(sessionStorage.getItem('authorization'));
+      if (!isAuth || isAuth !== testUtils.data.token) {
         response = res(
           status(401),
           json({
@@ -214,8 +209,9 @@ export default [
       } return response;
     }),
   rest.post('/api/v1/entries',
-    ({ cookies: { fakeToken }, body: { title, body } }, res, { json, status }) => {
+    ({ body: { title, body } }, res, { json, status }) => {
       let response;
+      const isAuth = JSON.parse(sessionStorage.getItem('authorization'));
       if (!title) {
         testUtils.response.entry.err400.error.splice(0, 1, testUtils.errors.entry.title);
         response = res(
@@ -232,7 +228,7 @@ export default [
             error: testUtils.response.entry.err400.error,
           }),
         );
-      } else if (!fakeToken || fakeToken !== testUtils.data.token) {
+      } else if (!isAuth || isAuth !== testUtils.data.token) {
         response = res(
           status(401),
           json({

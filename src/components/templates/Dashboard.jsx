@@ -20,11 +20,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import env from '../../utils/env';
 import authServices from '../Auth';
 
 const drawerWidth = 240;
-const url = env.backendAPI('auth/logout');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +71,7 @@ function Dashboard({
   const auth = authServices.useAuth();
 
   const handleLogout = async () => {
-    auth.logout(url)
+    auth.logout()
       .then(() => {
         history.push('/login');
       }).catch((err) => { throw err; });

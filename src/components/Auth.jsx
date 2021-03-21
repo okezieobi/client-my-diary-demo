@@ -12,50 +12,55 @@ function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState(true);
 
-  const authenticate = (url, input) => fetch(url, {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    method: 'POST',
-    credentials: 'include',
-    body: JSON.stringify(input),
-  }).then((response) => {
-    if (response.status === 200 || response.status === 201) return setUser(true);
+  const authenticate = async (url, input) => {
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      method: 'POST',
+      body: JSON.stringify(input),
+    });
+    if (response.ok) {
+      const { data: { token } } = await response.json();
+      sessionStorage.setItem('authorization', JSON.stringify(token));
+      return setUser(true);
+    }
     setUser(false);
     return response.json();
-  });
+  };
 
-  const setResource = (url, input = {}, method = 'POST') => fetch(url, {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    method,
-    credentials: 'include',
-    body: JSON.stringify(input),
-  }).then((response) => {
+  const setResource = async (url, input = {}, method = 'POST') => {
+    const authorization = sessionStorage.getItem('authorization');
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: JSON.parse(authorization),
+      },
+      method,
+      body: JSON.stringify(input),
+    });
     if (response.status === 401) return setUser(false);
     setUser(true);
     return response.json();
-  });
+  };
 
-  const getResource = (url) => fetch(url, {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    credentials: 'include',
-  }).then((response) => {
+  const getResource = async (url) => {
+    const authorization = JSON.parse(sessionStorage.getItem('authorization'));
+    const response = await fetch(url, {
+      headers: {
+        authorization,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
     if (response.status === 401) return setUser(false);
     setUser(true);
     return response.json();
-  });
+  };
 
-  const logout = (url) => fetch(url, {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    method: 'POST',
-    credentials: 'include',
-  }).then(() => setUser(false));
+  const logout = async () => {
+    sessionStorage.removeItem('authorization');
+    return setUser(false);
+  };
 
   return {
     user,
