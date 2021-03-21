@@ -8,12 +8,13 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import './index.css';
 import App from './App';
 import theme from './theme';
-import worker from './mocks/browser';
 import authServices from './components/Auth';
 import reportWebVitals from './reportWebVitals';
 
 if (process.env.NODE_ENV === 'development') {
-  worker.start();
+  // eslint-disable-next-line global-require
+  const worker = require('./mocks/browser');
+  worker.default.start();
 }
 
 ReactDOM.render(
