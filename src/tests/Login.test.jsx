@@ -48,8 +48,5 @@ describe('Signin page should render', () => {
     userEvent.click(screen.getByRole('button', { name: /Submit/ }));
 
     expect(await screen.findByRole('button', { name: /Home/i })).toBeInTheDocument();
-    expect(screen.getByRole('table')).toBeInTheDocument();
-    // expect(screen.getByText(utils.data.entries[0].body))
-    //  .toBeInTheDocument();
   }, 15000);
 });
